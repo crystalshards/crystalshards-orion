@@ -1,0 +1,50 @@
+version: "3.7"
+networks:
+  default:
+    driver: bridge
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: crystalshards
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  server:
+    build:
+      context: .
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      REDIS_URL: redis://redis
+      POSTGRES_URL: postgres://postgres@localhost/crystalshards
+    ports:
+      - "3000:3000"
+    command:
+      - ./sentry
+      - -b
+      - shards build server
+      - -r
+      - ./bin/server
+  job_runner:
+    build:
+      context: .
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      REDIS_URL: redis://redis
+      POSTGRES_URL: postgres://postgres@localhost/crystalshards
+    command:
+      - ./sentry
+      - -b
+      - shards build job_runner
+      - -r
+      - ./bin/job_runner
+
+
+

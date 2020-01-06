@@ -1,0 +1,34 @@
+name: crystal-shards
+version: 1.0.0
+crystal: 0.32.1
+
+authors:
+  - jwaldrip <jason@waldrip.net>
+
+targets:
+  server:
+    main: src/server.cr
+  job_runner:
+    main: src/job_runner.cr
+
+dependencies:
+  orion:
+    github: obsidian/orion
+    version: 2.1.1
+  clear:
+    github: anykeyh/clear
+    version: 0.7.2
+  mosquito:
+    github: robacarp/mosquito
+    version: 0.6.0
+  kilt:
+    github: jeromegn/kilt
+  slang:
+    github: jeromegn/slang
+
+development_dependencies:
+  shards:
+    github: crystal-lang/shards
+    version: 0.9.0
+
+license: MIT

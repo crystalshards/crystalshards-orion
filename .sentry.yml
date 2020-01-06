@@ -1,0 +1,7 @@
+build: shards build server
+install_shards: true
+run: ./bin/server
+watch:
+  - ./src/**/*.cr
+  - ./src/**/*.ecr
+  - ./src/**/*.slang

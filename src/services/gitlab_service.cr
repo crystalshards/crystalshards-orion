@@ -1,0 +1,2 @@
+class GitLabService
+end
