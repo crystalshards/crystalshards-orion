@@ -9,8 +9,6 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
       li.nav-item
         a.nav-link href="/stats" Stats
       li.nav-item
-        a.nav-link href="/docs" Docs
-      li.nav-item
         a.nav-link href="/contribute" Contribute
 
 
