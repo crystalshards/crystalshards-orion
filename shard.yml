@@ -14,7 +14,7 @@ targets:
 dependencies:
   orion:
     github: obsidian/orion
-    version: 2.1.1
+    version: 2.2.0
   clear:
     github: anykeyh/clear
     version: 0.7.2
@@ -23,8 +23,10 @@ dependencies:
     version: 0.6.0
   kilt:
     github: jeromegn/kilt
+    version: 0.6.0
   slang:
     github: jeromegn/slang
+    version: 1.7.1
 
 development_dependencies:
   shards:

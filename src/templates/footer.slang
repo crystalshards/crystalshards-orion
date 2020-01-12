@@ -1,1 +1,3 @@
-span I am footer
+#footer.container
+  .content
+    span I am footer

@@ -13,52 +13,52 @@ services:
     image: redis
     ports:
       - "6379:6379"
-  server:
-    build:
-      context: .
-    depends_on:
-      - redis
-      - postgres
-    environment:
-      REDIS_URL: redis://redis
-      POSTGRES_URL: postgres://postgres@postgres/crystalshards
-    ports:
-      - "3000:3000"
-    command:
-      - ./sentry
-      - -b
-      - shards build server
-      - -r
-      - ./bin/server
-    volumes:
-      - ./src:/app/src
-      - ./db:/app/db
-      - ./spec:/app/spec
-      - ./shard.yml:/app/.sentry.yml
-      - ./shard.yml:/app/shard.yml
-      - ./shard.lock:/app/shard.lock
-      - ./migrate:/app/migrate
-  job_runner:
-    build:
-      context: .
-    depends_on:
-      - redis
-      - postgres
-    environment:
-      REDIS_URL: redis://redis
-      POSTGRES_URL: postgres://postgres@postgres/crystalshards
-    volumes:
-      - ./src:/app/src
-      - ./db:/app/db
-      - ./shard.yml:/app/.sentry.yml
-      - ./shard.yml:/app/shard.yml
-      - ./shard.lock:/app/shard.lock
-    command:
-      - ./sentry
-      - -b
-      - shards build job_runner
-      - -r
-      - ./bin/job_runner
+  # server:
+  #   build:
+  #     context: .
+  #   depends_on:
+  #     - redis
+  #     - postgres
+  #   environment:
+  #     REDIS_URL: redis://redis
+  #     POSTGRES_URL: postgres://postgres@postgres/crystalshards
+  #   ports:
+  #     - "3000:3000"
+  #   command:
+  #     - ./sentry
+  #     - -b
+  #     - shards build server
+  #     - -r
+  #     - ./bin/server
+  #   volumes:
+  #     - ./src:/app/src
+  #     - ./db:/app/db
+  #     - ./spec:/app/spec
+  #     - ./shard.yml:/app/.sentry.yml
+  #     - ./shard.yml:/app/shard.yml
+  #     - ./shard.lock:/app/shard.lock
+  #     - ./migrate:/app/migrate
+  # job_runner:
+  #   build:
+  #     context: .
+  #   depends_on:
+  #     - redis
+  #     - postgres
+  #   environment:
+  #     REDIS_URL: redis://redis
+  #     POSTGRES_URL: postgres://postgres@postgres/crystalshards
+  #   volumes:
+  #     - ./src:/app/src
+  #     - ./db:/app/db
+  #     - ./shard.yml:/app/.sentry.yml
+  #     - ./shard.yml:/app/shard.yml
+  #     - ./shard.lock:/app/shard.lock
+  #   command:
+  #     - ./sentry
+  #     - -b
+  #     - shards build job_runner
+  #     - -r
+  #     - ./bin/job_runner
 
 
 
