@@ -1,0 +1,6 @@
+#!/usr/bin/env crystal
+require "clear"
+require "../src/db/setup"
+require "../src/db/migrations/*"
+
+Clear::CLI.run

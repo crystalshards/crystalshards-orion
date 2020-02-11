@@ -14,10 +14,10 @@ targets:
 dependencies:
   orion:
     github: obsidian/orion
-    version: 2.2.0
+    tag: v3.0.0-alpha1
   clear:
     github: anykeyh/clear
-    version: 0.7.2
+    branch: master
   mosquito:
     github: robacarp/mosquito
     version: 0.6.0
@@ -27,6 +27,9 @@ dependencies:
   slang:
     github: jeromegn/slang
     version: 1.7.1
+  sentry:
+    github: samueleaton/sentry
+    branch: master
 
 development_dependencies:
   shards:

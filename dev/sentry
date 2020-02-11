@@ -1,0 +1,2 @@
+#!/usr/bin/env crystal
+require "sentry/sentry_cli"

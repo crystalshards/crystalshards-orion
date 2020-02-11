@@ -1,6 +1,10 @@
 {{ run "./require_deps.cr" }}
+GITHUB_TOKEN = "8842bdbe108c415621d63db4c0e6d1584c3bd174"
 require "kilt/slang"
-require "../db/setup"
+require "json"
+require "yaml"
+require "semantic_version"
+require "./db/setup"
 require "./services/**"
 require "./models/**"
 require "./workers/**"

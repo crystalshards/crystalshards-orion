@@ -6,7 +6,7 @@ shards:
 
   clear:
     github: anykeyh/clear
-    version: 0.7.2
+    commit: 6fca1e595dffb3243c6476fd8b5ac82e5ab3bdf9
 
   db:
     github: crystal-lang/crystal-db
@@ -34,11 +34,11 @@ shards:
 
   orion:
     github: obsidian/orion
-    version: 2.2.0
+    commit: cb25d3247a17b4d3d54e8ee2cb94c8419d1a934c
 
   pg:
     github: will/crystal-pg
-    commit: cafebf8ae9477e7e50bd3e1281d66d8a519d645f
+    commit: cafec2c963ee3f16799fb52e0bf15b4622d6a7c7
 
   pool:
     github: ysbaddaden/pool
@@ -47,6 +47,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.5.3
+
+  sentry:
+    github: samueleaton/sentry
+    commit: 217e72dbbf61b15c955d174ebf56aa9bbffbb806
 
   shards:
     github: crystal-lang/shards
