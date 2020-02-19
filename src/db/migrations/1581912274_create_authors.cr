@@ -1,9 +1,8 @@
-class CreateShardRefAuthors
+class CreateShardAuthors
   include Clear::Migration
 
   def change(dir)
-    create_table(:shard_ref_authors, :uuid) do |t|
-      t.references "shard_refs", type: :uuid, null: false
+    create_table(:authors, :uuid) do |t|
       t.column :name, type: :string, null: false
       t.column :email, type: :string
       t.timestamps
