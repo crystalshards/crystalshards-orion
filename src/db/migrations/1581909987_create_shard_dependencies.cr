@@ -3,8 +3,8 @@ class CreateShardDependencies
 
   def change(dir)
     create_table(:shard_dependencies, :uuid) do |t|
-      t.references "shards", type: :uuid, null: false, foreign_key: "parent_id"
-      t.references "projects", type: :uuid, null: false, foreign_key: "dependency_id"
+      t.references "shards", "parent_id", type: :uuid, null: false
+      t.references "projects", "dependency_id", type: :uuid, null: false
       t.column :development, type: :boolean, default: false, null: false
       t.column :ref_requirement, :string
       t.timestamps

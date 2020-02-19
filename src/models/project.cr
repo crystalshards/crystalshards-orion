@@ -13,8 +13,6 @@ class Project
   belongs_to mirrored : Project, foreign_key: "mirrored_id"
   has_many mirrors : Project, foreign_key: "mirrored_id"
 
-  full_text_searchable
-
   def url
     @url ||= case provider
     when "github"

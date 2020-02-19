@@ -3,8 +3,8 @@ class CreateShardAuthors
 
   def change(dir)
     create_table(:shard_authors, :uuid) do |t|
-      t.references "shards", null: false, index: true
-      t.references "authors", null: false, index: true
+      t.references "shards", type: :uuid, null: false
+      t.references "authors", type: :uuid, null: false
       t.timestamps
     end
   end

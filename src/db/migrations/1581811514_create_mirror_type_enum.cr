@@ -1,4 +1,4 @@
-class CreateRefTypeEnum
+class CreateMirrorTypeEnum
   include Clear::Migration
 
   def change(dir)

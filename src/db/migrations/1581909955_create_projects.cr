@@ -11,7 +11,7 @@ class CreateProjects
       t.column :pull_request_count, :integer, null: false, default: 0
       t.column :issue_count, :integer, null: false, default: 0
       t.column :mirror_type, :mirror_type
-      t.references :mirrored_id, :uuid
+      t.references "projects", "mirrored_id", type: :uuid
       t.timestamps
     end
   end

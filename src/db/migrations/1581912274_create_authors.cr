@@ -1,4 +1,4 @@
-class CreateShardAuthors
+class CreateAuthors
   include Clear::Migration
 
   def change(dir)

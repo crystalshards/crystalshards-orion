@@ -14,6 +14,4 @@ class Shard
   belongs_to project : Project
   has_many dependencies : ShardDependency, foreign_key: "parent_id"
   has_many authors : Author, through: "shard_authors"
-
-  full_text_searchable
 end

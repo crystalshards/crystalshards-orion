@@ -13,7 +13,6 @@ class CreateShards
       t.column :executables, :string, array: true
       t.column :tags, :string, array: true
       t.timestamps
-      t.full_text_searchable on: [{"description", 'A'}, {"tags", 'B'}, {"executables", 'C'}]
     end
   end
 end

@@ -6,7 +6,7 @@ shards:
 
   clear:
     github: anykeyh/clear
-    commit: 6fca1e595dffb3243c6476fd8b5ac82e5ab3bdf9
+    commit: 3efce5eebfb75ac04c218e9dab547b6ffa022563
 
   db:
     github: crystal-lang/crystal-db
