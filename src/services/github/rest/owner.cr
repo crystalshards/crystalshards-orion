@@ -1,4 +1,4 @@
-class Github::REST::Owner
+class Service::Github::REST::Owner
   JSON.mapping(
     login: String,
     avatar_url: String,

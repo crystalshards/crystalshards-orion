@@ -1,4 +1,4 @@
-class ShardVersionUpdateWorker < Mosquito::QueuedJob
+class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   params(
     project_id : UUID,
     shardfile_url : String,
@@ -14,7 +14,7 @@ class ShardVersionUpdateWorker < Mosquito::QueuedJob
   end
 
   def perform
-    shard_version = Shard.create(
+    shard_version = ::Shard.create(
       project_id: project_id,
       version: version,
       manifest: manifest
@@ -22,7 +22,7 @@ class ShardVersionUpdateWorker < Mosquito::QueuedJob
   end
 
   private def manifest
-    Manifest::Shard.from_yaml HTTP::Client.get(shardfile_url).body
+    ::Manifest::Shard.from_yaml HTTP::Client.get(shardfile_url).body
   end
 
   private def version(string = version_string)

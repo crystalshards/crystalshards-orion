@@ -1,6 +1,6 @@
 require "./repository"
 
-class Github::GraphQL::RepositorySearchQuery
+class Service::Github::GraphQL::RepositorySearchQuery
   class Response
     JSON.mapping(
       data: RepositorySearchQuery
@@ -8,8 +8,8 @@ class Github::GraphQL::RepositorySearchQuery
   end
 
   JSON.mapping(
-    search: Github::GraphQL::Connection(Github::GraphQL::Repository),
-    rate_limit: {type: Github::GraphQL::RateLimit, key: "rateLimit"}
+    search: Connection(Service::Github::GraphQL::Repository),
+    rate_limit: {type: RateLimit, key: "rateLimit"}
   )
 
   QUERY = <<-graphql
@@ -23,7 +23,7 @@ class Github::GraphQL::RepositorySearchQuery
       }
     }
   }
-  #{Github::GraphQL::Repository::FRAGMENT}
+  #{Service::Github::GraphQL::Repository::FRAGMENT}
   graphql
 
   def self.fetch(*, language = "Crystal", pushed_before : Time? = nil, first : Int32? = nil, after : String? = nil)

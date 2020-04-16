@@ -1,17 +1,18 @@
 require "./connection"
 require "./ref"
 
-class Github::GraphQL::Repository
+class Service::Github::GraphQL::Repository
   JSON.mapping(
     url: String,
-    updated_at: {type: String?, key: "updatedAt"},
+    updated_at: {type: Time?, key: "updatedAt"},
     homepage_url: {type: String?, key: "homepageUrl"},
-    watchers: Github::GraphQL::Connection(Nil),
-    forks: Github::GraphQL::Connection(Nil),
-    stargazers: Github::GraphQL::Connection(Nil),
-    pull_requests: {type: Github::GraphQL::Connection(Nil), key: "pullRequests"},
-    issues: {type: Github::GraphQL::Connection(Nil), key: "issues"},
-    tags: Github::GraphQL::Connection(Github::GraphQL::Ref)
+    name_with_owner: {type: String, key: "nameWithOwner"},
+    watchers: Service::Github::GraphQL::Connection(Nil),
+    forks: Service::Github::GraphQL::Connection(Nil),
+    stargazers: Service::Github::GraphQL::Connection(Nil),
+    pull_requests: {type: Service::Github::GraphQL::Connection(Nil), key: "pullRequests"},
+    issues: {type: Service::Github::GraphQL::Connection(Nil), key: "issues"},
+    tags: Service::Github::GraphQL::Connection(Github::GraphQL::Ref)
   )
 
   FRAGMENT = <<-graphql
@@ -19,6 +20,7 @@ class Github::GraphQL::Repository
     url
     homepageUrl
     updatedAt
+    nameWithOwner
     watchers {
       totalCount
     }
@@ -39,6 +41,6 @@ class Github::GraphQL::Repository
     }
   }
 
-  #{Github::GraphQL::Ref::FRAGMENT}
+  #{Service::Github::GraphQL::Ref::FRAGMENT}
   graphql
 end

@@ -1,9 +1,9 @@
 require "./commit"
 
-class Github::GraphQL::Ref
+class Service::Github::GraphQL::Ref
   JSON.mapping(
     name: {type: String},
-    commit: {type: Commit}
+    commit: {type: Service::Github::GraphQL::Commit}
   )
 
   FRAGMENT = <<-graphql
@@ -14,6 +14,6 @@ class Github::GraphQL::Ref
     }
   }
 
-  #{Github::GraphQL::Commit::FRAGMENT}
+  #{Service::Github::GraphQL::Commit::FRAGMENT}
   graphql
 end

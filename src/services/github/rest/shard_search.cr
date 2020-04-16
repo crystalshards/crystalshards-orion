@@ -1,4 +1,4 @@
-class Github::REST::ShardSearch
+class Service::Github::REST::ShardSearch
   JSON.mapping(
     total_count: Int32,
     items: Array(Github::REST::File)

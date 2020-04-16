@@ -1,6 +1,6 @@
 require "./github/**"
 
-module Github
+module Service::Github
   extend self
 
   def get_by_language(*args, **opts)
@@ -10,7 +10,7 @@ module Github
   def get_by_shardfile(*args, **opts)
     repos = Github::REST::ShardSearch.fetch_repos(**opts)
     node_ids = repos.map(&.node_id)
-    Github::REST::ShardSearch.fetch(node_ids: node_ids).repos
+    Github::GraphQL::MultiRepositoryQuery.fetch(node_ids: node_ids).repos
   end
 
   def total_by_shardfile
@@ -18,6 +18,6 @@ module Github
   end
 
   def total_pages_by_shardfile(*, per_page = 100)
-    Math.ceil(total_count / per_page)
+    (total_by_shardfile / per_page).ceil.to_i
   end
 end

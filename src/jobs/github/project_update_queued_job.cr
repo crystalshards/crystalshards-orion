@@ -1,4 +1,4 @@
-class GithubProjectUpdateWorker < Mosquito::QueuedJob
+class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   params(
     url : String,
     name_with_owner : String,
@@ -22,14 +22,14 @@ class GithubProjectUpdateWorker < Mosquito::QueuedJob
     )
     if versions
       versions.each do |version|
-        ShardVersionUpdateWorker.new(
+        Shard::VersionUpdateQueuedJob.new(
           shardfile_url: "https://raw.githubusercontent.com/#{name_with_owner}/v#{version.to_s}/shard.yml",
           project_id: project.id,
           version_string: version.to_s
         ).enqueue
       end
     else
-      ShardVersionUpdateWorker.new(
+      Shard::VersionUpdateQueuedJob.new(
         shardfile_url: "https://raw.githubusercontent.com/#{name_with_owner}/HEAD/shard.yml",
         project_id: project.id
       ).enqueue

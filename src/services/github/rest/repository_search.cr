@@ -1,4 +1,4 @@
-class Github::REST::RepositorySearch
+class Service::Github::REST::RepositorySearch
   JSON.mapping(
     total_count: Int32,
     items: Array(Github::REST::Repository)

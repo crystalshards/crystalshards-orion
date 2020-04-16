@@ -1,4 +1,4 @@
-class Github::GraphQL::Commit
+class Service::Github::GraphQL::Commit
   JSON.mapping(
     pushed_date: {type: Time, key: "pushedDate"}
   )

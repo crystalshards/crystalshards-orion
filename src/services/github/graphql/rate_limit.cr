@@ -1,4 +1,4 @@
-class Github::GraphQL::RateLimit
+class Service::Github::GraphQL::RateLimit
   JSON.mapping(
     cost: Int32?,
     node_count: {type: Int32?, key: "nodeCount"},

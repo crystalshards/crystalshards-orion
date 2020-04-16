@@ -1,4 +1,4 @@
-class Github::REST::File
+class Service::Github::REST::File
   JSON.mapping({
     repository: Github::REST::Repository,
   })

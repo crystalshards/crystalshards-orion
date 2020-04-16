@@ -1,6 +1,6 @@
 require "./repository"
 
-class Github::GraphQL::MultiRepositoryQuery
+class Service::Github::GraphQL::MultiRepositoryQuery
   class Response
     JSON.mapping(
       data: MultiRepositoryQuery
@@ -8,8 +8,8 @@ class Github::GraphQL::MultiRepositoryQuery
   end
 
   JSON.mapping(
-    repos: Array(Repository),
-    rate_limit: {type: Github::GraphQL::RateLimit, key: "rateLimit"}
+    repos: Array(Service::Github::GraphQL::Repository),
+    rate_limit: {type: RateLimit, key: "rateLimit"}
   )
 
   QUERY = <<-graphql
@@ -18,7 +18,7 @@ class Github::GraphQL::MultiRepositoryQuery
       ...repo_fragment
     }
   }
-  #{Github::GraphQL::Repository::FRAGMENT}
+  #{Service::Github::GraphQL::Repository::FRAGMENT}
   graphql
 
   def self.fetch(*, node_ids : Array(String))

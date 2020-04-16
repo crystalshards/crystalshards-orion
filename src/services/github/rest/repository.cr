@@ -1,4 +1,4 @@
-class Github::REST::Repository
+class Service::Github::REST::Repository
   JSON.mapping(
     node_id: String,
     html_url: String,
