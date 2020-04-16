@@ -2,15 +2,15 @@ version: 1.0
 shards:
   admiral:
     github: jwaldrip/admiral.cr
-    commit: d11fc4863154f3dbd933421bdf45d356a2550e07
+    commit: 09a81513a47535c4b59cbf0ab98cadcbf6ab70fb
 
   clear:
     github: anykeyh/clear
-    commit: 3efce5eebfb75ac04c218e9dab547b6ffa022563
+    commit: f9aa2369a665f413ea27a8000e8884c778f28d36
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.8.0
+    version: 0.9.0
 
   generate:
     github: anykeyh/generate.cr
@@ -24,9 +24,13 @@ shards:
     github: jeromegn/kilt
     version: 0.6.0
 
+  molinillo:
+    github: crystal-lang/crystal-molinillo
+    version: 0.1.0
+
   mosquito:
     github: robacarp/mosquito
-    version: 0.6.0
+    commit: bce04b7501bb6ec14d4f1c9bda540e20c1765e80
 
   oak:
     github: obsidian/oak
@@ -38,7 +42,7 @@ shards:
 
   pg:
     github: will/crystal-pg
-    commit: cafec2c963ee3f16799fb52e0bf15b4622d6a7c7
+    commit: cafee448dc09ef487bd3941febce8796830f1bd7
 
   pool:
     github: ysbaddaden/pool
@@ -46,15 +50,15 @@ shards:
 
   redis:
     github: stefanwille/crystal-redis
-    version: 2.5.3
+    version: 2.6.0
 
   sentry:
-    github: samueleaton/sentry
-    commit: 217e72dbbf61b15c955d174ebf56aa9bbffbb806
+    github: Acciaiodigitale/sentry
+    commit: 5ba3ace2a1c2ab8ea55cd4a89a663bec4f21f75a
 
   shards:
     github: crystal-lang/shards
-    version: 0.9.0
+    version: 0.10.0
 
   slang:
     github: jeromegn/slang

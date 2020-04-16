@@ -8,7 +8,7 @@ class Github::REST::ShardSearch
     fetch.total_count
   end
 
-  def self.fetch(per_page, page)
+  def self.fetch(per_page = 100, page = 1)
     headers = HTTP::Headers.new
     headers["Authorization"] = "Bearer #{GITHUB_TOKEN}"
     url = "https://api.github.com/search/code?q=path:/+filename:shard.yml&per_page=#{per_page}&page=#{page}&sort=indexed"

@@ -17,12 +17,6 @@ class Github::GraphQL::MultiRepositoryQuery
     repos: nodes(ids: $node_ids) {
       ...repo_fragment
     }
-    rateLimit {
-      cost
-      nodeCount
-      remaining
-      resetAt
-    }
   }
   #{Github::GraphQL::Repository::FRAGMENT}
   graphql

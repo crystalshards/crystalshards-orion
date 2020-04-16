@@ -1,3 +1,4 @@
+require "shards/resolvers/resolver"
 require "shards/spec"
 spec = Shards::Spec.from_yaml(File.read("./shard.yml"))
 

@@ -8,7 +8,7 @@ module Github
   end
 
   def get_by_shardfile(*args, **opts)
-    repos = strategy.fetch_repos(**opts)
+    repos = Github::REST::ShardSearch.fetch_repos(**opts)
     node_ids = repos.map(&.node_id)
     Github::REST::ShardSearch.fetch(node_ids: node_ids).repos
   end

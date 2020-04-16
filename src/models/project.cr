@@ -10,20 +10,20 @@ class Project
   column pull_request_count : Int32
   column issue_count : Int32
 
-  belongs_to mirrored : Project, foreign_key: "mirrored_id"
-  has_many mirrors : Project, foreign_key: "mirrored_id"
+  belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: UUID
+  has_many mirrors : Project, foreign_key: "mirrored_id", foreign_key_type: UUID
 
   def url
     @url ||= case provider
-    when "github"
-      "https://github.com/#{provider_uri}"
-    when "gitlab"
-      "https://gitlab.com/#{provider_uri}"
-    when "bitbucket"
-      "https://bitbucket.com/#{provider_uri}"
-    when "git", "path"
-      uri
-    end
+             when "github"
+               "https://github.com/#{provider_uri}"
+             when "gitlab"
+               "https://gitlab.com/#{provider_uri}"
+             when "bitbucket"
+               "https://bitbucket.com/#{provider_uri}"
+             when "git", "path"
+               uri
+             end
   end
 
   def clone_url

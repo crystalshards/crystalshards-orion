@@ -1,5 +1,5 @@
 require "./connection"
-require "./release"
+require "./ref"
 
 class Github::GraphQL::Repository
   JSON.mapping(
@@ -11,8 +11,9 @@ class Github::GraphQL::Repository
     stargazers: Github::GraphQL::Connection(Nil),
     pull_requests: {type: Github::GraphQL::Connection(Nil), key: "pullRequests"},
     issues: {type: Github::GraphQL::Connection(Nil), key: "issues"},
-    releases: Github::GraphQL::Connection(Github::GraphQL::Release)
+    tags: Github::GraphQL::Connection(Github::GraphQL::Ref)
   )
+
   FRAGMENT = <<-graphql
   fragment repo_fragment on Repository {
     url
@@ -33,13 +34,11 @@ class Github::GraphQL::Repository
     issues {
       totalCount
     }
-    releases(first: 10, orderBy:{ field: CREATED_AT, direction: DESC }) {
-      nodes {
-        ...release
-      }
+    tags: refs(refPrefix: "refs/tags/", first: 100) {
+      ...ref
     }
   }
 
-  #{Github::GraphQL::Release::FRAGMENT}
+  #{Github::GraphQL::Ref::FRAGMENT}
   graphql
 end

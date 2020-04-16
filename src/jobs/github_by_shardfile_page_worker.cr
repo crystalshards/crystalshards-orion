@@ -1,13 +1,12 @@
-class GithubByLanguagePageWorker < Mosquito::QueuedJob
-  params first : Int32 = 100
-  params after : String
-  params pushed_before : Time
+class GithubShardFilePageWorker < Mosquito::QueuedJob
+  params(
+    page : Int32,
+    per_page : Int32
+  )
 
   def perform
-    search = Github.get_by_language(first: first, after: after)
-    search.edges.each do |edge|
-      repo = edge.node
-      GithubShardUpdateWorker.peform(
+    Github.get_by_shardfile(per_page: per_page, page: page).each do |repo|
+      GithubProjectUpdateWorker.peform(
         url: repo.url,
         watcher_count: repo.watchers.total_count,
         fork_count: repo.forks.total_count,
@@ -18,6 +17,5 @@ class GithubByLanguagePageWorker < Mosquito::QueuedJob
         name_with_owner: repo.name_with_owner
       )
     end
-    this.class.perform(first: first, after: search.edges.last.cursor, pushed_before: search.edges.last.node.updated_at)
   end
 end
