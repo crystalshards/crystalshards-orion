@@ -37,7 +37,9 @@ class Service::Github::GraphQL::Repository
       totalCount
     }
     tags: refs(refPrefix: "refs/tags/", first: 100) {
-      ...ref
+      nodes {
+        ...ref
+      }
     }
   }
 

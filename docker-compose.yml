@@ -9,6 +9,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: crystalshards
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
   redis:
     image: redis
     ports:
@@ -25,19 +26,18 @@ services:
     ports:
       - "3000:3000"
     command:
-      - ./bin/sentry
+      - ./dev/sentry
       - -b
       - shards build server
       - -r
       - ./bin/server
     volumes:
-      - ./src:/app/src
-      - ./db:/app/db
-      - ./spec:/app/spec
-      - ./shard.yml:/app/.sentry.yml
-      - ./shard.yml:/app/shard.yml
-      - ./shard.lock:/app/shard.lock
-      - ./migrate:/app/migrate
+      - ./src:/app/src:cached
+      - ./spec:/app/spec:cached
+      - ./shard.yml:/app/.sentry.yml:cached
+      - ./shard.yml:/app/shard.yml:cached
+      - ./shard.lock:/app/shard.lock:cached
+      - ./migrate:/app/migrate:cached
   job_runner:
     build:
       context: .
@@ -49,12 +49,11 @@ services:
       POSTGRES_URL: postgres://postgres@postgres/crystalshards
     volumes:
       - ./src:/app/src:cached
-      - ./db:/app/db:cached
       - ./shard.yml:/app/.sentry.yml:cached
       - ./shard.yml:/app/shard.yml:cached
       - ./shard.lock:/app/shard.lock:cached
     command:
-      - ./bin/sentry
+      - ./dev/sentry
       - -b
       - shards build job_runner
       - -r

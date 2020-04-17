@@ -6,7 +6,7 @@ class CreateShards
       t.references "projects", type: :uuid, null: false
       t.column :ref_type, :ref_type, index: true, null: false
       t.column :ref_name, :string, index: true, null: false
-      t.column :spec_json
+      t.column :manifest, :jsonb
       t.timestamps
     end
   end

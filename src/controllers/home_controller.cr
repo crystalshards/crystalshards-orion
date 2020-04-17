@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def home
-    render("src/templates/home.slang")
+    render view: "home.slang"
   end
 end

@@ -4,7 +4,7 @@ class CreateProjects
   def change(dir)
     create_table(:projects, :uuid) do |t|
       t.column :provider, :provider, null: false
-      t.column :uri, :provider, null: false
+      t.column :uri, :string, null: false
       t.column :watcher_count, :integer, null: false, default: 0
       t.column :fork_count, :integer, null: false, default: 0
       t.column :star_count, :integer, null: false, default: 0

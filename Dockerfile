@@ -1,6 +1,6 @@
-FROM crystallang/crystal:0.32.1
+FROM crystallang/crystal:0.34.0
 WORKDIR /app
-COPY shard.* ./
+COPY shard.yml shard.lock ./
 RUN shards install
 COPY . .
 RUN shards build --production

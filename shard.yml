@@ -27,9 +27,6 @@ dependencies:
   slang:
     github: jeromegn/slang
     version: 1.7.1
-  shards:
-    github: crystal-lang/shards
-    version: 0.10.0
 
 development_dependencies:
   sentry:

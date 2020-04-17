@@ -1,4 +1,4 @@
-build: shards build server
+build: shards build server --local
 install_shards: true
 run: ./bin/server
 watch:

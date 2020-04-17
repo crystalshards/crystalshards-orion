@@ -1,7 +1,5 @@
-require "shards/resolvers/resolver"
-require "shards/spec"
-spec = Shards::Spec.from_yaml(File.read("./shard.yml"))
-
-spec.dependencies.each do |dep|
-  puts "require \"#{dep.name}\""
+require "yaml"
+spec = YAML.parse(File.read(ARGV[0]))
+spec["dependencies"].as_h.each do |name, value|
+  puts "require \"#{name.as_s}\""
 end

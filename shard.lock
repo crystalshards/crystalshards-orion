@@ -24,10 +24,6 @@ shards:
     github: jeromegn/kilt
     version: 0.6.0
 
-  molinillo:
-    github: crystal-lang/crystal-molinillo
-    version: 0.1.0
-
   mosquito:
     github: robacarp/mosquito
     commit: bce04b7501bb6ec14d4f1c9bda540e20c1765e80
@@ -38,7 +34,7 @@ shards:
 
   orion:
     github: obsidian/orion
-    commit: cb25d3247a17b4d3d54e8ee2cb94c8419d1a934c
+    commit: 5afd58e16e8698a1296252b2277b01e614e44a85
 
   pg:
     github: will/crystal-pg
@@ -55,10 +51,6 @@ shards:
   sentry:
     github: Acciaiodigitale/sentry
     commit: 5ba3ace2a1c2ab8ea55cd4a89a663bec4f21f75a
-
-  shards:
-    github: crystal-lang/shards
-    version: 0.10.0
 
   slang:
     github: jeromegn/slang

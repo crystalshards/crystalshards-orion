@@ -42,6 +42,7 @@ class Service::Github::GraphQL::RepositorySearchQuery
     headers["Authorization"] = "Bearer #{GITHUB_TOKEN}"
     url = "https://api.github.com/graphql"
     response = HTTP::Client.post(url, headers, body)
+    raise Exception.new("Bad response: #{response.body}") if response.status_code != 200
     Response.from_json(response.body).data
   end
 end

@@ -1,5 +1,5 @@
-{{ run "./require_deps.cr" }}
-GITHUB_TOKEN = "8842bdbe108c415621d63db4c0e6d1584c3bd174"
+{{ run "./require_deps.cr", "#{__DIR__}/../shard.yml" }}
+GITHUB_TOKEN = ENV["GITHUB_TOKEN"]?
 require "kilt/slang"
 require "json"
 require "yaml"

@@ -17,7 +17,7 @@ class Service::Github::REST::RepositorySearch
     end
     url = "https://api.github.com/search/repositories?q=language:Crystal#{before_date}&sort=updated&per_page=#{per_page}&page=#{page}"
     response = HTTP::Client.get(url, headers)
-    raise Exception.new("Bad response: #{response.status_code}") if response.status_code != 200
+    raise Exception.new("Bad response: #{response.body}") if response.status_code != 200
     from_json(response.body)
   end
 

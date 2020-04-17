@@ -13,7 +13,7 @@ class Service::Github::REST::ShardSearch
     headers["Authorization"] = "Bearer #{GITHUB_TOKEN}"
     url = "https://api.github.com/search/code?q=path:/+filename:shard.yml&per_page=#{per_page}&page=#{page}&sort=indexed"
     response = HTTP::Client.get(url, headers)
-    raise Exception.new("Bad response: #{response.status_code}") if response.status_code != 200
+    raise Exception.new("Bad response: #{response.body}") if response.status_code != 200
     from_json(response.body)
   end
 
