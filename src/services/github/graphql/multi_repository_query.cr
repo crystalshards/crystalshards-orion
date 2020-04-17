@@ -9,8 +9,8 @@ class Service::Github::GraphQL::MultiRepositoryQuery
 
   JSON.mapping(
     repos: Array(Service::Github::GraphQL::Repository),
-    rate_limit: {type: RateLimit, key: "rateLimit"}
-  )
+      # rate_limit: {type: RateLimit, key: "rateLimit"}
+)
 
   QUERY = <<-graphql
   query ($node_ids: [ID!]!) {

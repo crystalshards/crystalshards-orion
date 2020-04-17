@@ -14,7 +14,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   def perform
-    shard_version = ::Shard.query.find({project_id: "project_id", version: version}) || ::Shard.create(
+    shard_version = ::Shard.query.find({project_id: project_id, version: version}) || ::Shard.create(
       project_id: project_id,
       version: version,
       manifest: manifest

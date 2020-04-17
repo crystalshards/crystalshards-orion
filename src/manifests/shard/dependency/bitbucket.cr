@@ -1,4 +1,4 @@
-class Manifest::Shard::Dependency::Bitbucket < Manifest::Shard::Dependency
+class Manifest::Shard::Dependency::Bitbucket
   include JSON::Serializable
   include YAML::Serializable
 

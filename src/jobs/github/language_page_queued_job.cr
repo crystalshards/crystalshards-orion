@@ -23,7 +23,9 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
         name_with_owner: repo.name_with_owner
       ).enqueue
     end
-    next_pushed_before = ((last_repo = edges.last.node) ? last_repo.updated_at : nil) || pushed_before
+
+    return unless (last_edge = edges.last?)
+    next_pushed_before = (last_edge ? last_edge.node.not_nil!.updated_at : nil) || pushed_before
     self.class.new(first: first, after: edges.last.cursor.to_s, pushed_before: next_pushed_before).enqueue
   end
 end

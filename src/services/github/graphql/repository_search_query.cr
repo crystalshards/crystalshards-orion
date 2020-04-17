@@ -9,8 +9,8 @@ class Service::Github::GraphQL::RepositorySearchQuery
 
   JSON.mapping(
     search: Connection(Service::Github::GraphQL::Repository),
-    rate_limit: {type: RateLimit, key: "rateLimit"}
-  )
+      # rate_limit: {type: RateLimit, key: "rateLimit"}
+)
 
   QUERY = <<-graphql
   query ($query: String!, $first: Int, $after: String) {

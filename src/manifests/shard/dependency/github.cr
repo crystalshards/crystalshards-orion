@@ -1,4 +1,4 @@
-class Manifest::Shard::Dependency::Github < Manifest::Shard::Dependency
+class Manifest::Shard::Dependency::Github
   include JSON::Serializable
   include YAML::Serializable
 

@@ -2,9 +2,10 @@ class Shard
   include Clear::Model
 
   # Columns
+  primary_key name: "id", type: :uuid
   column manifest : Manifest::Shard
   column name : String
-  column version : SemanticVersion
+  column version : SemanticVersion?
   column license : String?
   column description : String?
   column crystal : SemanticVersion?

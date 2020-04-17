@@ -1,7 +1,7 @@
 class Project
   include Clear::Model
 
-  column id : UUID, primary: true, presence: false
+  primary_key name: "id", type: :uuid
   column provider : Provider
   column uri : String
   column watcher_count : Int32
@@ -9,9 +9,10 @@ class Project
   column star_count : Int32
   column pull_request_count : Int32
   column issue_count : Int32
+  column mirror_type : MirrorType?
 
-  belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: UUID
-  has_many mirrors : Project, foreign_key: "mirrored_id", foreign_key_type: UUID
+  belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: UUID?
+  has_many mirrors : Project, foreign_key: "mirrored_id", foreign_key_type: UUID?
 
   def url
     @url ||= case provider

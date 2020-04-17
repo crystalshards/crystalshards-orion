@@ -1,4 +1,4 @@
-class Manifest::Shard::Dependency::Git < Manifest::Shard::Dependency
+class Manifest::Shard::Dependency::Git
   include JSON::Serializable
   include YAML::Serializable
 

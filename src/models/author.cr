@@ -1,7 +1,7 @@
 class Author
   include Clear::Model
 
-  column id : UUID, primary: true, presence: false
+  primary_key name: "id", type: :uuid
   column name : String
   column email : String
 
