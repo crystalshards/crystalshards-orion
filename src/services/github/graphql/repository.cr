@@ -3,6 +3,7 @@ require "./ref"
 
 class Service::Github::GraphQL::Repository
   JSON.mapping(
+    id: String,
     url: String,
     updated_at: {type: Time?, key: "updatedAt"},
     homepage_url: {type: String?, key: "homepageUrl"},
@@ -17,6 +18,7 @@ class Service::Github::GraphQL::Repository
 
   FRAGMENT = <<-graphql
   fragment repo_fragment on Repository {
+    id
     url
     homepageUrl
     updatedAt

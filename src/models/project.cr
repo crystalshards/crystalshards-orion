@@ -3,6 +3,7 @@ class Project
 
   primary_key name: "id", type: :uuid
   column provider : Provider
+  column api_id : String
   column uri : String
   column watcher_count : Int32
   column fork_count : Int32

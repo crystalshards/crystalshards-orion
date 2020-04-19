@@ -2,30 +2,31 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
   include JobSerializers
 
   params(
-    first : Int32 = 100,
-    after : String = "",
-    pushed_before : Time = Time.utc
+    page : Int32 = 1,
+    per_page : Int32 = 100,
+    pushed_before : Time = Time.utc + Time::Span.new(days: 1)
   )
 
   def perform
-    search = Service::Github.get_by_language(first: first, after: after.blank? ? nil : after, pushed_before: pushed_before)
-    return unless (edges = search.edges)
-    edges.each do |edge|
-      next unless (repo = edge.node)
+    return if per_page * page >= 1000
+    repos = Service::Github.get_by_language(per_page: per_page, page: page, pushed_before: pushed_before)
+    repos.each do |repo|
       ProjectUpdateQueuedJob.new(
-        url: repo.url,
-        watcher_count: repo.watchers.total_count || 0,
-        fork_count: repo.forks.total_count || 0,
-        star_count: repo.stargazers.total_count || 0,
-        pull_request_count: repo.pull_requests.total_count || 0,
-        issue_count: repo.issues.total_count || 0,
-        release_tags: (nodes = repo.tags.nodes) ? nodes.map(&.name).join(",") : "",
-        name_with_owner: repo.name_with_owner
+        api_id: repo.node_id,
+        url: repo.html_url,
+        name_with_owner: repo.full_name,
+        watcher_count: repo.watchers_count || 0,
+        fork_count: repo.forks_count || 0,
+        star_count: repo.stargazers_count || 0,
+        pull_request_count: 0,
+        issue_count: repo.open_issues_count || 0,
+        default_branch: repo.default_branch || "HEAD"
       ).enqueue
     end
-
-    return unless (last_edge = edges.last?)
-    next_pushed_before = (last_edge ? last_edge.node.not_nil!.updated_at : nil) || pushed_before
-    self.class.new(first: first, after: edges.last.cursor.to_s, pushed_before: next_pushed_before).enqueue
+    # if page < Service::Github.total_pages_by_language
+    # end
+    # Service::Github.get_by_language(per_page: per_page, page: page, pushed_before: pushed_before)
+    # return unless (last_repo = repos.last?)
+    # self.class.new(pushed_before: last_repo.pushed_at).enqueue
   end
 end

@@ -4,7 +4,7 @@ class Manifest::Shard
 
   getter name : String
   getter version : String
-  getter authors : Array(String)?
+  getter authors : Array(Shard::Author)?
   getter description : String?
   getter license : String?
   getter crystal : String?

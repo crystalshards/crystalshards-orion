@@ -5,16 +5,12 @@ class Job::Github::ShardFilePageQueuedJob < Mosquito::QueuedJob
   )
 
   def perform
+    return if per_page * page >= 1000
     Service::Github.get_by_shardfile(per_page: per_page, page: page).each do |repo|
       ProjectUpdateQueuedJob.new(
-        url: repo.url,
-        watcher_count: repo.watchers.total_count || 0,
-        fork_count: repo.forks.total_count || 0,
-        star_count: repo.stargazers.total_count || 0,
-        pull_request_count: repo.pull_requests.total_count || 0,
-        issue_count: repo.issues.total_count || 0,
-        release_tags: (nodes = repo.tags.nodes) ? nodes.map(&.name).join(",") : "",
-        name_with_owner: repo.name_with_owner
+        api_id: repo.node_id,
+        url: repo.html_url,
+        name_with_owner: repo.full_name
       ).enqueue
     end
   end

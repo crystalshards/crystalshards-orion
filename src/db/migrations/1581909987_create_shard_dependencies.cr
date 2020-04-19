@@ -15,5 +15,17 @@ class CreateShardDependencies
 
       t.index ["parent_id", "dependency_id"], unique: true
     end
+
+    dir.up do
+      execute <<-SQL
+        ALTER TABLE shard_dependencies ADD CONSTRAINT shard_dependencies_pkey primary key (parent_id, dependency_id);
+      SQL
+    end
+
+    dir.down do
+      execute <<-SQL
+        ALTER TABLE shard_dependencies DROP CONSTRAINT shard_dependencies_pkey;
+      SQL
+    end
   end
 end

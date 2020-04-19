@@ -6,6 +6,7 @@ class CreateShards
       t.column :manifest, :jsonb, null: false
       t.column :name, :string, index: true, null: false
       t.column :version, :string, index: true, null: false
+      t.column :git_tag, :string, index: true
       t.column :license, :string, index: true
       t.column :description, :string
       t.column :crystal, :string

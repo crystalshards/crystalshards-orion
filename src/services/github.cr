@@ -3,14 +3,24 @@ require "./github/**"
 module Service::Github
   extend self
 
+  def fetch(node_ids : Array(String))
+    Github::GraphQL::MultiRepositoryQuery.fetch(node_ids: node_ids).repos
+  end
+
   def get_by_language(*args, **opts)
-    Github::GraphQL::RepositorySearchQuery.fetch(**opts).search
+    Github::REST::RepositorySearch.fetch_repos(**opts)
+  end
+
+  def total_by_language(*, pushed_before : Time? = nil)
+    Github::REST::RepositorySearch.total_count()
+  end
+
+  def total_pages_by_language(*, per_page = 100, pushed_before : Time? = nil)
+    (total_by_language(pushed_before: pushed_before) / per_page).ceil.to_i
   end
 
   def get_by_shardfile(*args, **opts)
-    repos = Github::REST::ShardSearch.fetch_repos(**opts)
-    node_ids = repos.map(&.node_id)
-    Github::GraphQL::MultiRepositoryQuery.fetch(node_ids: node_ids).repos
+    Github::REST::ShardSearch.fetch_repos(**opts)
   end
 
   def total_by_shardfile
