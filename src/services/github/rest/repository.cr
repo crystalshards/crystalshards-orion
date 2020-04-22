@@ -5,6 +5,7 @@ class Service::Github::REST::Repository
   getter html_url : String
   getter full_name : String
   getter pushed_at : Time?
+  getter updated_at : Time?
   getter stargazers_count : Int32?
   getter watchers_count : Int32?
   getter forks_count : Int32?
