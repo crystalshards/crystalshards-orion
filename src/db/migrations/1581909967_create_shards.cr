@@ -2,7 +2,7 @@ class CreateShards
   include Clear::Migration
 
   def change(dir)
-    create_table(:shards, :uuid) do |t|
+    create_table(:shards) do |t|
       t.column :manifest, :jsonb, null: false
       t.column :name, :string, index: true, null: false
       t.column :version, :string, index: true, null: false
@@ -12,7 +12,7 @@ class CreateShards
       t.column :crystal, :string
       t.column :tags, :string, array: true
 
-      t.references "projects", type: :uuid, null: false
+      t.references "projects", null: false
 
       t.timestamps
     end
