@@ -12,6 +12,8 @@ module Manifest::Shard::Dependency::GitRef
         "branch"
       when .tag
         "tag"
+      else
+        nil
       end
     end
 

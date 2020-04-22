@@ -2,7 +2,7 @@ class Service::Github::REST::Response(T)
   def self.fetch(endpoint : String, **key_values)
     headers = HTTP::Headers.new
     headers["Authorization"] = "Bearer #{GITHUB_TOKEN}"
-    params = key_values.map { |k, v| [k,v].join("=") }.join("&")
+    params = key_values.map { |k, v| [k, v].join("=") }.join("&")
     url = "https://api.github.com/search/#{endpoint}?" + params
     response = HTTP::Client.get(url, headers)
     puts "REST Request (#{T.name}):"

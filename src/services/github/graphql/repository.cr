@@ -10,7 +10,7 @@ class Service::Github::GraphQL::Repository
     homepage_url: {type: String?, key: "homepageUrl"},
     name_with_owner: {type: String, key: "nameWithOwner"},
     watchers: Service::Github::GraphQL::Connection(Nil),
-    repository_topics: { type: Service::Github::GraphQL::Connection(RepositoryTopic), key: "repositoryTopics" },
+    repository_topics: {type: Service::Github::GraphQL::Connection(RepositoryTopic), key: "repositoryTopics"},
     forks: Service::Github::GraphQL::Connection(Nil),
     stargazers: Service::Github::GraphQL::Connection(Nil),
     pull_requests: {type: Service::Github::GraphQL::Connection(Nil), key: "pullRequests"},

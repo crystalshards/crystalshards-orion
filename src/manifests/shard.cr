@@ -12,7 +12,7 @@ class Manifest::Shard
   getter documentation : String?
   getter dependencies : Hash(String, Dependency::Provider)?
   getter development_dependencies : Hash(String, Dependency::Provider)?
-  getter tags : Array(String) = [] of String
+  getter tags : Array(String)?
 
   def self.to_column(value : JSON::Any) : Manifest::Shard?
     from_json value.to_json
