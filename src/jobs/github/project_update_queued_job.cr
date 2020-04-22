@@ -37,15 +37,8 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   def update_project
-    # Find and and update by URL
-    Project.query.find_or_create({provider: "github", uri: url}) { |p| set_project_attributes p }
-  rescue
-    # Find and update by API ID to catch renames
-    Project.query.find_or_create({provider: "github", api_id: api_id}) { |p| set_project_attributes p }
-  end
-
-  private def set_project_attributes(project : Project)
     puts "Creating/Updating project: #{url}".colorize(:cyan)
+    project = get_project
     project.api_id = api_id
     project.uri = url
     project.tags = tags.split(",")
@@ -55,6 +48,15 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     project.star_count = star_count if star_count >= 0
     project.pull_request_count = pull_request_count if pull_request_count >= 0
     project.issue_count = issue_count if issue_count >= 0
+    project.tap(&.save)
+  end
+
+  def get_project
+    # Find and and update by URL
+    Project.query.find_or_build({provider: "github", uri: url}) { }
+  rescue
+    # Find and update by API ID to catch renames
+    Project.query.find_or_build({provider: "github", api_id: api_id}) { }
   end
 
   private def versions
