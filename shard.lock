@@ -26,7 +26,7 @@ shards:
 
   mosquito:
     github: robacarp/mosquito
-    commit: bce04b7501bb6ec14d4f1c9bda540e20c1765e80
+    commit: 0cbc8f0e03f8c3706ebcac7be4b91da32c3dd414
 
   oak:
     github: obsidian/oak

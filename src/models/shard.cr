@@ -1,47 +1,65 @@
 class Shard
   include Clear::Model
 
-  class Author
-    include Clear::Model
-
-    belongs_to post : ::Shard, key_type: UUID
-    belongs_to tag : ::Author, key_type: UUID
-
-    self.table = "shard_authors"
-  end
-
   # Columns
-  primary_key name: "id", type: :uuid
+  primary_key
   column manifest : Manifest::Shard
   column name : String
-  column version : SemanticVersion
-  column git_tag : SemanticVersion?
+  column version : String
+  column git_tag : String?
   column license : String?
   column description : String?
-  column crystal : SemanticVersion?
+  column crystal : String?
   column tags : Array(String)?
 
   # Associations
-  belongs_to project : Project, key_type: UUID
-  has_many dependencies : ShardDependency, foreign_key: "parent_id", foreign_key_type: UUID
-  has_many authors : Author, through: Shard::Author, foreign_key_type: UUID
+  belongs_to project : Project
+  has_many dependencies : ShardDependency, foreign_key: "parent_id"
+  has_many authors : Author, through: "shard_authors"
 
   # Copy spec data to shard
   before :validate do |model|
-    shard = model.as(Shard)
-    shard.name = shard.manifest.name
-    shard.version = SemanticVersion.parse(shard.manifest.version)
-    shard.license = shard.manifest.license
-    shard.description = shard.manifest.description
-    shard.crystal = (crystal = shard.manifest.crystal) ? SemanticVersion.parse(crystal) : nil
-    shard.tags = shard.manifest.tags
+    model.as(self).update_from_manifest!
   end
 
   after :save do |model|
-    shard = model.as(Shard)
-    (shard.manifest.authors || [] of Manifest::Shard::Author).each do |manifest_author|
-      author = ::Author.query.find_or_create({ name: manifest_author.name, email: manifest_author.email }){}
-      ::Shard::Author.query.find_or_create({ shard_id: shard.id.to_s, author_id: author.id.to_s }){}
+    model.as(self).associate_authors!
+    model.as(self).associate_dependencies!
+  end
+
+  after :create do |model|
+    model.as(self).associate_authors!
+    model.as(self).associate_dependencies!
+  end
+
+  protected def update_from_manifest!
+    self.name = manifest.name
+    self.version = manifest.version
+    self.license = manifest.license
+    self.description = manifest.description
+    self.crystal = manifest.crystal
+    self.tags = manifest.tags
+  end
+
+  protected def associate_dependencies!
+    # Associate release deps
+    (manifest.dependencies || {} of String => Manifest::Shard::Dependency::Provider).each do |name, dependency|
+      if (dep = ShardDependency.associate(self, name, dependency))
+        self.dependencies << dep
+      end
+    end
+
+    # Associate development deps
+    (manifest.development_dependencies || {} of String => Manifest::Shard::Dependency::Provider).each do |name, dependency|
+      if (dep = ShardDependency.associate(self, name, dependency, true))
+        self.dependencies << dep
+      end
+    end
+  end
+
+  protected def associate_authors!
+    (manifest.authors || [] of Manifest::Shard::Author).each do |manifest_author|
+      self.authors << Author.query.find_or_create({name: manifest_author.name, email: manifest_author.email}) { }
     end
   end
 end

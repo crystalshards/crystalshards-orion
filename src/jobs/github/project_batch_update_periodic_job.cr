@@ -1,12 +1,12 @@
-class Job::Github::ProjectUpdatePeriodicJob < Mosquito::PeriodicJob
+class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
   run_every 1.hour
 
   def perform
     # Fetch node_ids in batches
     id_collector = Channel(String).new
     spawn do
-      Project.query.where(provider: "github").select("api_id").each_with_cursor(100) do |project|
-        id_collector.send(project.api_id)
+      Project.query.where { (provider == "github") & (api_id != nil) }.select("api_id").each_with_cursor(100) do |project|
+        id_collector.send(project.api_id.not_nil!)
       end
       id_collector.close
     end

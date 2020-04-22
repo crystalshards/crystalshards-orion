@@ -16,7 +16,7 @@ class CreateProjects
 
       t.timestamps
 
-      t.index [:provider, :url], unique: true
+      t.index [:provider, :uri], unique: true
       t.index [:provider, :api_id], unique: true
     end
   end

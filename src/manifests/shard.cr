@@ -10,7 +10,8 @@ class Manifest::Shard
   getter crystal : String?
   getter repository : String?
   getter documentation : String?
-  getter dependencies : Hash(String, Dependency::Bitbucket | Dependency::Git | Dependency::Github | Dependency::Gitlab | Dependency::Path)?
+  getter dependencies : Hash(String, Dependency::Provider)?
+  getter development_dependencies : Hash(String, Dependency::Provider)?
   getter tags : Array(String) = [] of String
 
   def self.to_column(value : JSON::Any) : Manifest::Shard?

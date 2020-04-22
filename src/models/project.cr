@@ -1,28 +1,28 @@
 class Project
   include Clear::Model
 
-  primary_key name: "id", type: :uuid
+  primary_key
   column provider : Provider
-  column api_id : String
   column uri : String
-  column watcher_count : Int32
-  column fork_count : Int32
-  column star_count : Int32
-  column pull_request_count : Int32
-  column issue_count : Int32
+  column api_id : String?
+  column watcher_count : Int32, presence: false
+  column fork_count : Int32, presence: false
+  column star_count : Int32, presence: false
+  column pull_request_count : Int32, presence: false
+  column issue_count : Int32, presence: false
   column mirror_type : MirrorType?
 
-  belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: UUID?
-  has_many mirrors : Project, foreign_key: "mirrored_id", foreign_key_type: UUID?
+  belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: Int64?
+  has_many mirrors : Project, foreign_key: "mirrored_id"
 
   def url
     @url ||= case provider
              when "github"
-               "https://github.com/#{provider_uri}"
+               "https://github.com/#{uri}"
              when "gitlab"
-               "https://gitlab.com/#{provider_uri}"
+               "https://gitlab.com/#{uri}"
              when "bitbucket"
-               "https://bitbucket.com/#{provider_uri}"
+               "https://bitbucket.com/#{uri}"
              when "git", "path"
                uri
              end

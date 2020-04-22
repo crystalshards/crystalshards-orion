@@ -31,9 +31,10 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   private def update_project
-    if (project = Project.query.find({provider: "github", api_id: api_id}))
+    if (project = Project.query.find({provider: "github", uri: url}))
       puts "Updating project: #{url}"
       project.update(
+        api_id: api_id,
         watcher_count: watcher_count,
         fork_count: fork_count,
         star_count: star_count,
@@ -59,10 +60,10 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   private def versions
-    release_tags.split(",").each_with_object([] of SemanticVersion) do |tag, versions|
+    release_tags.split(",").each_with_object([] of String) do |tag, versions|
       begin
         match = tag.match(/^v(.*)/)
-        version = SemanticVersion.parse(match[1]) if match
+        version = match[1] if match
         versions << version if version
       rescue
       end

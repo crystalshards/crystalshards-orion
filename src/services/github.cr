@@ -7,12 +7,16 @@ module Service::Github
     Github::GraphQL::MultiRepositoryQuery.fetch(node_ids: node_ids).repos
   end
 
+  def fetch(url : String)
+    Github::GraphQL::RepositoryResourceQuery.fetch(url: url).repo
+  end
+
   def get_by_language(*args, **opts)
     Github::REST::RepositorySearch.fetch_repos(**opts)
   end
 
   def total_by_language(*, pushed_before : Time? = nil)
-    Github::REST::RepositorySearch.total_count()
+    Github::REST::RepositorySearch.total_count
   end
 
   def total_pages_by_language(*, per_page = 100, pushed_before : Time? = nil)

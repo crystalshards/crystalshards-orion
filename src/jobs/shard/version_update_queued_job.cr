@@ -1,17 +1,9 @@
 class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   params(
-    project_id : UUID,
+    project_id : Int64,
     shardfile_url : String,
     git_tag : String = ""
   )
-
-  def deserialize_uuid(string)
-    UUID.new(string)
-  end
-
-  def serialize_uuid(uuid)
-    uuid.to_s
-  end
 
   def perform
     update_shard || create_shard
@@ -23,7 +15,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
       ::Shard.create!(
         project_id: project_id,
         manifest: manifest,
-        git_tag: git_tag_version
+        git_tag: git_tag
       )
     end
   end
@@ -33,7 +25,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
       puts "Updating shard version: #{manifest.name}@#{manifest.version}"
       shard.update(
         manifest: manifest,
-        git_tag: git_tag_version
+        git_tag: git_tag
       )
       return shard
     end
@@ -46,9 +38,5 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
     if response.status_code === 200
       ::Manifest::Shard.from_yaml response.body
     end
-  end
-
-  private def git_tag_version(string = git_tag)
-    SemanticVersion.parse(string) unless string.blank?
   end
 end
