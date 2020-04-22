@@ -1,12 +1,11 @@
-class Service::Github::GraphQL::Label
+class Service::Github::GraphQL::Topic
   JSON.mapping(
     name: {type: String}
   )
 
   FRAGMENT = <<-graphql
-  fragment label on Label {
+  fragment topic on Topic {
     name
   }
-
   graphql
 end

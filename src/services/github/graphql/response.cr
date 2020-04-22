@@ -30,11 +30,11 @@ class Service::Github::GraphQL::Response(T)
       query:     T::QUERY,
       variables: variables,
     }.to_json
-    puts "Fetching repo by resource url:"
-    puts "variables:", variables.to_pretty_json
-    puts "query:", T::QUERY
+    puts "GraphQL Request (#{T.name}):"
+    puts "VARIABLES:", variables.to_pretty_json.colorize(:dark_gray)
+    puts "QUERY:", T::QUERY.colorize(:dark_gray)
     response = HTTP::Client.post(url, headers, body)
-    puts "Response: #{response.status_code}"
+    puts "Response: #{response.status_code.colorize(response.status_code == 200 ? :light_green : :light_red)}"
     raise Exception.new("Bad response #{response.status_code}: #{response.body}") if response.status_code != 200
     response = from_json(response.body)
     raise "GraphQL Error: #{response.errors.try(&.map(&.message).join(""))}" if (response.errors)

@@ -10,7 +10,7 @@ class Service::Github::GraphQL::Repository
     homepage_url: {type: String?, key: "homepageUrl"},
     name_with_owner: {type: String, key: "nameWithOwner"},
     watchers: Service::Github::GraphQL::Connection(Nil),
-    labels: Service::Github::GraphQL::Connection(Label),
+    repository_topics: { type: Service::Github::GraphQL::Connection(RepositoryTopic), key: "repositoryTopics" },
     forks: Service::Github::GraphQL::Connection(Nil),
     stargazers: Service::Github::GraphQL::Connection(Nil),
     pull_requests: {type: Service::Github::GraphQL::Connection(Nil), key: "pullRequests"},
@@ -29,9 +29,9 @@ class Service::Github::GraphQL::Repository
     watchers {
       totalCount
     }
-    labels(first: 100) {
+    repositoryTopics(first: 100) {
       nodes {
-        ...label
+        ...repositoryTopic
       }
     }
     forks {
@@ -53,7 +53,7 @@ class Service::Github::GraphQL::Repository
     }
   }
 
-  #{Service::Github::GraphQL::Label::FRAGMENT}
+  #{Service::Github::GraphQL::RepositoryTopic::FRAGMENT}
   #{Service::Github::GraphQL::Ref::FRAGMENT}
   graphql
 end

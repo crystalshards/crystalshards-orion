@@ -26,7 +26,7 @@ class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
             star_count: repo.stargazers.total_count || -1,
             pull_request_count: repo.pull_requests.total_count || -1,
             issue_count: repo.issues.total_count || -1,
-            tags: (t = repo.labels.nodes) ? t.map(&.name).join(",") : "",
+            tags: (t = repo.repository_topics.nodes) ? t.map(&.topic.name).join(",") : "",
             release_tags: (rt = repo.tags.nodes) ? rt.map(&.name).join(",") : "",
             name_with_owner: repo.name_with_owner
           ).enqueue
