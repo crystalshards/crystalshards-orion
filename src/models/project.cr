@@ -12,6 +12,8 @@ class Project
   column issue_count : Int32?
   column mirror_type : MirrorType?
   column tags : Array(String), presence: false
+  column pushed_at : Time?
+
   timestamps
 
   belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: Int64?
