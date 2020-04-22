@@ -15,11 +15,12 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
         api_id: repo.node_id,
         url: repo.html_url,
         name_with_owner: repo.full_name,
-        watcher_count: repo.watchers_count || 0,
-        fork_count: repo.forks_count || 0,
-        star_count: repo.stargazers_count || 0,
-        pull_request_count: 0,
-        issue_count: repo.open_issues_count || 0,
+        pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
+        watcher_count: repo.watchers_count || -1,
+        fork_count: repo.forks_count || -1,
+        star_count: repo.stargazers_count || -1,
+        pull_request_count: -1,
+        issue_count: repo.open_issues_count || -1,
         default_branch: repo.default_branch || "HEAD"
       ).enqueue
     end

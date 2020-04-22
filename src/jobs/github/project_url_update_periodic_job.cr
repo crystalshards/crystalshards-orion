@@ -3,18 +3,21 @@ class Job::Github::ProjectURLUpdatePeriodicJob < Mosquito::PeriodicJob
 
   def perform
     Project.query.where { (provider == "github") & (api_id == nil) }.select("uri").each_with_cursor(100) do |project|
-      repo = ::Service::Github.fetch(url: project.uri)
-      ProjectUpdateQueuedJob.new(
-        api_id: repo.id,
-        url: repo.url,
-        watcher_count: repo.watchers.total_count || 0,
-        fork_count: repo.forks.total_count || 0,
-        star_count: repo.stargazers.total_count || 0,
-        pull_request_count: repo.pull_requests.total_count || 0,
-        issue_count: repo.issues.total_count || 0,
-        release_tags: (nodes = repo.tags.nodes) ? nodes.map(&.name).join(",") : "",
-        name_with_owner: repo.name_with_owner
-      ).enqueue
+      if (repo = ::Service::Github.fetch(url: project.uri))
+        ProjectUpdateQueuedJob.new(
+          api_id: repo.id,
+          url: repo.url,
+          watcher_count: repo.watchers.total_count || -1,
+          fork_count: repo.forks.total_count || -1,
+          star_count: repo.stargazers.total_count || -1,
+          pull_request_count: repo.pull_requests.total_count || -1,
+          issue_count: repo.issues.total_count || -1,
+          pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
+          tags: (t = repo.labels.nodes) ? t.map(&.name).join(",") : "",
+          release_tags: (nodes = repo.tags.nodes) ? nodes.map(&.name).join(",") : "",
+          name_with_owner: repo.name_with_owner
+        ).enqueue
+      end
     end
   end
 end

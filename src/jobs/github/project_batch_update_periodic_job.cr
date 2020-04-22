@@ -20,12 +20,14 @@ class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
           ProjectUpdateQueuedJob.new(
             api_id: repo.id,
             url: repo.url,
-            watcher_count: repo.watchers.total_count || 0,
-            fork_count: repo.forks.total_count || 0,
-            star_count: repo.stargazers.total_count || 0,
-            pull_request_count: repo.pull_requests.total_count || 0,
-            issue_count: repo.issues.total_count || 0,
-            release_tags: (nodes = repo.tags.nodes) ? nodes.map(&.name).join(",") : "",
+            pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
+            watcher_count: repo.watchers.total_count || -1,
+            fork_count: repo.forks.total_count || -1,
+            star_count: repo.stargazers.total_count || -1,
+            pull_request_count: repo.pull_requests.total_count || -1,
+            issue_count: repo.issues.total_count || -1,
+            tags: (t = repo.labels.nodes) ? t.map(&.name).join(",") : "",
+            release_tags: (rt = repo.tags.nodes) ? rt.map(&.name).join(",") : "",
             name_with_owner: repo.name_with_owner
           ).enqueue
         end

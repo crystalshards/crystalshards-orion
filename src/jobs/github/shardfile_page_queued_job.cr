@@ -10,7 +10,8 @@ class Job::Github::ShardFilePageQueuedJob < Mosquito::QueuedJob
       ProjectUpdateQueuedJob.new(
         api_id: repo.node_id,
         url: repo.html_url,
-        name_with_owner: repo.full_name
+        name_with_owner: repo.full_name,
+        pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
       ).enqueue
     end
   end
