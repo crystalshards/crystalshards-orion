@@ -9,18 +9,11 @@ class Service::Github::REST::RepositorySearch
   end
 
   def self.fetch(per_page = 100, page = 1, *, pushed_before : Time? = nil)
-    headers = HTTP::Headers.new
-    headers["Authorization"] = "Bearer #{GITHUB_TOKEN}"
     if pushed_before
       date_filter = pushed_before.to_s("%Y-%m-%d")
       before_date = date_filter.empty? ? "" : "+pushed:<=#{date_filter}"
     end
-    url = "https://api.github.com/search/repositories?q=language:Crystal#{before_date}&sort=updated&per_page=#{per_page}&page=#{page}"
-    puts "Fetching by language: #{url}"
-    response = HTTP::Client.get(url, headers)
-    raise Exception.new("Bad response: #{response.body}") if response.status_code != 200
-    puts "Response: #{response.status_code}"
-    from_json(response.body)
+    REST::Response(self).fetch("repositories", q: "language:Crystal#{before_date}", per_page: per_page, page: page, sort: "updated")
   end
 
   def self.fetch_repos(*args, **opts)
