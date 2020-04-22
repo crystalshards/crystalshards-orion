@@ -8,7 +8,7 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
   )
 
   def perform
-    return if per_page * page >= 1000
+    return if per_page * page > 1000
     repos = Service::Github.get_by_language(per_page: per_page, page: page, pushed_before: pushed_before)
     repos.each do |repo|
       ProjectUpdateQueuedJob.new(

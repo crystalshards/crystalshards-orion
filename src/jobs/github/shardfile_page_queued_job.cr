@@ -5,7 +5,7 @@ class Job::Github::ShardFilePageQueuedJob < Mosquito::QueuedJob
   )
 
   def perform
-    return if per_page * page >= 1000
+    return if per_page * page > 1000
     Service::Github.get_by_shardfile(per_page: per_page, page: page).each do |repo|
       ProjectUpdateQueuedJob.new(
         api_id: repo.node_id,
