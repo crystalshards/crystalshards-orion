@@ -24,10 +24,9 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
         default_branch: repo.default_branch || "HEAD"
       ).enqueue
     end
-    # if page < Service::Github.total_pages_by_language
-    # end
-    # Service::Github.get_by_language(per_page: per_page, page: page, pushed_before: pushed_before)
-    # return unless (last_repo = repos.last?)
-    # self.class.new(pushed_before: last_repo.pushed_at).enqueue
+
+    if (last_pushed_repo = repos.reverse.find(&.pushed_at)) && (per_page * page) === 1000
+      Job::Github::LanguageIndexPerodicJob.paginate(per_page: per_page, pushed_before: last_pushed_repo.pushed_at.not_nil!)
+    end
   end
 end
