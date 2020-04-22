@@ -41,7 +41,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     project = get_project
     project.api_id = api_id
     project.uri = url
-    project.tags = tags.split(",")
+    project.tags = tags.split(",").reject(&.empty?)
     project.pushed_at if pushed_at <= Time.utc
     project.watcher_count = watcher_count if watcher_count >= 0
     project.fork_count = fork_count if fork_count >= 0
