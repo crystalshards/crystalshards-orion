@@ -5,11 +5,11 @@ class Project
   column provider : Provider
   column uri : String
   column api_id : String?
-  column watcher_count : Int32, presence: false
-  column fork_count : Int32, presence: false
-  column star_count : Int32, presence: false
-  column pull_request_count : Int32, presence: false
-  column issue_count : Int32, presence: false
+  column watcher_count : Int32?
+  column fork_count : Int32?
+  column star_count : Int32?
+  column pull_request_count : Int32?
+  column issue_count : Int32?
   column mirror_type : MirrorType?
   timestamps
 
