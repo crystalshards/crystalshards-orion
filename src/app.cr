@@ -3,7 +3,7 @@ GITHUB_TOKEN = ENV["GITHUB_TOKEN"]?
 require "kilt/slang"
 require "json"
 require "yaml"
-require "semantic_version"
+require "colorize"
 require "./manifests/**"
 require "./concerns/**"
 require "./services/**"
