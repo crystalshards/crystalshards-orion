@@ -12,6 +12,8 @@ class Shard
   column crystal : String?
   column tags : Array(String)?
 
+  timestamps
+
   # Associations
   belongs_to project : Project
   has_many dependencies : ShardDependency, foreign_key: "parent_id"

@@ -9,6 +9,8 @@ class ShardDependency
   column requirement_version : String?
   column development : Bool
 
+  timestamps
+
   belongs_to shard : Shard, foreign_key: "parent_id"
   belongs_to dependency : Project, foreign_key: "dependency_id"
 
