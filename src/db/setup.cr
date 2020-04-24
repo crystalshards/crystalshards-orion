@@ -1,2 +1,2 @@
-ENV["POSTGRES_URL"] ||= "postgres://postgres@localhost/crystalshards"
-Clear::SQL.init(ENV["POSTGRES_URL"], connection_pool_size: 5)
+ENV["DATABASE_URL"] ||= "postgres://postgres@localhost/crystalshards"
+Clear::SQL.init(ENV["DATABASE_URL"], connection_pool_size: 5)

@@ -26,7 +26,7 @@ services:
       - postgres
     environment:
       REDIS_URL: redis://redis
-      POSTGRES_URL: postgres://postgres@postgres/crystalshards
+      DATABASE_URL: postgres://postgres@postgres/crystalshards
     ports:
       - "3000:3000"
     command:
@@ -50,7 +50,7 @@ services:
       - postgres
     environment:
       REDIS_URL: redis://redis
-      POSTGRES_URL: postgres://postgres@postgres/crystalshards
+      DATABASE_URL: postgres://postgres@postgres/crystalshards
     volumes:
       - ./src:/app/src:cached
       - ./shard.yml:/app/.sentry.yml:cached
