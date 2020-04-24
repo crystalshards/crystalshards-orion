@@ -10,10 +10,38 @@ class Manifest::Shard::Dependency::Git
   getter git : String
 
   def provider
-    "git"
+    host, path = parse
+    case host
+    when "github.com"
+      "github"
+    when "gitlab.com"
+      "gitlab"
+    when "bitbucket.com"
+      "bitbucket"
+    else
+      "git"
+    end
   end
 
   def uri
-    git
+    host, path = parse
+    case host
+    when "github.com", "gitlab.com", "bitbucket.com"
+      "https://#{host}/#{path}"
+    else
+      git
+    end
+  end
+
+  private def parse
+    if (match = git.match(/.*@(?<host>.*):(?<patht>.*)\.git/))
+      host = match["host"]
+      path = match["path"]
+      {host, path}
+    elsif (uri = URI.parse(git))
+      {uri.host, uri.path.rchop(".git")}
+    else
+      {nil, nil}
+    end
   end
 end
