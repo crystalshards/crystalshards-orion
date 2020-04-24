@@ -1,0 +1,6 @@
+workers:
+  job_runner:
+    replicaCount: 3
+    command:
+      - ./bin/job_runner
+    terminationGracePeriodSeconds: 60
