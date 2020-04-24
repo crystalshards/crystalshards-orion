@@ -1,6 +1,6 @@
 workers:
   job-runner:
-    replicaCount: 3
+    replicaCount: 1
     command:
       - ./bin/job_runner
     terminationGracePeriodSeconds: 60
