@@ -3,7 +3,7 @@ version: 1.0.0
 crystal: 0.32.1
 
 authors:
-  - jwaldrip <jason@waldrip.net>
+  - Jason Waldrip <jason@waldrip.net>
 
 targets:
   server:
