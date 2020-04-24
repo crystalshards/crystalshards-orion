@@ -8,6 +8,7 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
   )
 
   def perform
+    pushed_before = self.pushed_before <= Time.utc ? self.pushed_before : nil
     return if per_page * page > 1000
     repos = Service::Github.get_by_language(per_page: per_page, page: page, pushed_before: pushed_before)
     repos.each do |repo|
