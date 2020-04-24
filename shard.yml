@@ -1,6 +1,6 @@
 name: crystal-shards
 version: 1.0.0
-crystal: 0.32.1
+crystal: 0.34.0
 
 authors:
   - Jason Waldrip <jason@waldrip.net>
