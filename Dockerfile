@@ -5,4 +5,4 @@ RUN shards install
 COPY . .
 RUN shards build --production
 
-CMD /app/bin/server
+CMD ./bin/server
