@@ -1,4 +1,5 @@
 {{ run "./require_deps.cr", "#{__DIR__}/../shard.yml" }}
+ENV["PORT"] ||= "3000"
 GITHUB_TOKEN = ENV["GITHUB_TOKEN"]?
 require "kilt/slang"
 require "json"
