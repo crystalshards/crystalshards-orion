@@ -4,3 +4,5 @@ COPY shard.yml shard.lock ./
 RUN shards install
 COPY . .
 RUN shards build --production
+
+CMD /app/bin/server
