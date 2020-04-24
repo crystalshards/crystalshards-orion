@@ -2,6 +2,7 @@ class Manifest::Shard
   include JSON::Serializable
   include YAML::Serializable
 
+  # Official Spec
   getter name : String
   getter version : String
   getter authors : Array(Shard::Author)?
@@ -9,9 +10,16 @@ class Manifest::Shard
   getter license : String?
   getter crystal : String?
   getter repository : String?
+  getter homepage : String?
   getter documentation : String?
   getter dependencies : Hash(String, Dependency::Provider)?
   getter development_dependencies : Hash(String, Dependency::Provider)?
+  getter executables : Array(String)?
+  getter libraries : Hash(String, String)?
+  getter scripts : Scripts?
+  getter targets : Hash(String, Target)?
+
+  # Unofficial
   getter tags : Array(String)?
 
   def self.to_column(value : JSON::Any) : Manifest::Shard?
