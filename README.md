@@ -24,4 +24,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [jwaldrip](https://github.com/your-github-user) - creator and maintainer
+- [Jason Waldrip](https://github.com/your-github-user) - creator and maintainer
