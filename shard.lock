@@ -26,7 +26,7 @@ shards:
 
   mosquito:
     github: robacarp/mosquito
-    commit: 0cbc8f0e03f8c3706ebcac7be4b91da32c3dd414
+    commit: bd4d646312fecebabaf34099b99384ff0d473213
 
   oak:
     github: obsidian/oak
@@ -47,6 +47,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.6.0
+
+  sass:
+    github: straight-shoota/sass.cr
+    version: 0.5.0
 
   sentry:
     github: Acciaiodigitale/sentry

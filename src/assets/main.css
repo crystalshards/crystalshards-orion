@@ -1,19 +1,4 @@
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-#content {
-
-}
-
-#footer {
-  color: #fff;
-  background-color: #776791;
-  flex: 1;
-  display: flex;
-}
-
-#footer a {
-  color: #fff
+.brandfont {
+  font-family: "Righteous";
+  font-size: 1.15em;
 }

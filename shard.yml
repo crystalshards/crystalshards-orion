@@ -27,6 +27,8 @@ dependencies:
   slang:
     github: jeromegn/slang
     version: 1.7.1
+  sass:
+    github: straight-shoota/sass.cr
 
 development_dependencies:
   sentry:

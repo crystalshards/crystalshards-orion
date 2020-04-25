@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  @hero_text = "Under Construction"
+
   def home
     project_count = Project.query.count
     shard_count = Shard.query.distinct("project_id").count

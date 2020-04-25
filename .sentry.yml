@@ -5,3 +5,4 @@ watch:
   - ./src/**/*.cr
   - ./src/**/*.ecr
   - ./src/**/*.slang
+  - ./src/scss/**/*.scss
