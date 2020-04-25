@@ -1,7 +1,5 @@
-pre
-  = "CrystalShards is scanning for Shards... bleep bloop"
-  = "Found #{project_count} Crystal Projects"
-  = "Found #{shard_count} Valid Shards"
-  = "Found #{author_count} Shard Authors"
-  = "Found #{version_count} Shard Versions"
-  = "Linked #{dependency_count} Depedencies"
+.row
+  .col-4
+    h4 Recently Updated
+    - recently_updated.each do |shard|
+      = render partial: "shard_card.slang"

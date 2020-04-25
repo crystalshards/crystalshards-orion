@@ -36,7 +36,7 @@ html lang="en"
           h1.display-4=@hero_text
     .container
       = yield
-    .border-top
+    .border-top.pt-2.pb-2.mt-4
       footer.container
         = render partial: "footer.slang"
 
