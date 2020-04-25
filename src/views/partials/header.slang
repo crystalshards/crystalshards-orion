@@ -22,5 +22,5 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
       a.nav-link href="https://gitlab.com/crystalshards"
         i.fab.fa-gitlab
     li.m-2
-      a.nav-link href="https://twitter.com/crystalshards"
+      a.nav-link href="#"
         i.fab.fa-twitter
