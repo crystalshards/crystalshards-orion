@@ -12,6 +12,10 @@ shards:
     github: crystal-lang/crystal-db
     version: 0.9.0
 
+  emoji:
+    github: veelenga/emoji.cr
+    commit: 4642bd8ef64839b4639ba0be521e8c85113cb8d5
+
   generate:
     github: anykeyh/generate.cr
     commit: 27a59d663ded8ce39a361e3a88b8dd747f59ce42
