@@ -1,12 +1,12 @@
 class ApplicationController < CrystalShards::BaseController
   HEADER_LINKS = {
-    "Home" => "/",
-    "Shards" => "/shards",
+    "Home"     => "/",
+    "Shards"   => "/shards",
     "Projects" => "/projects",
-    "Tags" => "/tags",
-    "Docs" => "/docs",
-    "CLI" => "/cli",
-    "API" => "/api"
+    "Tags"     => "/tags",
+    "Docs"     => "/docs",
+    "CLI"      => "/cli",
+    "API"      => "/api",
   }
 
   @title = "CrystalShards.org"

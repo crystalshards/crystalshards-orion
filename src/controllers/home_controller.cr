@@ -2,7 +2,9 @@ class HomeController < ApplicationController
   @hero_text = "Under Construction"
 
   def home
-    recently_updated = Shard.query.inner_join("projects") { projects.id == shards.project_id }.distinct("project_id").order_by("project_id": "ASC", "projects.pushed_at": "DESC").limit(10)
+    recently_updated = Shard.recent.with_project.limit(20)
+    popular = Shard.popular.with_project.limit(20)
+    most_used = Shard.most_used.with_project.limit(20)
     render view: "home.slang"
   end
 

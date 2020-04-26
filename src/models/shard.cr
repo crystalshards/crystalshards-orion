@@ -34,6 +34,43 @@ class Shard
     model.as(self).associate_dependencies!
   end
 
+  scope :by_project do
+    cte = Clear::SQL.select("id", "rank() OVER (PARTITION BY shards.project_id ORDER BY shards.created_at DESC NULLS LAST) AS created_rank").from(:shards)
+    with_cte({ranked: cte}).where { ranked.created_rank == 1 }
+    .inner_join("ranked") { ranked.id == shards.id }
+  end
+
+  scope :releases do
+    where { shards.git_tag != nil }
+  end
+
+  scope :recent do
+    by_project.releases
+      .inner_join("projects") { projects.id == shards.project_id }
+      .order_by("projects.pushed_at", "DESC", "NULLS LAST")
+  end
+
+  scope :popular do
+    by_project.releases
+      .inner_join("projects") { projects.id == shards.project_id }
+      .order_by("projects.star_count", "DESC", "NULLS LAST")
+  end
+
+  scope :with_uses do
+    cte =
+      Clear::SQL.select("COUNT(DISTINCT shards.project_id) AS use_count", "dependencies.id")
+        .from("shards")
+        .inner_join("shard_dependencies") { shard_dependencies.parent_id == shards.id }
+        .inner_join("projects AS dependencies") { shard_dependencies.dependency_id == dependencies.id }
+        .group_by("dependencies.id")
+        .order_by("use_count")
+    with_cte({ uses: cte }).inner_join("uses") { shards.project_id == uses.id }
+  end
+
+  scope :most_used do
+    by_project.with_uses.order_by("use_count": "DESC")
+  end
+
   protected def update_from_manifest!
     self.name = manifest.name
     self.version = manifest.version
