@@ -2,9 +2,9 @@ class HomeController < ApplicationController
   @hero_text = "Shards from the Crystal Community"
 
   def home
-    recently_updated = Shard.recent.with_project.limit(6)
-    most_popular = Shard.popular.with_project.limit(6)
-    most_used = Shard.most_used.with_project.limit(6)
+    recently_updated = Shard.recent.with_project.limit(8)
+    most_popular = Shard.popular.with_project.limit(8)
+    most_used = Shard.most_used.with_project.limit(8)
     render view: "home.slang"
   end
 

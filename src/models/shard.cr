@@ -37,7 +37,7 @@ class Shard
   scope :by_project do
     cte = Clear::SQL.select("id", "rank() OVER (PARTITION BY shards.project_id ORDER BY shards.created_at DESC NULLS LAST) AS created_rank").from(:shards)
     with_cte({ranked: cte}).where { ranked.created_rank == 1 }
-    .inner_join("ranked") { ranked.id == shards.id }
+      .inner_join("ranked") { ranked.id == shards.id }
   end
 
   scope :releases do
@@ -64,7 +64,7 @@ class Shard
         .inner_join("projects AS dependencies") { shard_dependencies.dependency_id == dependencies.id }
         .group_by("dependencies.id")
         .order_by("use_count")
-    with_cte({ uses: cte }).inner_join("uses") { shards.project_id == uses.id }
+    with_cte({uses: cte}).inner_join("uses") { shards.project_id == uses.id }
   end
 
   scope :most_used do
