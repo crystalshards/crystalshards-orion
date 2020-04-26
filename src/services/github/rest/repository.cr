@@ -4,6 +4,7 @@ class Service::Github::REST::Repository
   getter node_id : String
   getter html_url : String
   getter full_name : String
+  getter description : String?
   getter pushed_at : Time?
   getter updated_at : Time?
   getter stargazers_count : Int32?

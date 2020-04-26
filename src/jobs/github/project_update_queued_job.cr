@@ -6,6 +6,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     url : String,
     pushed_at : Time,
     name_with_owner : String,
+    description : String = "",
     watcher_count : Int32 = -1,
     fork_count : Int32 = -1,
     star_count : Int32 = -1,
@@ -48,6 +49,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     project.star_count = star_count if star_count >= 0
     project.pull_request_count = pull_request_count if pull_request_count >= 0
     project.issue_count = issue_count if issue_count >= 0
+    project.description = description unless description.empty?
     project.tap(&.save)
   end
 

@@ -20,6 +20,7 @@ class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
           ProjectUpdateQueuedJob.new(
             api_id: repo.id,
             url: repo.url,
+            description: repo.description || "",
             pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
             watcher_count: repo.watchers.total_count || -1,
             fork_count: repo.forks.total_count || -1,

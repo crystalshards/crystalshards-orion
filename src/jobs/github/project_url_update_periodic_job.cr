@@ -7,6 +7,7 @@ class Job::Github::ProjectURLUpdatePeriodicJob < Mosquito::PeriodicJob
         ProjectUpdateQueuedJob.new(
           api_id: repo.id,
           url: repo.url,
+          description: repo.description || "",
           watcher_count: repo.watchers.total_count || -1,
           fork_count: repo.forks.total_count || -1,
           star_count: repo.stargazers.total_count || -1,

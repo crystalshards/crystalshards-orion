@@ -4,6 +4,7 @@ class Project
   primary_key
   column provider : Provider
   column uri : String
+  column description : String?
   column api_id : String?
   column watcher_count : Int32?
   column fork_count : Int32?

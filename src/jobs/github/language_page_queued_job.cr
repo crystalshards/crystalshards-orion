@@ -15,6 +15,7 @@ class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
       ProjectUpdateQueuedJob.new(
         api_id: repo.node_id,
         url: repo.html_url,
+        description: repo.description || "",
         name_with_owner: repo.full_name,
         pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
         watcher_count: repo.watchers_count || -1,

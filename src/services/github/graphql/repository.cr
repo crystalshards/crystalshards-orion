@@ -5,6 +5,7 @@ class Service::Github::GraphQL::Repository
   JSON.mapping(
     id: String,
     url: String,
+    description: String?,
     updated_at: {type: Time?, key: "updatedAt"},
     pushed_at: {type: Time?, key: "pushedAt"},
     homepage_url: {type: String?, key: "homepageUrl"},
@@ -22,6 +23,7 @@ class Service::Github::GraphQL::Repository
   fragment repo_fragment on Repository {
     id
     url
+    description
     homepageUrl
     updatedAt
     pushedAt
