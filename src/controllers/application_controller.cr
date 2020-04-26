@@ -4,6 +4,7 @@ class ApplicationController < CrystalShards::BaseController
     "Shards"   => "/shards",
     "Projects" => "/projects",
     "Tags"     => "/tags",
+    "Authors"  => "/authors",
     "Docs"     => "/docs",
     "CLI"      => "/cli",
     "API"      => "/api",
