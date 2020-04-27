@@ -1,5 +1,5 @@
-.col-12.col-md-6.d-flex.my-3
-  a.card.h-100.w-100.text-decoration-none.text-body href="/shards/#{shard.project.provider.to_s}/#{shard.project.display_name}"
+.col-12.col-lg-6.d-flex.align-items-stretch.my-3
+  a.card.text-decoration-none.text-body.w-100 href="/shards/#{shard.project.provider.to_s}/#{shard.project.display_name}"
     .card-header
       span.font-weight-bold=shard.name
     .card-body=Emoji.emojize(shard.description || shard.project.description || "No Description")
