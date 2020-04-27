@@ -10,7 +10,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
       - HEADER_LINKS.each do |name, link|
         - active = request.path == link
         li class="nav-item#{active ? " active" : ""}"
-          a.nav-link.ml-4 href="#"
+          a.nav-link.ml-4 href=link
             = name
             - if active
               span.sr-only

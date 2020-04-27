@@ -1,11 +1,12 @@
 .col-12.col-lg-6.d-flex.align-items-stretch.my-3
-  a.card.text-decoration-none.text-body.w-100 href="/shards/#{shard.project.provider.to_s}/#{shard.project.display_name}"
+  a.card.text-decoration-none.text-body.w-100 href="/shards/#{shard.project.provider.to_s}/#{shard.project.uri}"
     .card-header
       span.font-weight-bold=shard.name
+      span.text-muted="v#{shard.version}"
     .card-body=Emoji.emojize(shard.description || shard.project.description || "No Description")
     .card-footer.text-muted.font-weight-lighter
       i class="fab fa-#{shard.project.provider.to_s}"
-      span=shard.project.display_name
+      span=shard.project.uri
       - if shard.project.star_count
         span.font-weight-bold.ml-1.mr-1 •
         i.far.fa-star
