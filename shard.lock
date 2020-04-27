@@ -38,7 +38,7 @@ shards:
 
   orion:
     github: obsidian/orion
-    commit: a6bc0b96ca00633d69cdc3373217996402eb5a92
+    commit: c5d98a8a32ccd63b74ed8072fea2bada771cedde
 
   pg:
     github: will/crystal-pg
