@@ -27,7 +27,7 @@ class Manifest::Shard::Dependency::Git
     host, path = parse
     case host
     when "github.com", "gitlab.com", "bitbucket.com"
-      "https://#{host}/#{path}"
+      path
     else
       git
     end

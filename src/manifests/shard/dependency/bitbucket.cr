@@ -14,6 +14,6 @@ class Manifest::Shard::Dependency::Bitbucket
   end
 
   def uri
-    "https://bitbucket.org/#{bitbucket}"
+    bitbucket
   end
 end

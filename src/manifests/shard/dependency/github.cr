@@ -14,6 +14,6 @@ class Manifest::Shard::Dependency::Github
   end
 
   def uri
-    "https://github.com/#{github}"
+    github
   end
 end

@@ -1,8 +1,6 @@
 class Project
   include Clear::Model
 
-  @display_name : String?
-
   primary_key
   column provider : Provider
   column uri : String
@@ -22,13 +20,17 @@ class Project
   belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: Int64?
   has_many mirrors : Project, foreign_key: "mirrored_id"
 
-  def display_name
-    @display_name ||= case provider.to_s
-                      when "github", "gitlab", "bitbucket"
-                        URI.parse(uri).path.lstrip("/")
-                      else
-                        uri
-                      end
+  def url
+    case provider
+    when "github"
+      "https://github.com/#{uri}"
+    when "gitlab"
+      "https://gitlab.com/#{uri}"
+    when "bitbucket"
+      "https://bitbucket.com/#{uri}"
+    else
+      uri
+    end
   end
 
   def last_pushed_at_string : String

@@ -14,6 +14,6 @@ class Manifest::Shard::Dependency::Gitlab
   end
 
   def uri
-    "https://gitlab.com/#{gitlab}"
+    gitlab
   end
 end

@@ -41,7 +41,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     puts "Creating/Updating project: #{url}".colorize(:cyan)
     project = get_project
     project.api_id = api_id
-    project.uri = url
+    project.uri = URI.parse(url).path.lstrip("/")
     project.tags = tags.split(",").reject(&.empty?)
     project.pushed_at = pushed_at if pushed_at <= Time.utc
     project.watcher_count = watcher_count if watcher_count >= 0

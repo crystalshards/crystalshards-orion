@@ -3,7 +3,7 @@ class Job::Github::ProjectURLUpdatePeriodicJob < Mosquito::PeriodicJob
 
   def perform
     Project.query.where { (provider == "github") & (api_id == nil) }.select("uri").each_with_cursor(100) do |project|
-      if (repo = ::Service::Github.fetch(url: project.uri))
+      if (repo = ::Service::Github.fetch(url: project.url))
         ProjectUpdateQueuedJob.new(
           api_id: repo.id,
           url: repo.url,
