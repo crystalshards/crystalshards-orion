@@ -72,6 +72,11 @@ class Shard
     with_cte({uses: cte}).inner_join("uses") { shards.project_id == uses.id }
   end
 
+  scope :with_provider do |name|
+    inner_join("projects") { projects.id == shards.project_id }
+      .where { projects.provider == name }
+  end
+
   scope :most_used do
     releases
       .by_project

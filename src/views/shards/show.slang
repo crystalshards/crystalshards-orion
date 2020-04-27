@@ -1,1 +1,1 @@
-| Show Shard
+= render partial: "shard_card.slang"
