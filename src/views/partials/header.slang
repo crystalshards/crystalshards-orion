@@ -14,7 +14,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
             = name
             - if active
               span.sr-only
-  ul.navbar-nav.mr-auto
+  ul.navbar-nav.mr-auto.d-none.d-lg-flex
     li.m-2
       a.nav-link href="https://github.com/crystalshards"
         i.fab.fa-github
