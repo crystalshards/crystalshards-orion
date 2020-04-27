@@ -5,9 +5,9 @@ class ApplicationController < CrystalShards::BaseController
     "Projects" => "/projects",
     "Tags"     => "/tags",
     "Authors"  => "/authors",
-    "Docs"     => "/docs",
-    "CLI"      => "/cli",
-    "API"      => "/api",
+    # "Docs"     => "/docs",
+    # "CLI"      => "/cli",
+    # "API"      => "/api",
   }
 
   @title = "CrystalShards.org"
