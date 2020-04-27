@@ -35,23 +35,28 @@ class Shard
   end
 
   scope :by_project do
-    cte = Clear::SQL.select("id", "rank() OVER (PARTITION BY shards.project_id ORDER BY shards.created_at DESC NULLS LAST) AS created_rank").from(:shards)
+    cte = Clear::SQL
+      .select("id", "rank() OVER (PARTITION BY shards.project_id ORDER BY shards.created_at DESC NULLS LAST) AS created_rank")
+      .from(:shards)
+      .where { git_tag == version }
     with_cte({ranked: cte}).where { ranked.created_rank == 1 }
       .inner_join("ranked") { ranked.id == shards.id }
   end
 
   scope :releases do
-    where { shards.git_tag != nil }
+    where { shards.git_tag == shards.version }
   end
 
   scope :recent do
-    by_project.releases
+    releases
+      .by_project
       .inner_join("projects") { projects.id == shards.project_id }
       .order_by("projects.pushed_at", "DESC", "NULLS LAST")
   end
 
   scope :popular do
-    by_project.releases
+    releases
+      .by_project
       .inner_join("projects") { projects.id == shards.project_id }
       .order_by("projects.star_count", "DESC", "NULLS LAST")
   end
@@ -68,7 +73,10 @@ class Shard
   end
 
   scope :most_used do
-    by_project.with_uses.order_by("use_count": "DESC")
+    releases
+      .by_project
+      .with_uses
+      .order_by("use_count": "DESC")
   end
 
   protected def update_from_manifest!
