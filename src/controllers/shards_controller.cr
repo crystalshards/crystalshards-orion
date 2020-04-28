@@ -1,7 +1,7 @@
 class ShardsController < ApplicationController
   def index
     @hero_text = "Shard Directory"
-    shards = Shard.latest_in_project.with_project.order_by(name: "ASC")
+    shards = Shard.where_valid.latest_in_project.with_project.order_by(name: "ASC")
     case (char = request.query_params["char"]?)
     when /[a-z]/i
       shards = shards.where { name =~ /^#{char}/i }

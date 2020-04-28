@@ -62,21 +62,30 @@ class Shard
 
   # Order by recently updated
   scope :recently_released do
-    latest_in_project
+    where_valid
+      .latest_in_project
       .inner_join("projects") { projects.id == shards.project_id }
       .order_by("projects.pushed_at", "DESC", "NULLS LAST")
   end
 
+  scope :where_valid do
+    where {
+      name != nil && name != "" && version != nil && version != ""
+    }
+  end
+
   # Order by the most stars
   scope :popular do
-    latest_in_project
+    where_valid
+      .latest_in_project
       .inner_join("projects") { projects.id == shards.project_id }
       .order_by("projects.star_count", "DESC", "NULLS LAST")
   end
 
   # Order by most used by other public shards
   scope :most_used do
-    latest_in_project
+    where_valid
+      .latest_in_project
       .includes_uses
       .order_by("use_count": "DESC")
   end
