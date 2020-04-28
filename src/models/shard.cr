@@ -69,9 +69,7 @@ class Shard
   end
 
   scope :where_valid do
-    where {
-      name != nil && name != "" && version != nil && version != ""
-    }
+    where { (name != nil) & (name != "") & (version != nil) & (version != "") }
   end
 
   # Order by the most stars
