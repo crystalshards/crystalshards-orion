@@ -34,34 +34,54 @@ class Shard
     model.as(self).associate_dependencies!
   end
 
-  scope :by_project do
-    cte = Clear::SQL
-      .select("id", "rank() OVER (PARTITION BY shards.project_id ORDER BY shards.created_at DESC NULLS LAST) AS created_rank")
-      .from(:shards)
-      .where { git_tag == version }
-    with_cte({ranked: cte}).where { ranked.created_rank == 1 }
+  # Ranked within project (in order to get the latest release)
+  scope :latest_in_project do
+    # Set the has_tag field
+    has_tags_cte =
+      dup.select({
+        id: "shards.id",
+        has_tag: "CASE git_tag WHEN null THEN 0 WHEN '' THEN 0 ELSE 1 END"
+      })
+
+    # Rank the shards
+    ranked_cte =
+      dup.select({
+        id: "shards.id",
+        rank: "row_number() OVER (PARTITION BY shards.project_id ORDER BY shards_with_has_tag.has_tag ASC, shards.created_at DESC NULLS LAST)"
+      })
+      .inner_join("shards_with_has_tag") { shards_with_has_tag.id == shards.id }
+
+    # Select the first in rank
+    with_cte({
+      shards_with_has_tag: has_tags_cte.to_sql,
+      ranked: ranked_cte.to_sql,
+    })
+      .where { ranked.rank == 1 }
       .inner_join("ranked") { ranked.id == shards.id }
   end
 
-  scope :releases do
-    where { shards.git_tag == shards.version }
-  end
-
-  scope :recent do
-    releases
-      .by_project
+  # Order by recently updated
+  scope :recently_released do
+    latest_in_project
       .inner_join("projects") { projects.id == shards.project_id }
       .order_by("projects.pushed_at", "DESC", "NULLS LAST")
   end
 
+  # Order by the most stars
   scope :popular do
-    releases
-      .by_project
+    latest_in_project
       .inner_join("projects") { projects.id == shards.project_id }
       .order_by("projects.star_count", "DESC", "NULLS LAST")
   end
 
-  scope :with_uses do
+  # Order by most used by other public shards
+  scope :most_used do
+    latest_in_project
+      .includes_uses
+      .order_by("use_count": "DESC")
+  end
+
+  scope :includes_uses do
     cte =
       Clear::SQL.select("COUNT(DISTINCT shards.project_id) AS use_count", "dependencies.id")
         .from("shards")
@@ -72,16 +92,9 @@ class Shard
     with_cte({uses: cte}).inner_join("uses") { shards.project_id == uses.id }
   end
 
-  scope :with_provider do |name|
+  scope :by_provider do |name|
     inner_join("projects") { projects.id == shards.project_id }
       .where { projects.provider == name }
-  end
-
-  scope :most_used do
-    releases
-      .by_project
-      .with_uses
-      .order_by("use_count": "DESC")
   end
 
   protected def update_from_manifest!

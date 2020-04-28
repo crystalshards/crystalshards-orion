@@ -1,7 +1,7 @@
 class ShardsController < ApplicationController
   def index
     @hero_text = "Shard Directory"
-    shards = Shard.by_project.with_project.order_by(name: "ASC")
+    shards = Shard.latest_in_project.with_project.order_by(name: "ASC")
     case (char = request.query_params["char"]?)
     when /[a-z]/i
       shards = shards.where { name =~ /^#{char}/i }
@@ -25,10 +25,10 @@ class ShardsController < ApplicationController
   end
 
   private def latest_shard
-    Shard.by_project.with_provider(request.path_params["provider"]).find({ uri: request.path_params["uri"] })
+    Shard.latest_in_project.with_project.by_provider(request.path_params["provider"]).find({ uri: request.path_params["uri"] })
   end
 
   private def shard_by_version
-    Shard.with_provider(request.path_params["provider"]).find({ uri: request.path_params["uri"], git_tag: request.query_params["v"] })
+    Shard.by_provider(request.path_params["provider"]).with_project.find({ uri: request.path_params["uri"], git_tag: request.query_params["v"] })
   end
 end

@@ -17,7 +17,7 @@
 .mt-3
   h4
     i.fa.fa-history.text-primary
-    | Recently Updated
+    | Recently Released
   .row
-    - recently_updated.each do |shard|
+    - recently_released.each do |shard|
       = render partial: "shard_card.slang"
