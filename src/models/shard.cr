@@ -68,6 +68,12 @@ class Shard
       .order_by("projects.pushed_at", "DESC", "NULLS LAST")
   end
 
+  scope :originals do
+    latest_in_project
+      .inner_join("projects") { projects.id == shards.project_id }
+      .where { projects.mirrored_id == nil }
+  end
+
   scope :where_valid do
     where { (name != nil) & (name != "") & (version != nil) & (version != "") }
   end

@@ -7,7 +7,6 @@ class Project
   column description : String?
   column api_id : String?
   column watcher_count : Int32?
-  column fork_count : Int32?
   column star_count : Int32?
   column pull_request_count : Int32?
   column issue_count : Int32?

@@ -12,7 +12,7 @@ class Service::Github::GraphQL::Repository
     name_with_owner: {type: String, key: "nameWithOwner"},
     watchers: Service::Github::GraphQL::Connection(Nil),
     repository_topics: {type: Service::Github::GraphQL::Connection(RepositoryTopic), key: "repositoryTopics"},
-    forks: Service::Github::GraphQL::Connection(Nil),
+    parent: Repository?,
     stargazers: Service::Github::GraphQL::Connection(Nil),
     pull_requests: {type: Service::Github::GraphQL::Connection(Nil), key: "pullRequests"},
     issues: {type: Service::Github::GraphQL::Connection(Nil), key: "issues"},
@@ -36,8 +36,8 @@ class Service::Github::GraphQL::Repository
         ...repositoryTopic
       }
     }
-    forks {
-      totalCount
+    parent {
+      ...repo_fragment
     }
     stargazers {
       totalCount

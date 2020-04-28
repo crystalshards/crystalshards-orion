@@ -17,20 +17,7 @@ class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
       node_ids << node_id
       if (node_ids.size == 100)
         ::Service::Github.fetch(node_ids: node_ids).each do |repo|
-          ProjectUpdateQueuedJob.new(
-            api_id: repo.id,
-            url: repo.url,
-            description: repo.description || "",
-            pushed_at: repo.pushed_at || Time.utc + Time::Span.new(days: 300),
-            watcher_count: repo.watchers.total_count || -1,
-            fork_count: repo.forks.total_count || -1,
-            star_count: repo.stargazers.total_count || -1,
-            pull_request_count: repo.pull_requests.total_count || -1,
-            issue_count: repo.issues.total_count || -1,
-            tags: (t = repo.repository_topics.nodes) ? t.map(&.topic.name).join(",") : "",
-            release_tags: (rt = repo.tags.nodes) ? rt.map(&.name).join(",") : "",
-            name_with_owner: repo.name_with_owner
-          ).enqueue
+          ProjectUpdateQueuedJob.with_payload(repo).enqueue
         end
         node_ids = [] of String
       end
