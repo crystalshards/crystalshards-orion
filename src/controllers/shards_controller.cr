@@ -2,8 +2,11 @@ class ShardsController < ApplicationController
   def index
     @hero_text = "Shard Directory"
     shards = Shard.by_project.with_project.order_by(name: "ASC")
-    if (letter = request.query_params["letter"]?)
-      shards = shards.where { name =~ /^#{letter}/i }
+    case (char = request.query_params["char"]?)
+    when /[a-z]/i
+      shards = shards.where { name =~ /^#{char}/i }
+    when "0-9"
+      shards = shards.where { name =~ /^[0-9]/i }
     end
     total_count = shards.count
     total_pages = (total_count / per_page).ceil.to_i

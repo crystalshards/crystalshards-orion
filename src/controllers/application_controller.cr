@@ -27,7 +27,11 @@ class ApplicationController < CrystalShards::BaseController
   private def update_params(*args, **params)
     next_params = HTTP::Params.parse(request.query_params.to_s)
     params.each do |key, value|
-      next_params[key.to_s] = value
+      if value
+        next_params[key.to_s] = value
+      else
+        next_params.delete_all(key.to_s)
+      end
     end
     [request.path, next_params.to_s].join("?")
   end
