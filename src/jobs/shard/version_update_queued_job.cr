@@ -2,6 +2,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   params(
     project_id : Int64,
     shardfile_url : String,
+    readme_url : String,
     git_tag : String = ""
   )
 
@@ -11,6 +12,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
       puts "Creating/Updating shard version: #{m.name}@#{m.version}".colorize(:cyan)
       shard = ::Shard.query.find_or_build({project_id: project_id, git_tag: git_tag}) { }
       shard.manifest = m
+      shard.readme = readme
       shard.git_tag = git_tag
       shard.save
     end
@@ -24,5 +26,12 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
     ::Manifest::Shard.from_yaml response.body
   rescue e
     puts "Project does not have a valid shard file: #{e.message}"
+  end
+
+  protected def readme : String?
+    puts "Fetching readme: #{readme_url}".colorize(:yellow)
+    response = HTTP::Client.get(readme_url)
+    puts "Response: #{response.status_code}".colorize(response.status_code === 200 ? :light_green : :light_red)
+    response.body if response.status_code === 200
   end
 end

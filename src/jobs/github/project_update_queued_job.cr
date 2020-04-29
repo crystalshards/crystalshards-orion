@@ -58,6 +58,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
       @issue_count : Int32? = nil,
       @pull_request_count : Int32? = nil,
       @parent : Payload? = nil,
+      @homepage : String? = nil,
       @tags : Array(String) = [] of String,
       @release_tags : Array(String) = [] of String,
       @default_branch : String = "HEAD"
@@ -88,6 +89,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
       versions.each do |version|
         Shard::VersionUpdateQueuedJob.new(
           shardfile_url: "https://raw.githubusercontent.com/#{payload.uri}/v#{version}/shard.yml",
+          readme_url: "https://raw.githubusercontent.com/#{payload.uri}/v#{version}/README.md",
           project_id: project.id,
           git_tag: version
         ).enqueue
@@ -95,6 +97,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     else
       Shard::VersionUpdateQueuedJob.new(
         shardfile_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}/shard.yml",
+        readme_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}/README.md",
         project_id: project.id
       ).enqueue
     end
