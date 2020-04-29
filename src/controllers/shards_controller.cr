@@ -19,16 +19,24 @@ class ShardsController < ApplicationController
 
   def show
     @hero_text = "Shard Detail"
-    if (shard = request.query_params["v"]? ? shard_by_version : latest_shard)
+    if (shard = version ? shard_by_version : latest_shard)
       render view: "shards/show.slang"
     end
   end
 
+  private def uri
+    request.path_params["uri"] + request.format
+  end
+
   private def latest_shard
-    Shard.by_provider(request.path_params["provider"]).latest_in_project.with_project.find({ uri: request.path_params["uri"] })
+    Shard.by_provider(request.path_params["provider"]).latest_in_project.find({ uri: uri  })
+  end
+
+  private def version
+    request.query_params["v"]?
   end
 
   private def shard_by_version
-    Shard.by_provider(request.path_params["provider"]).latest_in_project.with_project.find({ uri: request.path_params["uri"], git_tag: request.query_params["v"] })
+    Shard.by_provider(request.path_params["provider"]).latest_in_project.find({ uri: uri, git_tag: version })
   end
 end
