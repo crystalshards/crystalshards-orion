@@ -6,3 +6,5 @@ function copytext(id) {
   document.execCommand("copy");
   $temp.remove();
 }
+
+hljs.initHighlightingOnLoad();

@@ -1,7 +1,7 @@
 <% cb_id = UUID.random %>
 <div class="position-relative">
 <pre class="text-light bg-dark px-4 my-2 rounded">
-<code id="cb-<%= cb_id %>">
+<code id="cb-<%= cb_id %>" class="nohighlight">
 <%= "#{shard.name}:\n  #{shard.project.provider.to_s}: #{shard.project.uri}#{version ? "\n  version: #{version}" : ""}" %>
 </code>
 </pre>
