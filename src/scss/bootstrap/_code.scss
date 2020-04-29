@@ -32,12 +32,12 @@ pre {
   display: block;
   @include font-size($code-font-size);
   color: $pre-color;
+  background-color: $gray-300;
 
   // Account for some code outputs that place code tags in pre tags
   code {
     @include font-size(inherit);
-    color: $code-block-color;
-    background-color: $code-block-background-color;
+    color: inherit;
     word-break: normal;
   }
 }
