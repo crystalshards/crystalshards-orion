@@ -36,7 +36,8 @@ pre {
   // Account for some code outputs that place code tags in pre tags
   code {
     @include font-size(inherit);
-    color: inherit;
+    color: $code-block-color;
+    background-color: $code-block-background-color;
     word-break: normal;
   }
 }
