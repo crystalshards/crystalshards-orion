@@ -1,5 +1,13 @@
-<pre class="text-light bg-dark px-4 rounded snippet">
-<code>
+<% cb_id = UUID.random %>
+<div class="position-relative">
+<pre class="text-light bg-dark px-4 my-2 rounded">
+<code id="cb-<%= cb_id %>">
 <%= "#{shard.name}:\n  #{shard.project.provider.to_s}: #{shard.project.uri}#{version ? "\n  version: #{version}" : ""}" %>
 </code>
 </pre>
+<div class="mt-n5 pt-3 mx-2 text-right">
+  <a class="text-light stretched-link" href="#" onclick='copytext("cb-<%= cb_id %>")'>
+    <i class="fa fa-copy"></i>
+  </a>
+</div>
+</div>

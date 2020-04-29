@@ -6,6 +6,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     getter api_id
     getter pushed_at
     getter description
+    getter homepage
     getter watcher_count
     getter star_count
     getter pull_request_count
@@ -21,6 +22,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
         api_id: repo.id,
         description: repo.description,
         watcher_count: repo.watchers.total_count,
+        homepage: repo.homepage_url,
         star_count: repo.stargazers.total_count,
         pull_request_count: repo.pull_requests.total_count,
         issue_count: repo.issues.total_count,
@@ -36,6 +38,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
         uri: repo.full_name,
         api_id: repo.node_id,
         description: repo.description,
+        homepage: repo.homepage,
         pushed_at: repo.pushed_at,
         watcher_count: repo.watchers_count,
         star_count: repo.stargazers_count,

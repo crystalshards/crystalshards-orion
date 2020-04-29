@@ -4,6 +4,7 @@ class Project
   primary_key
   column provider : Provider
   column uri : String
+  column homepage : String?
   column description : String?
   column api_id : String?
   column watcher_count : Int32?
@@ -21,11 +22,11 @@ class Project
 
   def url
     case provider
-    when "github"
+    when Provider::Github
       "https://github.com/#{uri}"
-    when "gitlab"
+    when Provider::Gitlab
       "https://gitlab.com/#{uri}"
-    when "bitbucket"
+    when Provider::Bitbucket
       "https://bitbucket.com/#{uri}"
     else
       uri

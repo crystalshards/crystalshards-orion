@@ -28,6 +28,10 @@ shards:
     github: jeromegn/kilt
     version: 0.6.0
 
+  markd:
+    github: icyleaf/markd
+    version: 0.2.0
+
   mosquito:
     github: robacarp/mosquito
     commit: bd4d646312fecebabaf34099b99384ff0d473213

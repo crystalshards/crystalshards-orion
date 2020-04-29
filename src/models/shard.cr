@@ -8,6 +8,7 @@ class Shard
   column version : String
   column git_tag : String?
   column license : String?
+  column readme : String?
   column description : String?
   column crystal : String?
   column tags : Array(String)?
@@ -108,6 +109,32 @@ class Shard
   scope :by_provider do |name|
     inner_join("projects") { projects.id == shards.project_id }
       .where { projects.provider == name }
+  end
+
+  def formatted_description
+    Emoji.emojize(description || project.description || "No Description")
+  end
+
+  def homepage_url
+    homepage = manifest.homepage || project.homepage
+    unless !homepage || homepage.empty?
+      URI.parse(homepage)
+    end
+  rescue
+    nil
+  end
+
+  def documentation_url
+    documentation = manifest.documentation
+    unless !documentation || documentation.empty?
+      URI.parse(documentation)
+    end
+  rescue
+    nil
+  end
+
+  def all_tags
+    (self.tags + project.tags).unique
   end
 
   protected def update_from_manifest!

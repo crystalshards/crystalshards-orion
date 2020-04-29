@@ -3,7 +3,7 @@
     .card-header
       span.font-weight-bold=shard.name
       span.text-muted="v#{shard.version}"
-    .card-body=Emoji.emojize(shard.description || shard.project.description || "No Description")
+    .card-body=shard.formatted_description
     .card-footer.text-muted.font-weight-lighter
       i class="fab fa-#{shard.project.provider.to_s}"
       span=shard.project.uri
