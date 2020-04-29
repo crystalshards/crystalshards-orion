@@ -6,7 +6,7 @@ RUN apt-get update -y && apt-get install -y libsass-dev
 COPY shard.yml shard.lock ./
 RUN shards install
 COPY . .
-RUN shards build --production
+RUN shards build --production --release
 
 ENV PORT 5000
 
