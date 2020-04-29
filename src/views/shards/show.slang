@@ -23,11 +23,12 @@
       = render partial: "code_block.ecr"
 
     - if (readme = shard.readme)
-        h4.mb-3
-          i.fa.fa-book-open
-          | Readme
-        .border.rounded.p-4.bg-light
-          == Markd.to_html(readme)
+      h4.mb-3
+        i.fa.fa-book-open
+        | Readme
+      #readme.border.rounded.p-4.bg-light
+        == Markd.to_html(readme)
+
   aside.col-4.border-left
     a.btn.btn-lg.btn-block.btn-outline-primary.text-left href=shard.project.url
       i.mx-3 class="fab fa-#{shard.project.provider.to_s}"

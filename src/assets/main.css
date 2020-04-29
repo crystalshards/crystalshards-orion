@@ -2,3 +2,7 @@
   font-family: "Righteous";
   font-size: 1.15em;
 }
+
+#readme > img {
+  max-width: 100%;
+}
