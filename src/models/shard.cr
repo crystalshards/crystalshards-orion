@@ -66,8 +66,7 @@ class Shard
   scope :recently_released do
     where_valid
       .latest_in_project
-      .inner_join("projects") { projects.id == shards.project_id }
-      .order_by("projects.pushed_at", "DESC", "NULLS LAST")
+      .order_by("shards.pushed_at", "DESC", "NULLS LAST")
   end
 
   scope :originals do
