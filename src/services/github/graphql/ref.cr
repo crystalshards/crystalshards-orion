@@ -1,12 +1,16 @@
+require "./tag"
+
 class Service::Github::GraphQL::Ref
   JSON.mapping(
-    name: {type: String}
+    tag: Tag
   )
 
   FRAGMENT = <<-graphql
   fragment ref on Ref {
-    name
+    tag: target {
+      ...tag
+    }
   }
-
+  #{Service::Github::GraphQL::Tag::FRAGMENT}
   graphql
 end

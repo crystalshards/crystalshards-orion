@@ -21,15 +21,15 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
         uri: repo.name_with_owner,
         api_id: repo.id,
         description: repo.description,
-        watcher_count: repo.watchers.total_count,
+        watcher_count: repo.watchers.try(&.total_count),
         homepage: repo.homepage_url,
-        star_count: repo.stargazers.total_count,
-        pull_request_count: repo.pull_requests.total_count,
-        issue_count: repo.issues.total_count,
+        star_count: repo.stargazers.try(&.total_count),
+        pull_request_count: repo.pull_requests.try(&.total_count),
+        issue_count: repo.issues.try(&.total_count),
         pushed_at: repo.pushed_at,
         parent: (parent = repo.parent) ? Payload.new(parent) : nil,
-        tags: (t = repo.repository_topics.nodes) ? t.map(&.topic.name) : [] of String,
-        release_tags: (nodes = repo.tags.nodes) ? nodes.map(&.name) : [] of String
+        tags: (t = repo.repository_topics.try(&.nodes)) ? t.map(&.topic.name) : [] of String,
+        release_tags: (nodes = repo.tags.try(&.nodes)) ? nodes.map(&.tag) : [] of Service::Github::GraphQL::Tag
       )
     end
 
@@ -60,7 +60,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
       @parent : Payload? = nil,
       @homepage : String? = nil,
       @tags : Array(String) = [] of String,
-      @release_tags : Array(String) = [] of String,
+      @release_tags : Array(Service::Github::GraphQL::Tag) = [] of Service::Github::GraphQL::Tag,
       @default_branch : String = "HEAD"
     ); end
   end
@@ -87,15 +87,15 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     # Create Versions
     unless versions.empty?
       versions.each do |version|
-        Shard::VersionUpdateQueuedJob.new(
+        Shard::VersionUpdateQueuedJob.with_payload(
           shardfile_url: "https://raw.githubusercontent.com/#{payload.uri}/v#{version}/shard.yml",
           readme_url: "https://raw.githubusercontent.com/#{payload.uri}/v#{version}/README.md",
           project_id: project.id,
-          git_tag: version
+          git_tag: version,
         ).enqueue
       end
     else
-      Shard::VersionUpdateQueuedJob.new(
+      Shard::VersionUpdateQueuedJob.with_payload(
         shardfile_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}/shard.yml",
         readme_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}/README.md",
         project_id: project.id
@@ -131,10 +131,9 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   private def versions
-    payload.release_tags.each_with_object([] of String) do |tag, versions|
-      match = tag.match(/^v(.+)/)
-      version = match[1] if match
-      versions << version if version
+    payload.release_tags.each_with_object([] of Service::Github::GraphQL::Tag) do |tag, versions|
+      match = tag.name.to_s.match(/^v(.+)/)
+      versions << tag if match
     end
   end
 end

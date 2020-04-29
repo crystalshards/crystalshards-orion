@@ -9,6 +9,7 @@ class Shard
   column git_tag : String?
   column license : String?
   column readme : String?
+  column pushed_at : Time?
   column description : String?
   column crystal : String?
   column tags : Array(String)?

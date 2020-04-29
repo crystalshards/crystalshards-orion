@@ -37,7 +37,10 @@ class Service::Github::GraphQL::Response(T)
     puts "Response: #{response.status_code.colorize(response.status_code == 200 ? :light_green : :light_red)}"
     raise Exception.new("Bad response #{response.status_code}: #{response.body}") if response.status_code != 200
     response = from_json(response.body)
-    raise "GraphQL Error: #{response.errors.try(&.map(&.message).join(""))}" if (response.errors)
+    if (response.errors)
+      message = response.errors.try(&.map(&.message).join(", "))
+      raise "GraphQL Error: #{message}"
+    end
     return response.data.not_nil!
   end
 end

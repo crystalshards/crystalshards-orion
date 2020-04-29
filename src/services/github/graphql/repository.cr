@@ -5,18 +5,18 @@ class Service::Github::GraphQL::Repository
   JSON.mapping(
     id: String,
     url: String,
+    name_with_owner: {type: String, key: "nameWithOwner"},
     description: String?,
     updated_at: {type: Time?, key: "updatedAt"},
     pushed_at: {type: Time?, key: "pushedAt"},
     homepage_url: {type: String?, key: "homepageUrl"},
-    name_with_owner: {type: String, key: "nameWithOwner"},
-    watchers: Service::Github::GraphQL::Connection(Nil),
-    repository_topics: {type: Service::Github::GraphQL::Connection(RepositoryTopic), key: "repositoryTopics"},
+    watchers: Service::Github::GraphQL::Connection(Nil)?,
+    repository_topics: {type: Service::Github::GraphQL::Connection(RepositoryTopic)?, key: "repositoryTopics"},
     parent: Repository?,
-    stargazers: Service::Github::GraphQL::Connection(Nil),
-    pull_requests: {type: Service::Github::GraphQL::Connection(Nil), key: "pullRequests"},
-    issues: {type: Service::Github::GraphQL::Connection(Nil), key: "issues"},
-    tags: Service::Github::GraphQL::Connection(Github::GraphQL::Ref)
+    stargazers: Service::Github::GraphQL::Connection(Nil)?,
+    pull_requests: {type: Service::Github::GraphQL::Connection(Nil)?, key: "pullRequests"},
+    issues: {type: Service::Github::GraphQL::Connection(Nil)?, key: "issues"},
+    tags: Service::Github::GraphQL::Connection(Github::GraphQL::Ref)?
   )
 
   FRAGMENT = <<-graphql
@@ -37,7 +37,9 @@ class Service::Github::GraphQL::Repository
       }
     }
     parent {
-      ...repo_fragment
+      id
+      url
+      nameWithOwner
     }
     stargazers {
       totalCount
