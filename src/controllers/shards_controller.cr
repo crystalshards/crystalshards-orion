@@ -37,6 +37,6 @@ class ShardsController < ApplicationController
   end
 
   private def shard_by_version
-    Shard.by_provider(request.path_params["provider"]).latest_in_project.find({ uri: uri, git_tag: version })
+    Shard.by_provider(request.path_params["provider"]).latest_in_project.find { (projects.uri == uri) & ((shards.git_tag == version) | (shards.version == version)) }
   end
 end
