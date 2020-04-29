@@ -12,8 +12,9 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: crystalshards
-      GITHUB_TOKEN: ${GITHUB_TOKEN}
   redis:
     image: redis
     ports:
@@ -26,7 +27,8 @@ services:
       - postgres
     environment:
       REDIS_URL: redis://redis
-      DATABASE_URL: postgres://postgres@postgres/crystalshards
+      DATABASE_URL: postgres://postgres:postgres@postgres/crystalshards
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
     ports:
       - "3000:3000"
     command:
@@ -50,7 +52,8 @@ services:
       - postgres
     environment:
       REDIS_URL: redis://redis
-      DATABASE_URL: postgres://postgres@postgres/crystalshards
+      DATABASE_URL: postgres://postgres:postgres@postgres/crystalshards
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
     volumes:
       - ./src:/app/src:cached
       - ./shard.yml:/app/.sentry.yml:cached
