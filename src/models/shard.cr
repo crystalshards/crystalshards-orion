@@ -36,6 +36,10 @@ class Shard
     model.as(self).associate_dependencies!
   end
 
+  scope :versions do
+    where { git_tag != nil }
+  end
+
   # Ranked within project (in order to get the latest release)
   scope :latest_in_project do
     # Set the has_tag field

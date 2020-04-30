@@ -26,4 +26,12 @@ class ShardDependency
       dep.development = development
     end
   end
+
+  scope :production do
+    where { shard_dependencies.development == false }
+  end
+
+  scope :development do
+    where { shard_dependencies.development == true }
+  end
 end

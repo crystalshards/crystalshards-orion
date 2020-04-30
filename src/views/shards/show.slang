@@ -79,14 +79,48 @@
         div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
         div.font-weight-bold
           = shard.project.mirrors.count
-    - if shard.dependencies.count > 1
+      .d-flex
+        div
+          i.fas.fa-link
+          | Dependents
+        div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+        div.font-weight-bold
+          = shard.project.dependent_count
+    - if shard.dependencies.production.count > 0
       .mb-4
         h5 Dependencies
-        - shard.dependencies.with_dependency.each do |dep|
+        - shard.dependencies.production.with_dependency.each do |dep|
           div
             a href="/shards/#{dep.dependency.provider.to_s}/#{dep.dependency.uri}"
               span.font-weight-bold = "#{dep.name}"
-              span.font-italic.text-muted = "#{dep.dependency.provider.to_s}: #{dep.dependency.uri}"
+              span.font-italic.font-weight-lighter.text-muted = "#{dep.dependency.provider.to_s}: #{dep.dependency.uri}"
+    - if (dev_deps = shard.dependencies.development).count > 0
+      .mb-4
+        h5 Development Dependencies
+        - dev_deps.with_dependency.each do |dep|
+          div
+            a href="/shards/#{dep.dependency.provider.to_s}/#{dep.dependency.uri}"
+              span.font-weight-bold = "#{dep.name}"
+              span.font-italic.font-weight-lighter.text-muted = "#{dep.dependency.provider.to_s}: #{dep.dependency.uri}"
+    - if (versions = shard.project.shards.versions).count > 0
+      .mb-4
+        h5 Versions
+        - current_shard = shard
+        - versions.each do |s|
+          - weight_class = s.version == current_shard.version ? "bold" : "regular"
+          div
+            a href="#{update_params(v: s.version)}"
+              div class="font-weight-#{weight_class}" = s.version
+              - if (pushed_at = s.pushed_at)
+                div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+                div.font-italic.font-weight-lighter.text-muted = pushed_at.to_s("%M %d, %Y")
+    - if (authors = shard.authors).count > 0
+      .mb-4
+        h5 Authors
+        - authors.each do |author|
+          div
+            a href="/authors/#{URI.encode(author.email || author.name)}"
+              div.font-weight-bold = author.name
 
 
 

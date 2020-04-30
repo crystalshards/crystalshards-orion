@@ -19,6 +19,15 @@ class Project
 
   belongs_to mirrored : Project, foreign_key: "mirrored_id", key_type: Int64?
   has_many mirrors : Project, foreign_key: "mirrored_id"
+  has_many dependents : ShardDependency, foreign_key: "dependency_id"
+  has_many shards : Shard
+
+  def dependent_count
+    dependents
+      .join("shards") { shards.id == shard_dependencies.parent_id }
+      .distinct("shards.project_id")
+      .count
+  end
 
   def url
     case provider
