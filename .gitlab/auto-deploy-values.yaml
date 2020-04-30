@@ -7,6 +7,6 @@ workers:
       - ./bin/job_runner
     terminationGracePeriodSeconds: 60
 readinessProbe:
-  path: "/"
+  path: "/healthz"
 livenessProbe:
   path: "/healthz"
