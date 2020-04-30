@@ -45,22 +45,22 @@ class Shard
     # Set the has_tag field
     has_tags_cte =
       dup.select({
-        id: "shards.id",
-        has_tag: "CASE git_tag WHEN null THEN 0 WHEN '' THEN 0 ELSE 1 END"
+        id:      "shards.id",
+        has_tag: "CASE git_tag WHEN null THEN 0 WHEN '' THEN 0 ELSE 1 END",
       })
 
     # Rank the shards
     ranked_cte =
       dup.select({
-        id: "shards.id",
-        rank: "row_number() OVER (PARTITION BY shards.project_id ORDER BY shards_with_has_tag.has_tag ASC, shards.created_at DESC NULLS LAST)"
+        id:   "shards.id",
+        rank: "row_number() OVER (PARTITION BY shards.project_id ORDER BY shards_with_has_tag.has_tag ASC, shards.created_at DESC NULLS LAST)",
       })
-      .inner_join("shards_with_has_tag") { shards_with_has_tag.id == shards.id }
+        .inner_join("shards_with_has_tag") { shards_with_has_tag.id == shards.id }
 
     # Select the first in rank
     with_cte({
       shards_with_has_tag: has_tags_cte.to_sql,
-      ranked: ranked_cte.to_sql,
+      ranked:              ranked_cte.to_sql,
     })
       .where { ranked.rank == 1 }
       .inner_join("ranked") { ranked.id == shards.id }

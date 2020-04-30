@@ -12,7 +12,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
       @project_id : Int64,
       @shardfile_url : String,
       @readme_url : String,
-      @git_tag : Service::Github::GraphQL::Ref? = nil,
+      @git_tag : Service::Github::GraphQL::Ref? = nil
     ); end
   end
 

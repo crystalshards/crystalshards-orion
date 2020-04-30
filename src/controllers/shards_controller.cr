@@ -29,7 +29,7 @@ class ShardsController < ApplicationController
   end
 
   private def latest_shard
-    Shard.by_provider(request.path_params["provider"]).latest_in_project.find({ uri: uri  })
+    Shard.by_provider(request.path_params["provider"]).latest_in_project.find({uri: uri})
   end
 
   private def version

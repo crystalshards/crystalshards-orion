@@ -1,6 +1,6 @@
 class Service::Github::GraphQL::Commit
   JSON.mapping(
-    pushed_date: { type: Time?, key: "pushedDate" }
+    pushed_date: {type: Time?, key: "pushedDate"}
   )
 
   FRAGMENT = <<-graphql
