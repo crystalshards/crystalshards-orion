@@ -24,6 +24,10 @@ shards:
     github: anykeyh/generate.cr
     commit: 27a59d663ded8ce39a361e3a88b8dd747f59ce42
 
+  icr:
+    github: crystal-community/icr
+    commit: 7da354f5c0a356aee77e68fc63c87e2ad35da7fb
+
   inflector:
     github: phoffer/inflector.cr
     version: 0.1.8
@@ -51,6 +55,10 @@ shards:
   pool:
     github: ysbaddaden/pool
     version: 0.2.3
+
+  readline:
+    github: crystal-lang/crystal-readline
+    commit: 0fb7d186da8e1b157998d98d1c96e99699b791eb
 
   redis:
     github: stefanwille/crystal-redis

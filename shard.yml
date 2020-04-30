@@ -39,5 +39,8 @@ development_dependencies:
   sentry:
     github: Acciaiodigitale/sentry
     branch: develop
+  icr:
+    github: crystal-community/icr
+    branch: master
 
 license: MIT
