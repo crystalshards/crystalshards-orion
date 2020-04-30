@@ -5,6 +5,7 @@ class AuthorsController < ApplicationController
   end
 
   def show
+    response.headers["Content-Type"] = "text/html"
     @hero_text = "Author Detail"
     render view: "authors/show.slang"
   end

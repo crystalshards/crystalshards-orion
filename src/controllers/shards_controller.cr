@@ -18,6 +18,7 @@ class ShardsController < ApplicationController
   end
 
   def show
+    response.headers["Content-Type"] = "text/html"
     @hero_text = "Shard Detail"
     if (shard = version ? shard_by_version : latest_shard)
       render view: "shards/show.slang"

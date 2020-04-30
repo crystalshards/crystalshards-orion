@@ -5,6 +5,7 @@ class TagsController < ApplicationController
   end
 
   def show
+    response.headers["Content-Type"] = "text/html"
     @hero_text = "Tag Detail"
     render view: "tags/show.slang"
   end
