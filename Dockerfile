@@ -7,8 +7,7 @@ COPY shard.yml shard.lock ./
 RUN shards install
 COPY . .
 
-RUN shards build server --production --release
-RUN shards build job_runner --production
+RUN shards build --production
 
 ENV PORT 5000
 
