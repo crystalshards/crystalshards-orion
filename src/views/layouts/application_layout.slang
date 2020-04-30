@@ -35,9 +35,9 @@ html lang="en"
                   i.fa.fa-search
               input.form-control type="search" placeholder=@search_placeholder
     - if @hero_text
-      .jumbotron.rounded-0
+      .jumbotron.rounded-0.py-3
         .container
-          h1.display-4=@hero_text
+          h3.mt-1=@hero_text
     .container
       = yield
     .border-top.pt-2.pb-2.mt-4
