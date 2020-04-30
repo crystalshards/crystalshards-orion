@@ -1,0 +1,5 @@
+build: shards build job_runner --local
+install_shards: true
+run: ./bin/job_runner
+watch:
+  - ./src/**/*.cr

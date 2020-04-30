@@ -1,16 +1,18 @@
-require "./tag"
+require "./commit"
 
 class Service::Github::GraphQL::Ref
   JSON.mapping(
-    tag: Tag
+    name: String,
+    commit: Commit
   )
 
   FRAGMENT = <<-graphql
   fragment ref on Ref {
-    tag: target {
-      ...tag
+    name
+    commit: target {
+      ...commit
     }
   }
-  #{Service::Github::GraphQL::Tag::FRAGMENT}
+  #{Service::Github::GraphQL::Commit::FRAGMENT}
   graphql
 end

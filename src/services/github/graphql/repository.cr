@@ -4,10 +4,8 @@ require "./ref"
 class Service::Github::GraphQL::Repository
   JSON.mapping(
     id: String,
-    url: String,
     name_with_owner: {type: String, key: "nameWithOwner"},
     description: String?,
-    updated_at: {type: Time?, key: "updatedAt"},
     pushed_at: {type: Time?, key: "pushedAt"},
     homepage_url: {type: String?, key: "homepageUrl"},
     watchers: Service::Github::GraphQL::Connection(Nil)?,
@@ -22,10 +20,8 @@ class Service::Github::GraphQL::Repository
   FRAGMENT = <<-graphql
   fragment repo_fragment on Repository {
     id
-    url
     description
     homepageUrl
-    updatedAt
     pushedAt
     nameWithOwner
     watchers {
