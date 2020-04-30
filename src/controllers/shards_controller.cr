@@ -2,9 +2,9 @@ class ShardsController < ApplicationController
   def index
     @hero_text = "Shard Directory"
     shards = Shard.originals.where_valid.with_project.order_by(name: "ASC")
-    case (char = request.query_params["char"]?)
+    case (starts_with = request.query_params["starts_with"]?)
     when /[a-z]/i
-      shards = shards.where { name =~ /^#{char}/i }
+      shards = shards.where { name =~ /^#{starts_with}/i }
     when "0-9"
       shards = shards.where { name =~ /^[0-9]/i }
     end
