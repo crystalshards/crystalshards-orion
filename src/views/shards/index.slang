@@ -5,9 +5,9 @@
   .col-12
     | Displaying shards
     = "#{start_index} - #{end_index} of #{total_count} in total"
-    - if char
+    - if starts_with
       | starting with
-      span.font-weight-bold #{char.upcase}
+      span.font-weight-bold #{starts_with.upcase}
 .row
   - shards.each do |shard|
     = render partial: "shard_card.slang"
