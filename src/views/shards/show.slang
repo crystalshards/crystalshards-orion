@@ -30,15 +30,63 @@
         == Markd.to_html(readme)
 
   aside.col-4.border-left
-    a.btn.btn-lg.btn-block.btn-outline-primary.text-left href=shard.project.url
-      i.mx-3 class="fab fa-#{shard.project.provider.to_s}"
-      span=shard.project.uri
-    - if (url = shard.homepage_url)
-      a.btn.btn-lg.btn-block.btn-outline-primary.text-left href=url.to_s
-        i.mx-3.fa.fa-home
-        span="#{url.host}#{url.path}"
-    - if (url = shard.documentation_url)
-      a.btn.btn-lg.btn-block.btn-outline-primary.text-left href=url.to_s
-        i.mx-3.fa.fa-book
-        span Documentation
+    .mb-4
+      a.btn.btn-block.btn-outline-primary.text-left href=shard.project.url
+        i.mx-1 class="fab fa-#{shard.project.provider.to_s}"
+        span=shard.project.uri
+      - if (url = shard.homepage_url)
+        a.btn.btn-block.btn-outline-primary.text-left href=url.to_s
+          i.mx-1.fa.fa-home
+          span="#{url.host}#{url.path}"
+      - if (url = shard.documentation_url)
+        a.btn.btn-block.btn-outline-primary.text-left href=url.to_s
+          i.mx-1.fa.fa-book
+          span Documentation
+    .mb-4
+      h5 Stats
+      .d-flex
+        div
+          i.fa.fa-star
+          | Stars
+        div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+        div.font-weight-bold
+          = shard.project.star_count || "?"
+      .d-flex
+        div
+          i.fa.fa-exclamation-circle
+          | Issues
+        div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+        div.font-weight-bold
+          = shard.project.issue_count || "?"
+      .d-flex
+        div
+          i.fas.fa-code-branch
+          | Pull Requests
+        div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+        div.font-weight-bold
+          = shard.project.pull_request_count || "?"
+      .d-flex
+        div
+          i.fas.fa-eye
+          | Watchers
+        div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+        div.font-weight-bold
+          = shard.project.watcher_count || "?"
+      .d-flex
+        div
+          i.fas.fa-clone
+          | Mirrors/Forks
+        div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+        div.font-weight-bold
+          = shard.project.mirrors.count
+    - if shard.dependencies.count > 1
+      .mb-4
+        h5 Dependencies
+        - shard.dependencies.with_dependency.each do |dep|
+          div
+            a href="/shards/#{dep.dependency.provider.to_s}/#{dep.dependency.uri}"
+              span.font-weight-bold = "#{dep.name}"
+              span.font-italic.text-muted = "#{dep.dependency.provider.to_s}: #{dep.dependency.uri}"
+
+
 

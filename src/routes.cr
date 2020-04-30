@@ -11,13 +11,6 @@ router CrystalShards do
     get "/:provider/*uri", action: show
   end
 
-  scope "/projects", controller: ProjectsController do
-    get "/", action: index
-    get "/new", action: new
-    post "/create", action: create
-    get "/:provider/*uri", action: show
-  end
-
   scope "/tags", controller: TagsController do
     get "/", action: index
     get "/:tag", action: show
