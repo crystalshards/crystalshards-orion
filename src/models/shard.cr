@@ -37,7 +37,7 @@ class Shard
   end
 
   scope :versions do
-    where { git_tag != nil }
+    where { (git_tag == raw("concat('v', version)")) }
   end
 
   # Ranked within project (in order to get the latest release)
@@ -70,7 +70,9 @@ class Shard
   scope :recently_released do
     where_valid
       .latest_in_project
+      .join(:projects) { projects.id == shards.project_id }
       .order_by("shards.pushed_at", "DESC", "NULLS LAST")
+      .order_by("projects.pushed_at", "DESC", "NULLS LAST")
   end
 
   scope :originals do
