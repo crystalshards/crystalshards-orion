@@ -27,7 +27,7 @@
         i.fa.fa-book-open
         | Readme
       #readme.border.rounded.p-4.bg-light
-        == Markd.to_html(readme)
+        == shard.readme_html
 
   aside.col-4.border-left
     .mb-4

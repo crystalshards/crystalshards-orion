@@ -1,3 +1,5 @@
+require "cmark"
+
 class Shard
   include Clear::Model
 
@@ -23,7 +25,9 @@ class Shard
 
   # Copy spec data to shard
   before :validate do |model|
-    model.as(self).update_from_manifest!
+    m = model.as(self)
+    m.update_from_manifest!
+    m.git_tag = nil if m.git_tag.to_s.strip.empty?
   end
 
   after :save do |model|
@@ -38,6 +42,7 @@ class Shard
 
   scope :versions do
     where { (git_tag == raw("concat('v', version)")) }
+      .order_by("shards.pushed_at", "DESC", "NULLS LAST")
   end
 
   # Ranked within project (in order to get the latest release)
@@ -53,7 +58,7 @@ class Shard
     ranked_cte =
       dup.select({
         id:   "shards.id",
-        rank: "row_number() OVER (PARTITION BY shards.project_id ORDER BY shards_with_has_tag.has_tag ASC, shards.created_at DESC NULLS LAST)",
+        rank: "row_number() OVER (PARTITION BY shards.project_id ORDER BY shards_with_has_tag.has_tag ASC, shards.pushed_at DESC NULLS LAST, shards.created_at DESC)",
       })
         .inner_join("shards_with_has_tag") { shards_with_has_tag.id == shards.id }
 
@@ -130,6 +135,12 @@ class Shard
     nil
   end
 
+  def readme_html
+    if (readme = self.readme)
+      Emoji.emojize(Cmark.gfm_to_html(readme, Cmark::Option.flags(Nobreaks, ValidateUTF8)))
+    end
+  end
+
   def documentation_url
     documentation = manifest.documentation
     unless !documentation || documentation.empty?
@@ -147,7 +158,7 @@ class Shard
     self.name = manifest.name
     self.version = manifest.version
     self.license = manifest.license
-    self.description = manifest.description
+    self.description = manifest.description || project.description
     self.crystal = manifest.crystal
     self.tags = manifest.tags
   end

@@ -2,11 +2,15 @@ version: 1.0
 shards:
   admiral:
     github: jwaldrip/admiral.cr
-    commit: 09a81513a47535c4b59cbf0ab98cadcbf6ab70fb
+    commit: c3c3467953654554b72c24e7b853d6fbb23f10c0
 
   clear:
     github: anykeyh/clear
     commit: f9aa2369a665f413ea27a8000e8884c778f28d36
+
+  cmark:
+    github: amauryt/cr-cmark-gfm
+    commit: 638ef0e34c0cd6a96a28559704af7c9081743e87
 
   db:
     github: crystal-lang/crystal-db
@@ -27,10 +31,6 @@ shards:
   kilt:
     github: jeromegn/kilt
     version: 0.6.0
-
-  markd:
-    github: icyleaf/markd
-    version: 0.2.0
 
   mosquito:
     github: robacarp/mosquito
