@@ -108,12 +108,12 @@
         - current_shard = shard
         - versions.each do |s|
           - weight_class = s.version == current_shard.version ? "bold" : "regular"
-          div
+          .d-flex
             a href="#{update_params(v: s.version)}"
               div class="font-weight-#{weight_class}" = s.version
-              - if (pushed_at = s.pushed_at)
-                div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
-                div.font-italic.font-weight-lighter.text-muted = pushed_at.to_s("%M %d, %Y")
+            - if (pushed_at = s.pushed_at)
+              div.flex-fill.border-bottom.border-bottom-style-dotted.mb-1.mx-2.border-secondary
+              div.font-italic.font-weight-lighter.text-muted = pushed_at.to_s("%b %d, %Y")
     - if (authors = shard.authors).count > 0
       .mb-4
         h5 Authors
