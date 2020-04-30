@@ -5,6 +5,7 @@ router CrystalShards do
   root to: "home#home"
   static path: "/assets/bootstrap.css", string: Sass.compile_file("src/scss/bootstrap/bootstrap.scss", output_style: Sass::OutputStyle::COMPRESSED)
   static path: "/assets", dir: "./src/assets"
+  static path: "/healthz", string: "OK"
 
   scope "/shards", controller: ShardsController do
     get "/", action: index

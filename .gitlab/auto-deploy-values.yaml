@@ -6,3 +6,7 @@ workers:
     command:
       - ./bin/job_runner
     terminationGracePeriodSeconds: 60
+readinessProbe:
+  path: "/"
+livenessProbe:
+  path: "/healthz"

@@ -3,7 +3,7 @@
 # tiller in the ops cluster. It will- download the tls certs/key to the current
 # directory.
 
-TILLER_NS="gitlab-managed-apps"
+TILLER_NS=${1-"gitlab-managed-apps"}
 CONTEXT=gke_crystalshards-org_us-central1-a_production
 
 mkdir -p tmp
