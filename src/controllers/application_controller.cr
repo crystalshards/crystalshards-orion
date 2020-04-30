@@ -32,6 +32,6 @@ class ApplicationController < CrystalShards::BaseController
         next_params.delete_all(key.to_s)
       end
     end
-    [request.path, next_params.to_s].join("?")
+    [request.path, next_params.to_s].reject(&.empty?).join("?")
   end
 end
