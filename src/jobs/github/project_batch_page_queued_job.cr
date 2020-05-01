@@ -1,4 +1,6 @@
 class Job::Github::ProjectBatchPageQueuedJob < Mosquito::QueuedJob
+  throttle limit: 5, period: 30
+
   class Payload
     include JSON::Serializable
     getter node_ids
