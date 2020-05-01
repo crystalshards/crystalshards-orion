@@ -4,7 +4,7 @@ module Service::Github
   extend self
 
   def fetch(node_ids : Array(String))
-    Github::GraphQL::MultiRepositoryQuery.fetch(node_ids: node_ids).repos
+    Github::GraphQL::MultiRepositoryQuery.fetch(node_ids: node_ids).repos.compact
   end
 
   def fetch(url : String)

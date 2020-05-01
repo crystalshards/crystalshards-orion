@@ -2,7 +2,7 @@ require "./repository"
 
 class Service::Github::GraphQL::MultiRepositoryQuery
   JSON.mapping(
-    repos: Array(Service::Github::GraphQL::Repository)
+    repos: Array(Service::Github::GraphQL::Repository?)
   )
 
   QUERY = <<-graphql
