@@ -26,6 +26,7 @@ services:
       - redis
       - postgres
     environment:
+      PORT: 3000
       REDIS_URL: redis://redis
       DATABASE_URL: postgres://postgres:postgres@postgres/crystalshards
       GITHUB_TOKEN: ${GITHUB_TOKEN}
@@ -51,6 +52,7 @@ services:
       - redis
       - postgres
     environment:
+      PORT: 3000
       REDIS_URL: redis://redis
       DATABASE_URL: postgres://postgres:postgres@postgres/crystalshards
       GITHUB_TOKEN: ${GITHUB_TOKEN}
