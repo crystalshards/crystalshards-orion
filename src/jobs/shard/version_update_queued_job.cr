@@ -35,11 +35,12 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   def perform
     if (manifest = self.manifest)
       m = manifest.not_nil!
-      Log.info { "Creating/Updating shard version: #{m.name}@#{m.version}".colorize(:cyan) }
-      shard = ::Shard.query.find_or_build({project_id: payload.project_id, git_tag: payload.git_tag.try(&.name)}) { }
+      tag_name = payload.git_tag.try(&.name)
+      shard = ::Shard.query.find_or_build({project_id: payload.project_id, git_tag: tag_name}) { }
+      Log.info { "#{shard.persisted? ? "Updating" : "Creating"} shard: #{m.name}@#{m.version}".colorize(:cyan) }
       shard.manifest = m
       shard.readme = readme
-      shard.git_tag = payload.git_tag.try(&.name)
+      shard.git_tag = tag_name
       shard.pushed_at = pushed_date
       shard.save
     end
