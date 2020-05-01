@@ -59,7 +59,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
       @pull_request_count : Int32? = nil,
       @parent : Payload? = nil,
       @homepage : String? = nil,
-      @tags : Array(String) = [] of String,
+      @tags : Array(String)? = nil,
       @release_tags : Array(Service::Github::GraphQL::Ref) = [] of Service::Github::GraphQL::Ref,
       @default_branch : String = "HEAD"
     ); end
@@ -106,15 +106,15 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   private def update_project(payload = self.payload)
     project = get_project
     Log.debug { "#{project.persisted? ? "Updating" : "Creating"} project: github:#{payload.uri}".colorize(:cyan) }
-    project.api_id = payload.api_id
     project.uri = payload.uri
-    project.tags = payload.tags
-    project.pushed_at = payload.pushed_at
-    project.watcher_count = payload.watcher_count
-    project.star_count = payload.star_count
-    project.pull_request_count = payload.pull_request_count
-    project.issue_count = payload.issue_count
-    project.description = payload.description
+    project.api_id = payload.api_id unless payload.api_id.nil?
+    project.tags = payload.tags.not_nil! unless payload.tags.nil?
+    project.pushed_at = payload.pushed_at unless payload.pushed_at.nil?
+    project.watcher_count = payload.watcher_count unless payload.watcher_count.nil?
+    project.star_count = payload.star_count unless payload.star_count.nil?
+    project.pull_request_count = payload.pull_request_count unless payload.pull_request_count.nil?
+    project.issue_count = payload.issue_count unless payload.issue_count.nil?
+    project.description = payload.description unless payload.description.nil?
     if (parent = payload.parent)
       project.mirror_type = MirrorType.from_string("fork")
       project.mirrored = update_project(parent)
