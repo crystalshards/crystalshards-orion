@@ -8,9 +8,9 @@ shards:
     github: anykeyh/clear
     commit: f9aa2369a665f413ea27a8000e8884c778f28d36
 
-  cmark:
-    github: amauryt/cr-cmark-gfm
-    commit: 638ef0e34c0cd6a96a28559704af7c9081743e87
+  common_marker:
+    github: mamantoha/crystal-cmark-gfm
+    version: 0.3.0
 
   db:
     github: crystal-lang/crystal-db

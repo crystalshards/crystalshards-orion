@@ -1,4 +1,4 @@
-require "cmark"
+require "common_marker"
 
 class Shard
   include Clear::Model
@@ -137,7 +137,12 @@ class Shard
 
   def readme_html
     if (readme = self.readme)
-      Emoji.emojize(Cmark.gfm_to_html(readme, Cmark::Option.flags(Nobreaks, ValidateUTF8)))
+      md = CommonMarker.new(
+        readme,
+        options: ["unsafe"],
+        extensions: ["table", "strikethrough", "autolink", "tagfilter", "tasklist"]
+      )
+      Emoji.emojize(md.to_html)
     end
   end
 

@@ -32,8 +32,8 @@ dependencies:
   emoji:
     github: veelenga/emoji.cr
     branch: master
-  cmark:
-    github: amauryt/cr-cmark-gfm
+  common_marker:
+    github: mamantoha/crystal-cmark-gfm
 
 development_dependencies:
   sentry:
