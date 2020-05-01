@@ -173,7 +173,7 @@ class Shard
 
   protected def blacklisted?
     BLACKLIST.any? do |name, spec|
-      spec.provider == project.provider && spec.uri == project.uri
+      spec.provider == project.provider.to_s && spec.uri == project.uri
     end
   end
 
