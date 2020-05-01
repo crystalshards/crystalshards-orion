@@ -16,9 +16,7 @@ class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
     while (node_id = id_collector.receive?)
       node_ids << node_id
       if (node_ids.size == 100)
-        ::Service::Github.fetch(node_ids: node_ids).each do |repo|
-          ProjectUpdateQueuedJob.with_payload(repo).enqueue
-        end
+        ProjectBatchPageQueuedJob.with_payload(node_ids: node_ids).enqueue
         node_ids = [] of String
       end
     end
