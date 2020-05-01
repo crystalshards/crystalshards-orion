@@ -21,6 +21,7 @@ class Manifest::Shard
 
   # Unofficial
   getter tags : Array(String)?
+  getter index : Bool = true
 
   def self.to_column(value : JSON::Any) : Manifest::Shard?
     from_json value.to_json

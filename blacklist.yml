@@ -1,0 +1,9 @@
+# The following projects are not "shards" but rather Crystal projects
+# Any project specified on this page will not show up on the front page
+# of CrystalShards
+which_is_the_fastest:
+  github: the-benchmarker/web-frameworks
+Awesome Crystal:
+  github: veelenga/awesome-crystal
+invidious:
+  github: omarroth/invidious

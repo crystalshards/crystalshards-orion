@@ -48,9 +48,9 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
 
   protected def pushed_date
     payload.git_tag.try(&.commit.try(&.pushed_date)) ||
-    payload.git_tag.try(&.commit.try(&.authored_date)) ||
-    payload.git_tag.try(&.try(&.tag.try(&.commit.try(&.pushed_date)))) ||
-    payload.git_tag.try(&.try(&.tag.try(&.commit.try(&.authored_date))))
+      payload.git_tag.try(&.commit.try(&.authored_date)) ||
+      payload.git_tag.try(&.try(&.tag.try(&.commit.try(&.pushed_date)))) ||
+      payload.git_tag.try(&.try(&.tag.try(&.commit.try(&.authored_date))))
   end
 
   protected def manifest : ::Manifest::Shard?

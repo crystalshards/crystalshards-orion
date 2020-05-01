@@ -2,10 +2,12 @@ require "common_marker"
 
 class Shard
   include Clear::Model
+  BLACKLIST = Hash(String, Manifest::Shard::Dependency::Provider).from_yaml(File.read("blacklist.yml"))
 
   # Columns
   primary_key
   column manifest : Manifest::Shard
+  column index : Bool, presence: false
   column name : String
   column version : String
   column git_tag : String?
@@ -166,6 +168,13 @@ class Shard
     self.description = manifest.description || project.description
     self.crystal = manifest.crystal
     self.tags = manifest.tags
+    self.index = manifest.index && !blacklisted?
+  end
+
+  protected def blacklisted?
+    BLACKLIST.any? do |name, spec|
+      spec.provider == project.provider && spec.uri == project.uri
+    end
   end
 
   protected def associate_dependencies!
