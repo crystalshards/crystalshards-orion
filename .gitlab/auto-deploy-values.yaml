@@ -2,7 +2,7 @@ application:
   migrateCommand: ./dev/clear migrate
 workers:
   job-runner:
-    replicaCount: 1
+    replicaCount: 3
     command:
       - ./bin/job_runner
     terminationGracePeriodSeconds: 60
