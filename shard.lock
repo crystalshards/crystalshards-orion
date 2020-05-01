@@ -20,6 +20,10 @@ shards:
     github: veelenga/emoji.cr
     commit: 4642bd8ef64839b4639ba0be521e8c85113cb8d5
 
+  exception_page:
+    github: crystal-loot/exception_page
+    version: 0.1.4
+
   generate:
     github: anykeyh/generate.cr
     commit: 27a59d663ded8ce39a361e3a88b8dd747f59ce42
@@ -46,7 +50,7 @@ shards:
 
   orion:
     github: obsidian/orion
-    commit: 92ab467943c99f11d3d4c1d5e6cae91646046c4b
+    commit: a4ff7af907820e901e5fc66b7959348ff1f033eb
 
   pg:
     github: will/crystal-pg
