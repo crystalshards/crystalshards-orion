@@ -19,8 +19,18 @@ class ApplicationController < CrystalShards::BaseController
 
   layout "application_layout.slang"
 
+  def render_404
+    response.headers["Content-Type"] = "text/html"
+    render view: "404.slang"
+  end
+
   private def current_page
     (request.query_params["page"]? || 1).to_i
+  end
+
+  private def pluralize(count : Int, word : String)
+    word = count == 1 ? Wordsmith::Inflector.singularize(word) : Wordsmith::Inflector.pluralize(word)
+    "#{count} #{word}"
   end
 
   private def update_params(*args, **params)

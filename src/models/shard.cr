@@ -124,6 +124,17 @@ class Shard
       .where { projects.provider == name }
   end
 
+  scope by_author do |author|
+    case author
+    when Author
+      latest_in_project
+        .inner_join("shard_authors") { shard_authors.shard_id == shards.id }
+        .where { shard_authors.author_id == author.id }
+    else
+      raise "not an author"
+    end
+  end
+
   def formatted_description
     Emoji.emojize(description || project.description || "No Description")
   end

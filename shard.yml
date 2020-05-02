@@ -34,6 +34,12 @@ dependencies:
     branch: master
   common_marker:
     github: mamantoha/crystal-cmark-gfm
+  wordsmith:
+    github: luckyframework/wordsmith
+    version: ~> 0.2
+  redis:
+    github: stefanwille/crystal-redis
+    version: ~> 2.6.0
 
 development_dependencies:
   sentry:

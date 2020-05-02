@@ -118,9 +118,9 @@
       .mb-4
         h5 Authors
         - authors.each do |author|
-          div
-            a href="/authors/#{URI.encode(author.email || author.name)}"
-              div.font-weight-bold = author.name
+          a.d-flex.align-items-center.mb-2 href="/authors/#{URI.encode(author.email || author.name)}"
+            img.rounded.align-left.mr-2 height=25 src="/authors/#{URI.encode(author.email || author.name)}/avatar"
+            div.font-weight-bold = author.name
 
 
 

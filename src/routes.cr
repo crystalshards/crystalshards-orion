@@ -20,6 +20,7 @@ router CrystalShards do
   scope "/authors", controller: AuthorsController do
     get "/", action: index
     get "/:email_or_name", action: show
+    get "/:email_or_name/avatar", action: avatar
   end
 end
 

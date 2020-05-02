@@ -80,3 +80,7 @@ shards:
     github: jeromegn/slang
     version: 1.7.1
 
+  wordsmith:
+    github: luckyframework/wordsmith
+    version: 0.2.0
+
