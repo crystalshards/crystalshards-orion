@@ -17,6 +17,18 @@ class ShardsController < ApplicationController
     render view: "shards/index.slang"
   end
 
+  def search
+    @hero_text = "Search Shards"
+    shards = Shard.originals.where_valid.with_project.search(request.query_params["q"]?.to_s)
+    total_count = shards.count
+    total_pages = (total_count / per_page).ceil.to_i
+    shards = shards.limit(per_page).offset((current_page - 1) * per_page)
+    current_count = shards.count
+    start_index = ((current_page - 1) * per_page) + 1
+    end_index = [(current_page * per_page), total_count].min
+    render view: "shards/search.slang"
+  end
+
   def show
     response.headers["Content-Type"] = "text/html"
     @hero_text = "Shard Detail"

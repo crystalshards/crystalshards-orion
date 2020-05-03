@@ -9,6 +9,7 @@ router CrystalShards do
 
   scope "/shards", controller: ShardsController do
     get "/", action: index
+    get "/search", action: search
     get "/:provider/*uri", action: show
   end
 

@@ -28,12 +28,12 @@ html lang="en"
     - if @show_search
       .bg-secondary.pt-2.pb-2
         .container
-          form.col-10.offset-1.mb-0
+          form.col-10.offset-1.mb-0 action="/shards/search" method="GET"
             .input-group
               .input-group-prepend
                 span.input-group-text
                   i.fa.fa-search
-              input.form-control type="search" placeholder=@search_placeholder
+              input.form-control name="q" type="search" placeholder=@search_placeholder
     - if @hero_text
       .jumbotron.rounded-0.py-3
         .container
