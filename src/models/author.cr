@@ -56,7 +56,10 @@ class Author
   end
 
   def default_avatar_url
-    "https://avatars.dicebear.com/v2/initials/#{initials}.svg"
+    initials_url = "https://avatars.dicebear.com/v2/initials/#{initials}.svg"
+    return initials_url unless email
+    hash = OpenSSL::MD5.hash email.to_s
+    "https://www.gravatar.com/avatar/#{hash}?d=#{URI.encode email.to_s}"
   end
 
   def name_is_username?
