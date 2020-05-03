@@ -3,8 +3,8 @@ class CreateShardDependencies
 
   def change(dir)
     create_table(:shard_dependencies) do |t|
-      t.references "shards", "parent_id", null: false
-      t.references "projects", "dependency_id", null: false
+      t.references "shards", "parent_id", null: false, on_delete: "CASCADE"
+      t.references "projects", "dependency_id", null: false, on_delete: "CASCADE"
       t.column :name, :string, index: true, null: false
       t.column :ref_type, :ref_type, index: true
       t.column :ref_name, :string, index: true

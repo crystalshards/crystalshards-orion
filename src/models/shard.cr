@@ -16,7 +16,7 @@ class Shard
   column pushed_at : Time?
   column description : String?
   column crystal : String?
-  column tags : Array(String)?
+  column tags : Array(String), presence: false
 
   timestamps
 
@@ -179,7 +179,7 @@ class Shard
     self.license = manifest.license
     self.description = manifest.description || project.description
     self.crystal = manifest.crystal
-    self.tags = manifest.tags
+    self.tags = (manifest.tags || [] of String) + project.tags
     self.index = manifest.index && !blacklisted?
   end
 
