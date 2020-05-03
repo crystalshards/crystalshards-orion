@@ -1,6 +1,6 @@
 - shard_count = author.shards.distinct("project_id").count
 .d-flex
-  img.rounded.mr-4 height=100 src=author.avatar_url
+  img.rounded.mr-4 height=100 src=(author.avatar_url || author.default_avatar_url)
   div.flex-fill
     h2 = author.name
     - if author.email

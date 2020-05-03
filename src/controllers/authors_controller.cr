@@ -15,15 +15,6 @@ class AuthorsController < ApplicationController
     end
   end
 
-  def avatar
-    if (author = self.author)
-      response.headers["Location"] = author.avatar_url || author.default_avatar_url
-      response.status_code = 301
-    else
-      response.respond_with_status 404
-    end
-  end
-
   private def author
     Author.query.find { (name == name_or_email) | (email == name_or_email) }
   end

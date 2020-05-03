@@ -105,7 +105,7 @@ class Shard
     where_valid
       .latest_in_project
       .includes_uses
-      .order_by("use_count": "DESC")
+      .order_by("uses.use_count": "DESC")
   end
 
   scope :includes_uses do
@@ -115,8 +115,9 @@ class Shard
         .inner_join("shard_dependencies") { shard_dependencies.parent_id == shards.id }
         .inner_join("projects AS dependencies") { shard_dependencies.dependency_id == dependencies.id }
         .group_by("dependencies.id")
-        .order_by("use_count")
-    with_cte({uses: cte}).inner_join("uses") { shards.project_id == uses.id }
+    with_cte({uses: cte})
+      .select("shards.*", "uses.use_count")
+      .inner_join("uses") { shards.project_id == uses.id }
   end
 
   scope :by_provider do |name|
@@ -205,8 +206,11 @@ class Shard
   end
 
   protected def associate_authors!
-    (manifest.authors || [] of Manifest::Shard::Author).each do |manifest_author|
-      self.authors << Author.query.find_or_create({name: manifest_author.name, email: manifest_author.email}) { }
+    (manifest.authors || [] of Manifest::Shard::Author).map do |manifest_author|
+      author = Author.query.find_or_build({email: manifest_author.email}) { }
+      author.name = manifest_author.name if manifest_author.name.size > author.name.size
+      author.save
+      self.authors << author
     end
   end
 end

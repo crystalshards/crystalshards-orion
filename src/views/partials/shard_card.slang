@@ -10,6 +10,9 @@
       - if shard.project.star_count
         i.far.fa-star.ml-2
         span=shard.project.star_count
+      - if (use_count = shard.attributes["use_count"]?)
+        i.fas.fa-link.ml-2
+        span=use_count
       - if shard.project.pushed_at
         i.fas.fa-history.ml-2
         span=shard.project.last_pushed_at_string

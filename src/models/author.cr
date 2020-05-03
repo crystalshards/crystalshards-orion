@@ -14,12 +14,12 @@ class Author
     cte =
       Clear::SQL.select("COUNT(DISTINCT shards.project_id) AS use_count", "authors.id")
         .from("authors")
-        .inner_join("shard_authors") { shard_authors.author_id == authors.id }
-        .inner_join("shards") { shards.id == shard_authors.shard_id }
-        .inner_join("shard_dependencies") { shard_dependencies.parent_id == shards.id }
-        .inner_join("projects AS dependencies") { shard_dependencies.dependency_id == dependencies.id }
+        .join("shard_authors") { shard_authors.author_id == authors.id }
+        .join("shards AS owned_shards") { owned_shards.id == shard_authors.shard_id }
+        .join("projects") { projects.id == owned_shards.project_id }
+        .join("shard_dependencies") { shard_dependencies.dependency_id == projects.id }
+        .join("shards") { shards.id == shard_dependencies.parent_id }
         .group_by("authors.id")
-        .order_by("use_count")
 
     with_cte({uses: cte})
       .select("authors.*", "uses.use_count")

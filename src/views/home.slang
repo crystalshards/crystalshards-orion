@@ -11,7 +11,7 @@
     i.fa.fa-umbrella.text-primary
     | Most Used
   .row
-    - most_used.each do |shard|
+    - most_used.each(fetch_columns: true) do |shard|
       = render partial: "shard_card.slang"
 
 .mt-3
