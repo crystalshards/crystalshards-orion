@@ -208,8 +208,10 @@ class Shard
   protected def associate_authors!
     (manifest.authors || [] of Manifest::Shard::Author).each do |manifest_author|
       author = Author.query.find_or_build({email: manifest_author.email}) { }
-      author.name = manifest_author.name if manifest_author.name.size > author.name.size
-      author.save
+      unless manifest_author.name_is_username? && author.persisted?
+        author.name = manifest_author.name
+        author.save
+      end
       self.authors << author
     end
   end

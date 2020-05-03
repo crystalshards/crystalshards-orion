@@ -14,6 +14,10 @@ class Manifest::Shard::Author
     end
   end
 
+  def name_is_username?
+    !name.includes?(" ")
+  end
+
   def to_yaml(builder)
     (email ? "#{name} <#{email}>" : name).to_yaml(builder)
   end

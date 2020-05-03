@@ -59,6 +59,10 @@ class Author
     "https://avatars.dicebear.com/v2/initials/#{initials}.svg"
   end
 
+  def name_is_username?
+    !name.includes?(" ")
+  end
+
   private def cache_key(*parts)
     (["authors", id] + parts.to_a).join("/")
   end
