@@ -19,6 +19,8 @@ class Shard
   column tags : Array(String), presence: false
 
   timestamps
+  
+  full_text_searchable
 
   # Associations
   belongs_to project : Project
