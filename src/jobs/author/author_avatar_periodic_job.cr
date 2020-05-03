@@ -6,6 +6,7 @@ class Job::Author::AvatarPeriodicJob < Mosquito::PeriodicJob
       if (github_user = Service::Github::REST::OwnerSearch.fetch(q: "#{author.email}+in%3Aemail", per_page: 1).items.first?)
         author.avatar_url = github_user.avatar_url
         author.save
+        sleep 1
       end
     end
   end
