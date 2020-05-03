@@ -59,7 +59,7 @@ class Author
     initials_url = "https://avatars.dicebear.com/v2/initials/#{initials}.svg"
     return initials_url unless email
     hash = Digest::MD5.hexdigest email.to_s
-    "https://www.gravatar.com/avatar/#{hash}?d=#{URI.encode email.to_s}"
+    "https://www.gravatar.com/avatar/#{hash}?d=#{URI.encode initials_url}"
   end
 
   def name_is_username?
