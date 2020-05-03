@@ -206,7 +206,7 @@ class Shard
   end
 
   protected def associate_authors!
-    (manifest.authors || [] of Manifest::Shard::Author).map do |manifest_author|
+    (manifest.authors || [] of Manifest::Shard::Author).each do |manifest_author|
       author = Author.query.find_or_build({email: manifest_author.email}) { }
       author.name = manifest_author.name if manifest_author.name.size > author.name.size
       author.save
