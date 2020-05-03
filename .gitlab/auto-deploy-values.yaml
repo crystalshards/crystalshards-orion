@@ -1,3 +1,9 @@
+replicaCount: 2
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
 application:
   migrateCommand: ./dev/clear migrate
 workers:
@@ -10,3 +16,7 @@ readinessProbe:
   path: "/healthz"
 livenessProbe:
   path: "/healthz"
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+  maxUnavailable: 0
