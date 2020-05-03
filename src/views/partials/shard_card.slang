@@ -13,6 +13,6 @@
       - if (use_count = shard.attributes["use_count"]?)
         i.fas.fa-link.ml-2
         span=use_count
-      - if shard.project.pushed_at
+      - if shard.pushed_at
         i.fas.fa-history.ml-2
-        span=shard.project.last_pushed_at_string
+        span=shard.last_pushed_at_string

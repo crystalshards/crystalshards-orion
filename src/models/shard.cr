@@ -150,6 +150,20 @@ class Shard
   rescue
     nil
   end
+  
+  def last_pushed_at_string : String
+    return "Unknown" unless (pushed_at = self.pushed_at)
+    span = Time.utc - pushed_at
+    if span.total_days >= 1
+      "#{span.total_days.to_i}d ago"
+    elsif span.total_hours >= 1
+      "#{span.total_hours.to_i}h ago"
+    elsif span.total_minutes >= 1
+      "#{span.total_minutes.to_i}m ago"
+    else
+      "#{span.total_seconds.to_i}s ago"
+    end
+  end
 
   def readme_html
     if (readme = self.readme)
