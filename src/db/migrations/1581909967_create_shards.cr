@@ -12,7 +12,7 @@ class CreateShards
       t.column :crystal, :string
       t.column :tags, :string, array: true
 
-      t.references "projects", null: false
+      t.references "projects", null: false, on_delete: "CASCADE"
 
       t.timestamps
     end
