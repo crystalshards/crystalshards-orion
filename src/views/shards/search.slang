@@ -4,7 +4,7 @@
     = request.query_params["q"]?
     = "#{start_index} - #{end_index} of #{total_count} in total"
 .row
-  - shards.each do |shard|
+  - shards.each(fetch_columns: true) do |shard|
     = render partial: "shard_card.slang"
 .row
   = render partial: "pagination.slang"

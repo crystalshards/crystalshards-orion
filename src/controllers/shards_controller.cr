@@ -19,7 +19,15 @@ class ShardsController < ApplicationController
 
   def search
     @hero_text = "Search Shards"
-    shards = Shard.originals.where_valid.with_project.search(request.query_params["q"]?.to_s)
+    shards =
+      Shard
+        .originals
+        .where_valid
+        .with_project
+        .includes_uses
+        .search(request.query_params["q"]?.to_s)
+        .order_by("use_count", "DESC", "NULLS LAST")
+
     total_count = shards.count
     total_pages = (total_count / per_page).ceil.to_i
     shards = shards.limit(per_page).offset((current_page - 1) * per_page)
