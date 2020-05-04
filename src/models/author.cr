@@ -22,7 +22,7 @@ class Author
 
     with_cte({uses: cte})
       .select("authors.*", "uses.use_count")
-      .inner_join("uses") { authors.id == uses.id }
+      .join("uses") { authors.id == uses.id }
   end
 
   scope :emails_only do
@@ -41,13 +41,13 @@ class Author
     cte =
       Clear::SQL.select("COUNT(DISTINCT shards.project_id) AS shard_count", "authors.id")
         .from("authors")
-        .inner_join("shard_authors") { shard_authors.author_id == authors.id }
-        .inner_join("shards") { shards.id == shard_authors.shard_id }
+        .join("shard_authors") { shard_authors.author_id == authors.id }
+        .join("shards") { shards.id == shard_authors.shard_id }
         .group_by("authors.id")
 
     with_cte({author_shards: cte})
       .select("authors.*", "author_shards.shard_count")
-      .inner_join("author_shards") { authors.id == author_shards.id }
+      .join("author_shards") { authors.id == author_shards.id }
   end
 
   def initials

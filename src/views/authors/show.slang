@@ -15,7 +15,7 @@
   .mt-4.pt-3.border-top
     h2 Shards
   .row
-    - Shard.by_author(author).includes_uses.each(fetch_columns: true) do |shard|
+    - Shard.by_author(author).includes_uses.order_by("uses.use_count": "DESC").each(fetch_columns: true) do |shard|
       = render partial: "shard_card.slang"
 
 

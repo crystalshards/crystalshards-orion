@@ -64,7 +64,7 @@ class Shard
         id:   "shards.id",
         rank: "row_number() OVER (PARTITION BY shards.project_id ORDER BY shards_with_has_tag.has_tag ASC, shards.pushed_at DESC NULLS LAST, shards.created_at DESC)",
       })
-        .inner_join("shards_with_has_tag") { shards_with_has_tag.id == shards.id }
+        .join("shards_with_has_tag") { shards_with_has_tag.id == shards.id }
 
     # Select the first in rank
     with_cte({
@@ -72,7 +72,7 @@ class Shard
       ranked:              ranked_cte.to_sql,
     })
       .where { ranked.rank == 1 }
-      .inner_join("ranked") { ranked.id == shards.id }
+      .join("ranked") { ranked.id == shards.id }
   end
 
   # Order by recently updated
@@ -86,7 +86,7 @@ class Shard
 
   scope :originals do
     latest_in_project
-      .inner_join("projects") { projects.id == shards.project_id }
+      .join("projects") { projects.id == shards.project_id }
       .where { projects.mirrored_id == nil }
   end
 
@@ -98,7 +98,7 @@ class Shard
   scope :popular do
     where_valid
       .latest_in_project
-      .inner_join("projects") { projects.id == shards.project_id }
+      .join("projects") { projects.id == shards.project_id }
       .order_by("projects.star_count", "DESC", "NULLS LAST")
   end
 
@@ -114,16 +114,16 @@ class Shard
     cte =
       Clear::SQL.select("COUNT(DISTINCT shards.project_id) AS use_count", "dependencies.id")
         .from("shards")
-        .inner_join("shard_dependencies") { shard_dependencies.parent_id == shards.id }
-        .inner_join("projects AS dependencies") { shard_dependencies.dependency_id == dependencies.id }
+        .full_outer_join("shard_dependencies") { shard_dependencies.parent_id == shards.id }
+        .full_outer_join("projects AS dependencies") { shard_dependencies.dependency_id == dependencies.id }
         .group_by("dependencies.id")
     with_cte({uses: cte})
       .select("shards.*", "uses.use_count")
-      .inner_join("uses") { shards.project_id == uses.id }
+      .join("uses") { shards.project_id == uses.id }
   end
 
   scope :by_provider do |name|
-    inner_join("projects") { projects.id == shards.project_id }
+    join("projects") { projects.id == shards.project_id }
       .where { projects.provider == name }
   end
 
@@ -131,7 +131,7 @@ class Shard
     case author
     when Author
       latest_in_project
-        .inner_join("shard_authors") { shard_authors.shard_id == shards.id }
+        .join("shard_authors") { shard_authors.shard_id == shards.id }
         .where { shard_authors.author_id == author.id }
     else
       raise "not an author"
