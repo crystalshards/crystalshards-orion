@@ -40,10 +40,10 @@ class Service::Github::GraphQL::Repository
     stargazers {
       totalCount
     }
-    pullRequests {
+    pullRequests(states: [OPEN]) {
       totalCount
     }
-    issues {
+    issues(states: [OPEN]) {
       totalCount
     }
     tags: refs(refPrefix: "refs/tags/", first: 100) {
