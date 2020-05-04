@@ -1,18 +1,38 @@
-# crystalshards.org
+# CrystalShards.org
 
-TODO: Write a description here
-
-## Installation
-
-TODO: Write installation instructions here
-
-## Usage
-
-TODO: Write usage instructions here
+CrystalShards.org is a multi-site index for crystalshards hosted all over the
+public internet. It aims to grow the community and expose useful tools to Crystal
+Application and Library developers.
 
 ## Development
 
-TODO: Write development instructions here
+To run crystalshards.org for local development you can use sentry.
+
+To run the server:
+```
+./dev/sentry
+```
+
+To run the indexer:
+```
+./dev/sentry -c .sentry.job_runner.yml
+```
+
+## Roadmap
+
+The following are roadmap items for the CrystalShards.org website. Contributors
+are welcome.
+
+[x] Parity with the old CrystalShards.org
+[x] GitHub indexing
+[x] Dependency Linking
+[x] Search
+[x] Author Showcase
+[ ] Shard Donation Links
+[ ] GitLab indexing
+[ ] Bitbucket indexing
+[ ] Tags
+[ ] Hosted Shard Documentation
 
 ## Contributing
 

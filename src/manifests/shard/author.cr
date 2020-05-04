@@ -7,7 +7,7 @@ class Manifest::Shard::Author
   property email : String?
 
   def initialize(name)
-    if name =~ /\A\s*(.+?)\s*<(\s*.+?\s*)>/
+    if name =~ /\A\s*(.+?)\s*<+(\s*.+?\s*)>+/
       @name, @email = $1, $2
     else
       @name = name

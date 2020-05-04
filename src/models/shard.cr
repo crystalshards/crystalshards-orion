@@ -19,7 +19,7 @@ class Shard
   column tags : Array(String), presence: false
 
   timestamps
-  
+
   full_text_searchable
 
   # Associations
@@ -150,7 +150,7 @@ class Shard
   rescue
     nil
   end
-  
+
   def last_pushed_at_string : String
     return "Unknown" unless (pushed_at = self.pushed_at)
     span = Time.utc - pushed_at

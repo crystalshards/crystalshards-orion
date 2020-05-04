@@ -5,7 +5,6 @@ class CreateAuthors
     create_table(:authors) do |t|
       t.column :name, type: :string, null: false
       t.column :email, type: :string
-      t.column :avatar_url, type: :string
       t.timestamps
     end
   end

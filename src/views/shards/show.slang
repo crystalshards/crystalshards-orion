@@ -6,6 +6,10 @@
         small.text-muted
           span="v#{shard.version}"
       = shard.formatted_description
+      .my-2
+        - shard.tags.each do |tag|
+          span.badge.badge-pill.badge-primary
+            span.font-weight-light = tag
     .mb-5
       h4.mb-3
         i.fa.fa-code
@@ -119,7 +123,7 @@
         h5 Authors
         - authors.each do |author|
           a.d-flex.align-items-center.mb-2 href="/authors/#{URI.encode(author.email || author.name)}"
-            img.rounded.align-left.mr-2 height=25 src=(author.avatar_url || author.default_avatar_url)
+            img.rounded.align-left.mr-2 height=25 src=author.avatar_url
             div.font-weight-bold = author.name
 
 

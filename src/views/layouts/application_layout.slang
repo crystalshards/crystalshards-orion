@@ -17,6 +17,12 @@ html lang="en"
     script src="/assets/bootstrap.bundle.min.js"
     script src="/assets/highlight.pack.js"
     script defer=true src="/assets/main.js"
+    script async=true src="https://www.googletagmanager.com/gtag/js?id=UA-26446640-2"
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments) };
+      gtag('js', new Date());
+      gtag('config', 'UA-26446640-2');
     meta name="msapplication-TileColor" content="#da532c"
     meta name="msapplication-config" content="/assets/icons/browserconfig.xml"
     meta name="theme-color" content="#ffffff"
