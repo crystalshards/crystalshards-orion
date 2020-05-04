@@ -104,7 +104,7 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   private def update_project(payload = self.payload)
-    project = get_project
+    project = get_project(payload)
     Log.debug { "#{project.persisted? ? "Updating" : "Creating"} project: github:#{payload.uri}".colorize(:cyan) }
     project.uri = payload.uri
     project.api_id = payload.api_id unless payload.api_id.nil?
