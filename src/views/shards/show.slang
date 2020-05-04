@@ -6,6 +6,10 @@
         small.text-muted
           span="v#{shard.version}"
       = shard.formatted_description
+      .my-2
+        - shard.tags.each do |tag|
+          span.badge.badge-pill.badge-primary
+            span.font-weight-light = tag
     .mb-5
       h4.mb-3
         i.fa.fa-code
