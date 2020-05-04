@@ -1,4 +1,5 @@
-name: crystal-shards
+name: Crystal Shards
+description: The public index of CrystalShards around the web.
 version: 1.0.0
 crystal: 0.34.0
 

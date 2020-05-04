@@ -3,7 +3,12 @@
     .card-header
       span.font-weight-bold=shard.name
       span.text-muted="v#{shard.version}"
-    .card-body=shard.formatted_description
+    .card-body
+      =shard.formatted_description
+      .my-2
+        - shard.tags.each do |tag|
+          span.badge.badge-pill.badge-primary
+            span.font-weight-light = tag
     .card-footer.text-muted.font-weight-lighter
       i class="fab fa-#{shard.project.provider.to_s}"
       span=shard.project.uri

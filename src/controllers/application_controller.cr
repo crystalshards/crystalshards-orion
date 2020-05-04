@@ -7,7 +7,6 @@ class ApplicationController < CrystalShards::BaseController
   HEADER_LINKS = {
     "Home"    => "/",
     "Shards"  => "/shards",
-    "Tags"    => "/tags",
     "Authors" => "/authors",
   }
 
