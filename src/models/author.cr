@@ -56,9 +56,9 @@ class Author
   end
 
   def default_avatar_url
-    initials_url = "https://avatars.dicebear.com/v2/initials/#{initials}.svg"
+    hash = Digest::MD5.hexdigest (email || name).to_s
+    initials_url = "https://api.adorable.io/avatars/285/#{hash}.png"
     return initials_url unless email
-    hash = Digest::MD5.hexdigest email.to_s
     "https://www.gravatar.com/avatar/#{hash}?#{HTTP::Params.encode({ d: initials_url })}"
   end
 
