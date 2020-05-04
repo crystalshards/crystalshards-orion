@@ -23,16 +23,16 @@ To run the indexer:
 The following are roadmap items for the CrystalShards.org website. Contributors
 are welcome.
 
-[x] Parity with the old CrystalShards.org
-[x] GitHub indexing
-[x] Dependency Linking
-[x] Search
-[x] Author Showcase
-[ ] Shard Donation Links
-[ ] GitLab indexing
-[ ] Bitbucket indexing
-[ ] Tags
-[ ] Hosted Shard Documentation
+* [x] Parity with the old CrystalShards.org
+* [x] GitHub indexing
+* [x] Dependency Linking
+* [x] Search
+* [x] Author Showcase
+* [ ] Shard Donation Links
+* [ ] GitLab indexing
+* [ ] Bitbucket indexing
+* [ ] Tags
+* [ ] Hosted Shard Documentation
 
 ## Contributing
 
