@@ -172,7 +172,7 @@ class Shard
         options: ["unsafe"],
         extensions: ["table", "strikethrough", "autolink", "tagfilter", "tasklist"]
       )
-      Emoji.emojize(md.to_html)
+      project.provider.image_replace(Emoji.emojize(md.to_html), project.uri, git_tag)
     end
   end
 

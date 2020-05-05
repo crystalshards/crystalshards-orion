@@ -30,16 +30,7 @@ class Project
   end
 
   def url
-    case provider
-    when Provider::Github
-      "https://github.com/#{uri}"
-    when Provider::Gitlab
-      "https://gitlab.com/#{uri}"
-    when Provider::Bitbucket
-      "https://bitbucket.com/#{uri}"
-    else
-      uri
-    end
+    "#{provider.base_url}#{uri}"
   end
 
   def last_pushed_at_string : String
