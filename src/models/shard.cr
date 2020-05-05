@@ -222,13 +222,25 @@ class Shard
   end
 
   protected def associate_authors!
-    (manifest.authors || [] of Manifest::Shard::Author).each do |manifest_author|
-      author = Author.query.find_or_build({email: manifest_author.email}) { }
+    found_authors = (manifest.authors || [] of Manifest::Shard::Author).map do |manifest_author|
+      author = Author.query.find_or_build(manifest_author.email ? {email: manifest_author.email} : {name: manifest_author.name}) { }
       unless manifest_author.name_is_username? && author.persisted?
         author.name = manifest_author.name
         author.save
       end
-      self.authors << author
+      author
+    end
+
+    existing_authors = authors.to_a
+
+    # Remove missing authors
+    (existing_authors - found_authors).each do |author|
+      authors.unlink author
+    end
+
+    # Add new authors
+    (found_authors - existing_authors).each do |author|
+      authors.add author
     end
   end
 end
