@@ -34,7 +34,7 @@ class Manifest::Shard::Dependency::Git
   end
 
   private def parse
-    if (match = git.match(/.*@(?<host>.*):(?<patht>.*)\.git/))
+    if (match = git.match(/.+@(?<host>.+):(?<path>.+)\.git/))
       host = match["host"]
       path = match["path"]
       {host, path}
