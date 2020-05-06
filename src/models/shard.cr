@@ -144,8 +144,8 @@ class Shard
 
   def homepage_url
     homepage = manifest.homepage || project.homepage
-    unless !homepage || homepage.empty?
-      URI.parse(homepage)
+    unless homepage.to_s.empty?
+      URI.parse(homepage.to_s)
     end
   rescue
     nil
@@ -186,7 +186,7 @@ class Shard
   end
 
   def license_url
-    if (base_url = project.provider.base_url)
+    if (project.provider.base_url)
       "#{project.url}/blob/#{git_tag || "HEAD"}/LICENSE"
     end
   end
@@ -206,7 +206,7 @@ class Shard
   end
 
   protected def blacklisted?
-    BLACKLIST.any? do |name, spec|
+    BLACKLIST.any? do |_name, spec|
       spec.provider == project.provider.to_s && spec.uri == project.uri
     end
   end
