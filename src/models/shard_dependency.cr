@@ -34,4 +34,12 @@ class ShardDependency
   scope :development do
     where { shard_dependencies.development == true }
   end
+
+  def requirement_string
+    op = requirement_operator.try(&.operator)
+    op ||= "=" if requirement_version
+    v = requirement_version
+    v ||= "*" unless op
+    [op, v].compact.join(" ")
+  end
 end
