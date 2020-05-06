@@ -1,8 +1,6 @@
 class Job::Github::ProjectBatchPageQueuedJob < Mosquito::QueuedJob
   BAD_ID_PATTERN = /Could not resolve to a node with the global id of '((?:[A-Za-z0-9+]{4})*(?:[A-Za-z0-9+]{2}==|[A-Za-z0-9+]{3}=)?)'\./
 
-  throttle limit: 5, period: 30
-
   class Payload
     include JSON::Serializable
     getter node_ids

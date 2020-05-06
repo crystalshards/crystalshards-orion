@@ -1,6 +1,5 @@
 class Job::Github::LanguagePageQueuedJob < Mosquito::QueuedJob
   include JobSerializers
-  throttle limit: 5, period: 30
 
   params(
     page : Int32 = 1,

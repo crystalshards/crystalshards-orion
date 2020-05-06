@@ -1,6 +1,4 @@
 class Job::Github::ShardFilePageQueuedJob < Mosquito::QueuedJob
-  throttle limit: 5, period: 30
-
   params(
     page : Int32,
     per_page : Int32
