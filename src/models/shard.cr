@@ -185,6 +185,12 @@ class Shard
     nil
   end
 
+  def license_url
+    if (base_url = project.provider.base_url)
+      "#{project.url}/blob/#{git_tag || "HEAD"}/LICENSE"
+    end
+  end
+
   def all_tags
     (self.tags + project.tags).unique
   end

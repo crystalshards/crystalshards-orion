@@ -46,6 +46,10 @@
         a.btn.btn-block.btn-outline-primary.text-left href=url.to_s
           i.mx-1.fa.fa-book
           span Documentation
+      - if shard.license
+        a.btn.btn-block.btn-outline-primary.text-left href=shard.license_url.to_s
+          i.mx-1.fas.fa-balance-scale
+          span="#{shard.license} License"
     .mb-4
       h5 Stats
       .d-flex
