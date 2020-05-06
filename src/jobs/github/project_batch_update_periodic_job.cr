@@ -20,5 +20,8 @@ class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
         node_ids = [] of String
       end
     end
+
+    # Capture any remaining node_ids
+    ProjectBatchPageQueuedJob.with_payload(node_ids: node_ids).enqueue
   end
 end
