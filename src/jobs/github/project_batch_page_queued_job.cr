@@ -1,4 +1,6 @@
 class Job::Github::ProjectBatchPageQueuedJob < Mosquito::QueuedJob
+  BAD_ID_PATTERN = /Could not resolve to a node with the global id of '((?:[A-Za-z0-9+]{4})*(?:[A-Za-z0-9+]{2}==|[A-Za-z0-9+]{3}=)?)'\./
+
   throttle limit: 5, period: 30
 
   class Payload
@@ -30,6 +32,13 @@ class Job::Github::ProjectBatchPageQueuedJob < Mosquito::QueuedJob
   def perform
     ::Service::Github.fetch(node_ids: payload.node_ids).each do |repo|
       ProjectUpdateQueuedJob.with_payload(repo).enqueue
+    end
+  rescue error
+    if (bad_ids = error.message.to_s.scan(BAD_ID_PATTERN).map(&.[1])).size > 0
+      Project.query.where { projects.api_id.in?(bad_ids) }.map(&.delete)
+      self.class.with_payload(node_ids: payload.node_ids - bad_ids).enqueue
+    else
+      raise error
     end
   end
 end
