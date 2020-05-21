@@ -88,16 +88,14 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
     unless versions.empty?
       versions.each do |tag|
         Shard::VersionUpdateQueuedJob.with_payload(
-          shardfile_url: "https://raw.githubusercontent.com/#{payload.uri}/#{tag.name}/shard.yml",
-          readme_url: "https://raw.githubusercontent.com/#{payload.uri}/#{tag.name}/README.md",
+          raw_base_url: "https://raw.githubusercontent.com/#{payload.uri}/#{tag.name}",
           project_id: project.id,
           git_tag: tag,
         ).enqueue
       end
     else
       Shard::VersionUpdateQueuedJob.with_payload(
-        shardfile_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}/shard.yml",
-        readme_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}/README.md",
+        raw_base_url: "https://raw.githubusercontent.com/#{payload.uri}/#{payload.default_branch}",
         project_id: project.id
       ).enqueue
     end

@@ -3,15 +3,13 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
     include JSON::Serializable
 
     getter project_id : Int64
-    getter shardfile_url : String
-    getter readme_url : String
+    getter raw_base_url : String
     getter git_tag : Service::Github::GraphQL::Ref?
 
     def initialize(
       *,
       @project_id : Int64,
-      @shardfile_url : String,
-      @readme_url : String,
+      @raw_base_url : String,
       @git_tag : Service::Github::GraphQL::Ref? = nil
     ); end
   end
@@ -54,8 +52,8 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   protected def manifest : ::Manifest::Shard?
-    Log.debug { "Fetching shardfile: #{payload.shardfile_url}".colorize(:yellow) }
-    response = HTTP::Client.get(payload.shardfile_url)
+    Log.debug { "Fetching shardfile: #{payload.raw_base_url}/shard.yml".colorize(:yellow) }
+    response = HTTP::Client.get("#{payload.raw_base_url}/shard.yml")
     Log.debug { "Response: #{response.status_code}".colorize(response.status_code === 200 ? :light_green : :light_red) }
     raise "Bad Response: #{response.status_code}" unless response.status_code === 200
     ::Manifest::Shard.from_yaml response.body
@@ -65,9 +63,15 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
   end
 
   protected def readme : String?
-    Log.debug { "Fetching readme: #{payload.readme_url}".colorize(:yellow) }
-    response = HTTP::Client.get(payload.readme_url)
-    Log.debug { "Response: #{response.status_code}".colorize(response.status_code === 200 ? :light_green : :light_red) }
-    response.body if response.status_code === 200
+    possible_filenames = ["README.md", "readme.md", "Readme.md"]
+    body = nil
+    until body || possible_filenames.empty?
+      url = "#{payload.raw_base_url}/#{possible_filenames.shift}"
+      Log.debug { "Fetching readme: #{url}".colorize(:yellow) }
+      response = HTTP::Client.get(url)
+      Log.debug { "Response: #{response.status_code}".colorize(response.status_code === 200 ? :light_green : :light_red) }
+      response.body if response.status_code === 200
+    end
+    return body
   end
 end
