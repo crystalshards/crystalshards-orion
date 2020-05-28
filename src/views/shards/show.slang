@@ -109,7 +109,7 @@
           div
             a href="/shards/#{dep.dependency.provider.to_s}/#{dep.dependency.uri}"
               span.font-weight-bold = "#{dep.name}"
-              span.font-italic.font-weight-lighter.text-muted = "#{dep.dependency.provider.to_s}: #{dep.dependency.uri}"
+              span.font-italic.font-weight-lighter.text-muted = dep.requirement_string
     - if (versions = shard.project.shards.versions).count > 0
       .mb-4
         h5 Versions
