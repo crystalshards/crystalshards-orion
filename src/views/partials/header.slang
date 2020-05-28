@@ -16,11 +16,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
               span.sr-only
   ul.navbar-nav.mr-auto.d-none.d-lg-flex
     li.m-2
-      a.nav-link href="https://github.com/crystalshards"
-        i.fab.fa-github
+      a class="github-button" href="https://github.com/crystalshards/crystalshards" data-size="large" data-show-count="true" aria-label="Star crystalshards/crystalshards on GitHub" Star
     li.m-2
       a.nav-link href="https://gitlab.com/crystalshards"
         i.fab.fa-gitlab
-    li.m-2
-      a.nav-link href="#"
-        i.fab.fa-twitter
