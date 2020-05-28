@@ -123,9 +123,9 @@ class Job::Github::ProjectUpdateQueuedJob < Mosquito::QueuedJob
   private def get_project(payload = self.payload)
     # Find and and update by URL
     if payload.api_id
-      Project.query.find_or_create({provider: "github", api_id: payload.api_id}) { }
+      Project.query.find_or_build({provider: "github", api_id: payload.api_id}) { }
     else
-      Project.query.find_or_create({provider: "github", uri: payload.uri}) { }
+      Project.query.find_or_build({provider: "github", uri: payload.uri}) { }
     end
   end
 
