@@ -21,7 +21,7 @@ dependencies:
     branch: master
   mosquito:
     github: robacarp/mosquito
-    branch: master
+    version: 0.7.0
   kilt:
     github: jeromegn/kilt
     version: 0.6.0
