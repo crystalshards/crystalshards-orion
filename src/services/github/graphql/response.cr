@@ -9,7 +9,7 @@ class Service::Github::GraphQL::Response(T)
 
     JSON.mapping(
       message: String,
-      locations: Array(Location)
+      locations: Array(Location)?
     )
   end
 
