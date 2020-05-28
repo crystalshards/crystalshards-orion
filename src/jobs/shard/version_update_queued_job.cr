@@ -70,7 +70,7 @@ class Job::Shard::VersionUpdateQueuedJob < Mosquito::QueuedJob
       Log.debug { "Fetching readme: #{url}".colorize(:yellow) }
       response = HTTP::Client.get(url)
       Log.debug { "Response: #{response.status_code}".colorize(response.status_code === 200 ? :light_green : :light_red) }
-      response.body if response.status_code === 200
+      body = response.body if response.status_code === 200
     end
     return body
   end
