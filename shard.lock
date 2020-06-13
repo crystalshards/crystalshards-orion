@@ -4,6 +4,10 @@ shards:
     github: jwaldrip/admiral.cr
     commit: c3c3467953654554b72c24e7b853d6fbb23f10c0
 
+  cache:
+    github: mamantoha/cache
+    version: 0.7.0
+
   clear:
     github: anykeyh/clear
     commit: f9aa2369a665f413ea27a8000e8884c778f28d36
@@ -40,6 +44,10 @@ shards:
     github: jeromegn/kilt
     version: 0.6.0
 
+  memcached:
+    github: comandeo/crystal-memcached
+    version: 0.2.2
+
   mosquito:
     github: robacarp/mosquito
     version: 0.7.0
@@ -50,7 +58,7 @@ shards:
 
   orion:
     github: obsidian/orion
-    commit: a4ff7af907820e901e5fc66b7959348ff1f033eb
+    commit: eb2b28740957a4145f027ca3bcf81331679bd943
 
   pg:
     github: will/crystal-pg

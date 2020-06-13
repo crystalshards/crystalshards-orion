@@ -22,6 +22,8 @@ dependencies:
   mosquito:
     github: robacarp/mosquito
     version: 0.7.0
+  cache:
+    github: mamantoha/cache
   kilt:
     github: jeromegn/kilt
     version: 0.6.0
