@@ -1,7 +1,7 @@
 name: Crystal Shards
 description: The public index of CrystalShards around the web.
 version: 1.0.0
-crystal: 0.34.0
+crystal: 0.35.0
 
 authors:
   - Jason Waldrip <jason@waldrip.net>
@@ -46,8 +46,7 @@ dependencies:
 
 development_dependencies:
   sentry:
-    github: Acciaiodigitale/sentry
-    branch: develop
+    github: samueleaton/sentry
   icr:
     github: crystal-community/icr
     branch: master

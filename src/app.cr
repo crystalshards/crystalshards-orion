@@ -4,7 +4,7 @@
 ENV["PORT"] ||= "3000"
 ENV["CRYSTAL_LOG_LEVEL"] ||= {% if flag?(:release) %}"INFO"{% else %}"DEBUG"{% end %}
 GITHUB_TOKEN = ENV["GITHUB_TOKEN"]?
-REDIS_CLIENT = (url = ENV["REDIS_URL"]?) ? Redis::PooledClient.new(url: url) : Redis::PooledClient.new
+REDIS_CLIENT = Redis::PooledClient.new(url: ENV["REDIS_URL"]?)
 
 require "kilt/slang"
 require "json"
