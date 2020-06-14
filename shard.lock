@@ -32,6 +32,10 @@ shards:
     git: https://github.com/anykeyh/generate.cr.git
     version: 0.1.0+git.commit.27a59d663ded8ce39a361e3a88b8dd747f59ce42
 
+  http_cache_handler:
+    git: https://github.com/jwaldrip/http_cache_handler.git
+    version: 0.1.0+git.commit.4d25526ad1d2e1988f4f961df6c97b6ef90ed379
+
   icr:
     git: https://github.com/crystal-community/icr.git
     version: 0.7.0+git.commit.7da354f5c0a356aee77e68fc63c87e2ad35da7fb

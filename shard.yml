@@ -22,8 +22,8 @@ dependencies:
   mosquito:
     github: robacarp/mosquito
     version: 0.7.0
-  cache:
-    github: mamantoha/cache
+  http_cache_handler:
+    github: jwaldrip/http_cache_handler
   kilt:
     github: jeromegn/kilt
     version: 0.6.0
