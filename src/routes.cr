@@ -1,5 +1,4 @@
 require "sass"
-require "./handlers/*"
 
 router CrystalShards do
   use HTTP::LogHandler.new
