@@ -11,7 +11,7 @@ router CrystalShards do
   end
 
   scope do # The primary application, to be cached
-    use CacheHandler.new(store: Cache::RedisStore(String, String).new(expires_in: 30.minutes, cache: REDIS_CLIENT))
+    use CacheHandler.new(store: Cache::RedisStore(String, String).new(expires_in: 3.hours, cache: REDIS_CLIENT))
 
     root to: "home#home"
 
