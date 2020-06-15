@@ -10,7 +10,7 @@ shards:
 
   clear:
     git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.c946b6c77f88f1727547fd22997a61ef8da1a542
+    version: 0.8+git.commit.f9aa2369a665f413ea27a8000e8884c778f28d36
 
   common_marker:
     git: https://github.com/mamantoha/crystal-cmark-gfm.git
