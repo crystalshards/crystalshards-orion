@@ -62,7 +62,7 @@ shards:
 
   orion:
     git: https://github.com/obsidian/orion.git
-    version: 3.0.0-dev+git.commit.b717d7f3a45a447631244afbaba72d6ff818362d
+    version: 3.0.1
 
   pg:
     git: https://github.com/will/crystal-pg.git
