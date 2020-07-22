@@ -2,7 +2,11 @@ require "common_marker"
 
 class Shard
   include Clear::Model
+  include Orion::Cache::Keyable
+
   BLACKLIST = Hash(String, Manifest::Shard::Dependency::Provider).from_yaml(File.read("blacklist.yml"))
+
+  define_cache_key self.class.name, id, updated_at
 
   # Columns
   primary_key

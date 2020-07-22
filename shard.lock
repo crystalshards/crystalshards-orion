@@ -6,15 +6,19 @@ shards:
 
   cache:
     git: https://github.com/mamantoha/cache.git
-    version: 0.7.0
+    version: 0.9.0
 
   clear:
     git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.f9aa2369a665f413ea27a8000e8884c778f28d36
+    version: 0.8+git.commit.4120e5e9bdea4d1ea78c9c7c74b6deb65bfcebe2
 
   common_marker:
     git: https://github.com/mamantoha/crystal-cmark-gfm.git
     version: 0.3.0
+
+  crystar:
+    git: https://github.com/naqvis/crystar.git
+    version: 0.1.7
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -32,6 +36,10 @@ shards:
     git: https://github.com/anykeyh/generate.cr.git
     version: 0.1.0+git.commit.27a59d663ded8ce39a361e3a88b8dd747f59ce42
 
+  html_builder:
+    git: https://github.com/crystal-lang/html_builder.git
+    version: 0.2.2
+
   http_cache_handler:
     git: https://github.com/jwaldrip/http_cache_handler.git
     version: 0.1.0+git.commit.f0f2ad8138b826760a854e8b70c69059431a3167
@@ -44,13 +52,17 @@ shards:
     git: https://github.com/phoffer/inflector.cr.git
     version: 0.1.8
 
+  json_mapping:
+    git: https://github.com/crystal-lang/json_mapping.cr.git
+    version: 0.1.0
+
   kilt:
     git: https://github.com/jeromegn/kilt.git
     version: 0.6.0
 
   memcached:
     git: https://github.com/comandeo/crystal-memcached.git
-    version: 0.2.2
+    version: 0.2.2+git.commit.ee02a364a0274df0cde3d1bb3ef958e2e7c07c18
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
@@ -58,11 +70,11 @@ shards:
 
   oak:
     git: https://github.com/obsidian/oak.git
-    version: 2.0.1
+    version: 4.0.0
 
   orion:
-    git: https://github.com/obsidian/orion.git
-    version: 3.0.0-dev+git.commit.eb2b28740957a4145f027ca3bcf81331679bd943
+    path: ../../obsidian/orion
+    version: 3.0.1
 
   pg:
     git: https://github.com/will/crystal-pg.git
@@ -85,8 +97,8 @@ shards:
     version: 0.5.0
 
   sentry:
-    git: https://github.com/samueleaton/sentry.git
-    version: 0.3.2
+    git: https://github.com/watzon/sentry.git
+    version: 0.3.2+git.commit.c112bb53a1de3b3d90d712b9435b63901188bcc0
 
   slang:
     git: https://github.com/jeromegn/slang.git
@@ -95,4 +107,8 @@ shards:
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
     version: 0.2.0
+
+  yaml_mapping:
+    git: https://github.com/crystal-lang/yaml_mapping.cr.git
+    version: 0.1.0
 

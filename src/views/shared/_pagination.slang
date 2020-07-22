@@ -1,3 +1,6 @@
+- current_page = locals[:current_page]
+- total_pages = locals[:total_pages]
+- total_count = locals[:total_count]
 - if total_pages > 1
   - first_page = current_page <= 1
   - last_page = current_page == total_pages

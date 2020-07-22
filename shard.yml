@@ -14,8 +14,9 @@ targets:
 
 dependencies:
   orion:
-    github: obsidian/orion
-    branch: v3.0.0-dev
+    # github: obsidian/orion
+    # version: ~> 3.0.1
+    path: ../../obsidian/orion
   clear:
     github: anykeyh/clear
     branch: master
@@ -43,10 +44,15 @@ dependencies:
   redis:
     github: stefanwille/crystal-redis
     version: ~> 2.6.0
+  json_mapping:
+    github: crystal-lang/json_mapping.cr
+  yaml_mapping:
+    github: crystal-lang/yaml_mapping.cr
 
 development_dependencies:
   sentry:
-    github: samueleaton/sentry
+    github: watzon/sentry
+    branch: master
   icr:
     github: crystal-community/icr
     branch: master

@@ -1,3 +1,4 @@
+- author = locals[:author]
 - shard_count = author.shards.distinct("project_id").count
 .d-flex
   img.rounded.mr-4 height=100 src=author.avatar_url
@@ -16,7 +17,7 @@
     h2 Shards
   .row
     - Shard.by_author(author).includes_uses.order_by("uses.use_count": "DESC").each(fetch_columns: true) do |shard|
-      = render partial: "shard_card.slang"
+      == render partial: "shards/shard_card.slang", locals: { shard: shard }
 
 
 
