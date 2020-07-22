@@ -1,4 +1,5 @@
 FROM crystallang/crystal:0.35.1
+WORKDIR /app
 
 RUN apt-get update -y && apt-get install -y libsass-dev build-essential cmake python
 
