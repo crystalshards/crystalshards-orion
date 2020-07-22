@@ -6,11 +6,11 @@ shards:
 
   cache:
     git: https://github.com/mamantoha/cache.git
-    version: 0.7.0
+    version: 0.9.0
 
   clear:
-    git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.f9aa2369a665f413ea27a8000e8884c778f28d36
+    git: https://github.com/007lva/clear.git
+    version: 0.8+git.commit.61946ba04b043c1fe680d8856d25dca8435d47c5
 
   common_marker:
     git: https://github.com/mamantoha/crystal-cmark-gfm.git
@@ -50,7 +50,7 @@ shards:
 
   memcached:
     git: https://github.com/comandeo/crystal-memcached.git
-    version: 0.2.2
+    version: 0.2.2+git.commit.ee02a364a0274df0cde3d1bb3ef958e2e7c07c18
 
   mosquito:
     git: https://github.com/robacarp/mosquito.git
@@ -58,11 +58,11 @@ shards:
 
   oak:
     git: https://github.com/obsidian/oak.git
-    version: 2.0.1
+    version: 4.0.0
 
   orion:
     git: https://github.com/obsidian/orion.git
-    version: 3.0.0-dev+git.commit.eb2b28740957a4145f027ca3bcf81331679bd943
+    version: 3.0.0-dev+git.commit.b717d7f3a45a447631244afbaba72d6ff818362d
 
   pg:
     git: https://github.com/will/crystal-pg.git
