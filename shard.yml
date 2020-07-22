@@ -18,8 +18,8 @@ dependencies:
     # version: ~> 3.0.1
     path: ../../obsidian/orion
   clear:
-    github: anykeyh/clear
-    branch: master
+    github: 007lva/clear
+    branch: bug/fix-logger-issues
   mosquito:
     github: robacarp/mosquito
     version: 0.7.0
