@@ -44,6 +44,10 @@ shards:
     git: https://github.com/phoffer/inflector.cr.git
     version: 0.1.8
 
+  json_mapping:
+    git: https://github.com/crystal-lang/json_mapping.cr.git
+    version: 0.1.0
+
   kilt:
     git: https://github.com/jeromegn/kilt.git
     version: 0.6.0
@@ -62,7 +66,7 @@ shards:
 
   orion:
     git: https://github.com/obsidian/orion.git
-    version: 3.0.1
+    version: 3.0.2
 
   pg:
     git: https://github.com/will/crystal-pg.git
@@ -95,4 +99,8 @@ shards:
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
     version: 0.2.0
+
+  yaml_mapping:
+    git: https://github.com/crystal-lang/yaml_mapping.cr.git
+    version: 0.1.0
 

@@ -15,7 +15,7 @@ targets:
 dependencies:
   orion:
     github: obsidian/orion
-    version: 3.0.1
+    version: 3.0.2
   clear:
     github: 007lva/clear
     branch: bug/fix-logger-issues
@@ -43,6 +43,10 @@ dependencies:
   redis:
     github: stefanwille/crystal-redis
     version: ~> 2.6.0
+  json_mapping:
+    github: crystal-lang/json_mapping.cr
+  yaml_mapping:
+    github: crystal-lang/yaml_mapping.cr
 
 development_dependencies:
   sentry:

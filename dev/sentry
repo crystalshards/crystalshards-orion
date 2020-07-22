@@ -1,2 +1,3 @@
 #!/usr/bin/env crystal
+require "yaml_mapping"
 require "sentry/sentry_cli"
