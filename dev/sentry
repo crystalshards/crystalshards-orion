@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
-exec crystal run `dirname $0`/../lib/sentry/src/sentry_cli.cr -- $@
+#!/usr/bin/env crystal
+require "sentry/sentry_cli"

@@ -1,2 +1,6 @@
-#!/usr/bin/env bash
-exec crystal run --warnings none `dirname $0`/clear.cr -- $@
+#!/usr/bin/env crystal
+require "clear"
+require "../src/db/setup"
+require "../src/db/migrations/*"
+
+Clear::CLI.run

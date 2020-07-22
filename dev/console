@@ -1,3 +1,2 @@
-#!/usr/bin/env bash
-proj="`dirname $0`/.."
-exec crystal run $proj/lib/icr/src/icr/cli.cr -- -r $proj/src/app
+#!/usr/bin/env crystal
+require "icr/cli"
