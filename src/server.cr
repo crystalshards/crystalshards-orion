@@ -8,7 +8,7 @@ config.host = "0.0.0.0"
 
 use HTTP::LogHandler.new
 
-static path: "/assets/bootstrap.css", string: Sass.compile_file("src/scss/bootstrap/bootstrap.scss", output_style: Sass::OutputStyle::COMPRESSED)
+static path: "/assets/stylesheets/bootstrap.css", string: Sass.compile_file("src/scss/bootstrap/bootstrap.scss", output_style: Sass::OutputStyle::COMPRESSED)
 static path: "/assets", dir: "./assets"
 static path: "/healthz", string: "OK"
 

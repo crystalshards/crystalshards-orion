@@ -1,7 +1,8 @@
-build: shards build server --local
+build: shards build server --local --error-trace
 install_shards: true
 run: ./bin/server
 watch:
+  - ./lib/**/*.cr
   - ./src/**/*.cr
   - ./src/**/*.ecr
   - ./src/**/*.slang

@@ -9,15 +9,15 @@ html lang="en"
     link rel="manifest" href="/assets/icons/site.webmanifest"
     link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5"
     link rel="shortcut icon" href="/assets/icons/favicon.ico"
-    link rel="stylesheet" href="/assets/main.css"
-    link rel="stylesheet" href="/assets/highlight.css"
-    link rel="stylesheet" href="/assets/bootstrap.css"
+    == stylesheet_link_tag("main")
+    == stylesheet_link_tag("highlight")
+    == stylesheet_link_tag("bootstrap")
     script async=true defer=true src="https://buttons.github.io/buttons.js"
     script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"
     script src="https://kit.fontawesome.com/dcc04e440a.js" crossorigin="anonymous"
-    script src="/assets/bootstrap.bundle.min.js"
-    script src="/assets/highlight.pack.js"
-    script defer=true src="/assets/main.js"
+    == javascript_include_tag("bootstrap.bundle.min")
+    == javascript_include_tag("highlight.pack", defer: true)
+    == javascript_include_tag("main", defer: true)
     script async=true src="https://www.googletagmanager.com/gtag/js?id=UA-26446640-2"
     javascript:
       window.dataLayer = window.dataLayer || [];
