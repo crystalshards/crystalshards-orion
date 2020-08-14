@@ -1,5 +1,5 @@
 class Job::Github::ShardfilePeriodicJob < Mosquito::PeriodicJob
-  run_every 1.hour
+  run_every 24.hours
 
   def perform
     per_page = 100

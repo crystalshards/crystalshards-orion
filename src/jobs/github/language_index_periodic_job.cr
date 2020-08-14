@@ -1,5 +1,5 @@
 class Job::Github::LanguageIndexPerodicJob < Mosquito::PeriodicJob
-  run_every 1.hour
+  run_every 24.hours
 
   def self.paginate(*, per_page = 100, pushed_before = Time.utc)
     Service::Github.total_pages_by_language(per_page: per_page).times do |index|

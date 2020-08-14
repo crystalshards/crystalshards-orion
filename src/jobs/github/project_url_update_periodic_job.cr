@@ -1,5 +1,5 @@
 class Job::Github::ProjectURLUpdatePeriodicJob < Mosquito::PeriodicJob
-  run_every 1.hour
+  run_every 24.hours
 
   def perform
     Project.query.where { (provider == "github") & (api_id == nil) }.each_with_cursor(100) do |project|

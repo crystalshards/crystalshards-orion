@@ -1,5 +1,5 @@
 class Job::Github::ProjectBatchUpdatePeriodicJob < Mosquito::PeriodicJob
-  run_every 1.hour
+  run_every 24.hours
 
   def perform
     # Fetch node_ids in batches
