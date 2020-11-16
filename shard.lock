@@ -9,7 +9,7 @@ shards:
     version: 0.9.0
 
   clear:
-    git: https://github.com/007lva/clear.git
+    git: https://github.com/anykeyh/clear.git
     version: 0.8+git.commit.61946ba04b043c1fe680d8856d25dca8435d47c5
 
   common_marker:
@@ -74,7 +74,7 @@ shards:
 
   orion:
     git: https://github.com/obsidian/orion.git
-    version: 4.0.0-beta2
+    version: 4.0.0-beta1
 
   pg:
     git: https://github.com/will/crystal-pg.git
