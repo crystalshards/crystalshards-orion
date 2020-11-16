@@ -10,7 +10,6 @@ COPY . .
 RUN shards build server --production --release
 RUN shards build job_runner --production
 
-
 ENV PORT 5000
 
 CMD ./bin/server

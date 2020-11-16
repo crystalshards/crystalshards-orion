@@ -15,10 +15,9 @@ targets:
 dependencies:
   orion:
     github: obsidian/orion
-    version: 4.0.0-beta1
+    version: 4.0.0-beta2
   clear:
-    github: 007lva/clear
-    branch: bug/fix-logger-issues
+    github: anykeyh/clear
   mosquito:
     github: robacarp/mosquito
     version: 0.7.0
