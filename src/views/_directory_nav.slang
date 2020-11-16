@@ -1,3 +1,4 @@
+- starts_with = locals[:starts_with]
 .d-flex.d-justify-content-between.flex-fill.mt-3.mb-5.flex-wrap
   a.mx-2.flex-fill href="#{update_params(starts_with: nil, page: nil)}" aria-label=starts_with class="#{!starts_with ? "font-weight-bolder" : "font-weight-regular"}"
     | All

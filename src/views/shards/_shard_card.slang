@@ -1,3 +1,4 @@
+- shard = locals[:shard]
 .col-12.col-lg-6.d-flex.align-items-stretch.my-3
   a.card.text-decoration-none.text-body.w-100 href="/shards/#{shard.project.provider.to_s}/#{shard.project.uri}"
     .card-header

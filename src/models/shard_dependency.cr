@@ -1,5 +1,8 @@
 class ShardDependency
   include Clear::Model
+  include Orion::Cache::Keyable
+
+  define_cache_key self.class.name, id, updated_at
 
   primary_key
   column name : String

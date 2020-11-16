@@ -1,4 +1,4 @@
-build: shards build job_runner --local
+build: shards build job_runner --local --error-trace
 install_shards: true
 run: ./bin/job_runner
 watch:

@@ -15,7 +15,7 @@ targets:
 dependencies:
   orion:
     github: obsidian/orion
-    version: 3.0.2
+    version: 4.0.0-beta1
   clear:
     github: 007lva/clear
     branch: bug/fix-logger-issues
@@ -50,7 +50,8 @@ dependencies:
 
 development_dependencies:
   sentry:
-    github: samueleaton/sentry
+    github: watzon/sentry
+    branch: master
   icr:
     github: crystal-community/icr
     branch: master

@@ -10,7 +10,8 @@ end
 
 Log.setup_from_env(
   builder: Log.builder,
-  level: ENV["CRYSTAL_LOG_LEVEL"],
-  sources: ENV.fetch("CRYSTAL_LOG_SOURCES", "*"),
+  default_level: :error,
+  log_level_env: "LOG_LEVEL",
+  default_sources: ENV.fetch("LOG_SOURCES", "*"),
   backend: Log::IOBackend.new
 )
