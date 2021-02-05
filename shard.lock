@@ -10,7 +10,7 @@ shards:
 
   clear:
     git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.61946ba04b043c1fe680d8856d25dca8435d47c5
+    version: 0.9
 
   common_marker:
     git: https://github.com/mamantoha/crystal-cmark-gfm.git
@@ -22,7 +22,7 @@ shards:
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.9.0
+    version: 0.10.0
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
@@ -78,7 +78,7 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.21.1+git.commit.cafe111fc28e366c219144d5f656c3718d7357dd
+    version: 0.23.1+git.commit.cafe039cfd6340a271e81603943bb1975f5a91f5
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
