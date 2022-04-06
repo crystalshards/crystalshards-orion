@@ -41,11 +41,11 @@ class ShardDependency
   def requirement_string
     case ref_type
     when RefType::Commit
-      "#{ref_type.to_s}: #{ref_name.try(&.chars.first(7).join)}"
+      "#{ref_type}: #{ref_name.try(&.chars.first(7).join)}"
     when .nil?, RefType::Version
       version_requirement_string
     else
-      "#{ref_type.to_s}: #{ref_name}"
+      "#{ref_type}: #{ref_name}"
     end
   end
 

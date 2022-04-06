@@ -13,10 +13,6 @@ static path: "/assets", dir: "./assets"
 static path: "/healthz", string: "OK"
 
 scope do # The primary application, to be cached
-  {% if flag?(:release) %}
-    use HTTPCacheHandler.new(expires_in: 3.hours, redis: REDIS_CLIENT)
-  {% end %}
-
   root controller: HomeController, action: home
 
   scope "/shards", controller: ShardsController do

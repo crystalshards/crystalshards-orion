@@ -29,7 +29,8 @@ class Shard
   # Associations
   belongs_to project : Project
   has_many dependencies : ShardDependency, foreign_key: "parent_id"
-  has_many authors : Author, through: "shard_authors"
+  has_many shard_authors : ShardAuthor
+  has_many authors : Author, through: :shard_authors
 
   # Copy spec data to shard
   before :validate do |model|
