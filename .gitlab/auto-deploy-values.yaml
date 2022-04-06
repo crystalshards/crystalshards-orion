@@ -4,8 +4,6 @@ hpa:
   minReplicas: 2
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
-application:
-  migrateCommand: ./dev/clear migrate
 workers:
   job-runner:
     replicaCount: 3
