@@ -1,0 +1,4 @@
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 15
