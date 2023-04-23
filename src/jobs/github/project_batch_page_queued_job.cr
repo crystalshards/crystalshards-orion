@@ -19,11 +19,11 @@ class Job::Github::ProjectBatchPageQueuedJob < Mosquito::QueuedJob
     new payload: Payload.new(*args, **params)
   end
 
-  def serialize_job__github__project_batch_page_queued_job__payload(p : Payload)
+  def serialize_job_github_project_batch_page_queued_job_payload(p : Payload)
     p.to_json
   end
 
-  def deserialize_job__github__project_batch_page_queued_job__payload(s : String)
+  def deserialize_job_github_project_batch_page_queued_job_payload(s : String)
     Payload.from_json s
   end
 
