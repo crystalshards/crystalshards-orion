@@ -1,15 +1,22 @@
-FROM crystallang/crystal:0.35.1
-WORKDIR /app
+FROM 84codes/crystal:1.8.1-alpine as builder
 
-RUN apt-get update -y && apt-get install -y libsass-dev build-essential cmake python
+# Setup
+WORKDIR /build
+RUN apk add --no-cache openssl ca-certificates yaml-static curl cmake musl clang clang-dev alpine-sdk dpkg
+RUN openssl version -d
 
-COPY shard.yml shard.lock ./
-RUN shards install
+# Deps
+COPY shard.lock shard.yml ./
+RUN shards install --production
+
+# Build
 COPY . .
+RUN shards build --release --production --static
 
-RUN shards build server --production --release
-RUN shards build job_runner --production
+# Import to scratch image
+FROM scratch
 
-ENV PORT 5000
-
-CMD ./bin/server
+ARG TARGET
+COPY --from=builder /build/bin/* /
+COPY --from=builder /build/bin/$TARGET /.main
+COPY --from=builder /etc/ssl/cert.pem /etc/ssl1.1/

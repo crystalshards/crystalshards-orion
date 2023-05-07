@@ -1,14 +1,14 @@
 name: Crystal Shards
 description: The public index of CrystalShards around the web.
 version: 1.0.0
-crystal: 0.35.0
+crystal: 1.8.1
 
 authors:
   - Jason Waldrip <jason@waldrip.net>
 
 targets:
-  server:
-    main: src/server.cr
+  web:
+    main: src/web.cr
   job_runner:
     main: src/job_runner.cr
 
@@ -19,16 +19,14 @@ dependencies:
   clear:
     github: anykeyh/clear
   mosquito:
-    github: robacarp/mosquito
-    version: 0.7.0
-  http_cache_handler:
-    github: jwaldrip/http_cache_handler
+    github: mosquito-cr/mosquito
+    version: 0.11.2
   kilt:
     github: jeromegn/kilt
-    version: 0.6.0
+    version: 0.6.1
   slang:
     github: jeromegn/slang
-    version: 1.7.1
+    version: 1.7.3
   sass:
     github: straight-shoota/sass.cr
   emoji:
@@ -41,7 +39,7 @@ dependencies:
     version: ~> 0.2
   redis:
     github: stefanwille/crystal-redis
-    version: ~> 2.6.0
+    version: ~> 2.8.0
   json_mapping:
     github: crystal-lang/json_mapping.cr
   yaml_mapping:
@@ -49,10 +47,6 @@ dependencies:
 
 development_dependencies:
   sentry:
-    github: watzon/sentry
-    branch: master
-  icr:
-    github: crystal-community/icr
-    branch: master
+    github: samueleaton/sentry
 
 license: MIT

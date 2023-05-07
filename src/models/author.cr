@@ -10,6 +10,7 @@ class Author
 
   timestamps
 
+  has_many shard_authors : ShardAuthor
   has_many shards : Shard, through: "shard_authors"
 
   scope :includes_uses do

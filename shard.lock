@@ -2,39 +2,47 @@ version: 2.0
 shards:
   admiral:
     git: https://github.com/jwaldrip/admiral.cr.git
-    version: 1.11.2+git.commit.c3c3467953654554b72c24e7b853d6fbb23f10c0
+    version: 1.12.1+git.commit.211937b64b753b86ccbe86a72122be30e294e31a
+
+  backtracer:
+    git: https://github.com/sija/backtracer.cr.git
+    version: 1.2.2
 
   cache:
     git: https://github.com/mamantoha/cache.git
-    version: 0.9.0
+    version: 0.14.0
 
   clear:
     git: https://github.com/anykeyh/clear.git
-    version: 0.8+git.commit.61946ba04b043c1fe680d8856d25dca8435d47c5
+    version: 0.9
 
   common_marker:
     git: https://github.com/mamantoha/crystal-cmark-gfm.git
-    version: 0.3.0
+    version: 0.6.0
 
   crystar:
     git: https://github.com/naqvis/crystar.git
-    version: 0.1.8
+    version: 0.3.0
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
-    version: 0.9.0
+    version: 0.11.0
 
   emoji:
     git: https://github.com/veelenga/emoji.cr.git
-    version: 0.4.0+git.commit.4642bd8ef64839b4639ba0be521e8c85113cb8d5
+    version: 0.5.0+git.commit.78b46a18a5672de185690568f6d36d753bd6bacf
 
   exception_page:
     git: https://github.com/crystal-loot/exception_page.git
-    version: 0.1.4
+    version: 0.3.0
 
   generate:
     git: https://github.com/anykeyh/generate.cr.git
-    version: 0.1.0+git.commit.27a59d663ded8ce39a361e3a88b8dd747f59ce42
+    version: 0.1.0+git.commit.f5dafc934a70e0ee2f246dddf3df44686f844da2
+
+  habitat:
+    git: https://github.com/luckyframework/habitat.git
+    version: 0.4.7
 
   html_builder:
     git: https://github.com/crystal-lang/html_builder.git
@@ -44,33 +52,25 @@ shards:
     git: https://github.com/jwaldrip/http_cache_handler.git
     version: 0.1.0+git.commit.f0f2ad8138b826760a854e8b70c69059431a3167
 
-  icr:
-    git: https://github.com/crystal-community/icr.git
-    version: 0.8.0+git.commit.8c57cd7c1fdf8088cb05c1587bd6c40d244a8a80
-
   inflector:
     git: https://github.com/phoffer/inflector.cr.git
     version: 0.1.8
 
   json_mapping:
     git: https://github.com/crystal-lang/json_mapping.cr.git
-    version: 0.1.0
+    version: 0.1.1
 
   kilt:
     git: https://github.com/jeromegn/kilt.git
-    version: 0.6.0
-
-  memcached:
-    git: https://github.com/comandeo/crystal-memcached.git
-    version: 0.2.2+git.commit.ee02a364a0274df0cde3d1bb3ef958e2e7c07c18
+    version: 0.6.1
 
   mosquito:
-    git: https://github.com/robacarp/mosquito.git
-    version: 0.7.0
+    git: https://github.com/mosquito-cr/mosquito.git
+    version: 0.11.2
 
   oak:
     git: https://github.com/obsidian/oak.git
-    version: 4.0.0
+    version: 4.0.1
 
   orion:
     git: https://github.com/obsidian/orion.git
@@ -78,37 +78,33 @@ shards:
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.21.1+git.commit.cafe111fc28e366c219144d5f656c3718d7357dd
+    version: 0.26.0+git.commit.cafe599847b127431b13968a725702ff3c0320ac
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
-    version: 0.2.3
-
-  readline:
-    git: https://github.com/crystal-lang/crystal-readline.git
-    version: 0.1.0+git.commit.0fb7d186da8e1b157998d98d1c96e99699b791eb
+    version: 0.3.0
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
-    version: 2.6.0
+    version: 2.8.3
 
   sass:
     git: https://github.com/straight-shoota/sass.cr.git
-    version: 0.5.0
+    version: 0.6.0
 
   sentry:
-    git: https://github.com/watzon/sentry.git
-    version: 0.3.2+git.commit.c112bb53a1de3b3d90d712b9435b63901188bcc0
+    git: https://github.com/samueleaton/sentry.git
+    version: 0.5.0
 
   slang:
     git: https://github.com/jeromegn/slang.git
-    version: 1.7.1
+    version: 1.7.3
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
-    version: 0.2.1
+    version: 0.4.0
 
   yaml_mapping:
     git: https://github.com/crystal-lang/yaml_mapping.cr.git
-    version: 0.1.0
+    version: 0.1.1
 

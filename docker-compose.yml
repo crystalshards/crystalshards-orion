@@ -3,18 +3,16 @@ networks:
   default:
     driver: bridge
 volumes:
-  postgres:
+  cockroachdb:
 services:
-  postgres:
-    image: postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: crystalshards
+  cockroachdb:
+   image: cockroachdb/cockroach:v19.2.2
+   ports:
+     - "26257:26257"
+     - "8080:8080"
+   command: start-single-node --insecure
+   volumes:
+     - cockroachdb
   redis:
     image: redis
     ports:
@@ -28,7 +26,7 @@ services:
     environment:
       PORT: 3000
       REDIS_URL: redis://redis
-      DATABASE_URL: postgres://postgres:postgres@postgres/crystalshards
+      DATABASE_URL: postgres://postgres:postgres@postgres:26257/crystalshards
       GITHUB_TOKEN: ${GITHUB_TOKEN}
     ports:
       - "3000:3000"
